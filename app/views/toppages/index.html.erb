@@ -1,11 +1,6 @@
-<% if user_signed_in? %> <!-- ユーザーがログインしているか調べる -->
-
-  <!-- ユーザーがログインしていた時の処理 -->
-  <h4> <%= current_user.name %> </h4>
-  <h4> メールアドレス： <%= current_user.email %> </h4>
-  <%= link_to "ログアウト", destroy_user_session_path, method: :delete %> <!-- ログアウトをする -->
-  <%= link_to "アカウント情報変更", edit_user_registration_path %>
-<% else %>
-  <!-- ユーザーがログインしていなかった時の処理 -->
-  <h2> 現在ログインしていません </h2>
-<% end %>
+<div class="center jumbotron">
+  <div class="text-center">
+    <h1>Welcome to the Microposts</h1>
+    <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+  </div>
+</div>
