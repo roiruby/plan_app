@@ -1,0 +1,25 @@
+<header class="mb-4">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Pladuce</a>
+    <form class="form-inline">
+            <input class="form-control mr-sm-1" type="search">
+            <button class="btn btn-primary" type="submit">検索</button>
+        </form>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <ul class="navbar-nav">
+        <% if user_signed_in? %>
+        <li class="nav-item"><i class="fas fa-info-circle fa-2x icon-blue"></i></li>
+        <li class="nav-item"><a href="#" class="nav-link">プラン作成</a></li>
+        <% else %>
+        <li class="nav-item"><%= link_to 'ログイン', new_user_session_path, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to '会員登録 (無料)', new_user_registration_path, class: 'nav-link' %></li>
+        <li class="nav-item"><a href="#" class="nav-link">プラン作成</a></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
+</header>
