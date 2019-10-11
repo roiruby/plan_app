@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :introduce, length: { maximum: 255 }
   validates :password, length: { in: 6..20 }, allow_nil: true
   has_secure_password
+  mount_uploader :image, ImageUploader
 end

@@ -13,3 +13,24 @@
  *= require_tree .
  *= require_self
  */
+ 
+ body{
+  font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+a:hover {
+    text-decoration: none;
+}
+
+
+/*-----プランナー詳細-----*/
+.circle-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.trim-image-to-circle img {
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    background-position: center center;
+}
