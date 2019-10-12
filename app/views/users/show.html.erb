@@ -6,5 +6,9 @@
 <p>メールアドレス : <%= @user.email %></p>
 <p>プロフィール : <%= @user.introduce %></p>
 
+<% @user.plans.each do |plan| %>
+<p><%= link_to plan.plan_title, plan_path(plan) %></p>
+<% end %>
+
 <%= link_to "プロフィール変更", edit_user_path %>
 <%= link_to "アカウント情報変更", edit_profile_path %>

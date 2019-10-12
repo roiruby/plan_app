@@ -1,0 +1,23 @@
+<div class="text-center">
+<h2>プラン編集</h2>
+</div>
+
+<div class="row">
+  <div class="col-sm-6 offset-sm-3">
+    
+    <%= form_with(model: @plan, local: true) do |f| %>
+    
+    <div class="form-group">
+        <%= f.label :plan_title, 'プランタイトル' %>
+        <%= f.text_field :plan_title, placeholder: '50文字以内', class: 'form-control' %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :content, 'サブタイトル・説明' %>
+        <%= f.text_area :content, :maxlength => "255", :size => "80x5",  class: 'form-control'  %>
+      </div>
+
+<%= f.submit '更新する', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>

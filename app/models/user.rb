@@ -9,4 +9,6 @@ class User < ApplicationRecord
   validates :password, length: { in: 6..20 }, allow_nil: true
   has_secure_password
   mount_uploader :image, ImageUploader
+  
+  has_many :plans
 end

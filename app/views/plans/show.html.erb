@@ -1,0 +1,10 @@
+<h1>プラン詳細ページ</h1>
+<p>プランタイトル : <%= @plan.plan_title %></p>
+<p>プランサブタイトル・説明 : <%= @plan.content %></p>
+
+<% if logged_in? %>
+<% if current_user == @plan.user %>
+<%= link_to "プランを編集", edit_plan_path, class: 'btn btn-primary btn-sm' %>
+<%= link_to "削除する", plan_path(@plan.id), method: :delete, data: { confirm: "本当に削除してもいいですか？" }, class: 'btn btn-danger btn-sm' %>
+<% end %>
+<% end %>
