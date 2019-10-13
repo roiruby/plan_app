@@ -48,3 +48,17 @@ a:hover .span2box {
   object-fit: cover;
 }
 
+/*-----プラン投稿-----*/
+.plan-image img {
+  height: 150px;
+  width: 200px;
+}
+
+/*-----プラン詳細-----*/
+.planshow-image img {
+  max-height: 576px;
+  max-width: 100%;
+  min-width: 320px;
+}
+
+

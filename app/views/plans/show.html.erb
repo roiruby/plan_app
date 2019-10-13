@@ -1,6 +1,12 @@
 <h1>プラン詳細ページ</h1>
-<p>プランタイトル : <%= @plan.plan_title %></p>
-<p>プランサブタイトル・説明 : <%= @plan.content %></p>
+<div class="planshow-image">
+<h2><%= @plan.plan_title %></h2>
+<% if @plan.image? %>
+    <%= image_tag @plan.image.url %>
+<% end %>
+<p><%= @plan.content %></p>
+</div>
+
 
 <% if logged_in? %>
 <% if current_user == @plan.user %>

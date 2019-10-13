@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update, :destroy]
   
   def index
+    @users = User.order(id: :desc).page(params[:page]).per(10)
   end
 
   def show
@@ -18,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      log_in @user
       flash[:success] = 'ユーザを登録しました。'
       redirect_to @user
     else

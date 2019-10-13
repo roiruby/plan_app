@@ -3,9 +3,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   # リサイズしたり画像形式を変更するのに必要
   include CarrierWave::RMagick
  
-  # 画像の上限を700にする
-#  process :resize_to_limit => [700, 700]
-  
   # 5mbまでのファイルのみにする
   def size_range
   1..5.megabytes
@@ -16,15 +13,19 @@ class ImageUploader < CarrierWave::Uploader::Base
  
   # サムネイルを生成する設定
   version :thumb do
-    process :resize_to_limit => [300, 300]
+    process :resize_to_limit => [1024, 576]
   end
    
+  version :thumb200 do
+    process :resize_to_limit => [200, 150]
+  end
+  
   version :thumb150 do
     process :resize_to_limit => [150, 150]
   end
  
-  version :thumb30 do
-    process :resize_to_limit => [30, 30]
+  version :thumb130 do
+    process :resize_to_limit => [130, 100]
   end
  
   # jpg,jpeg,gif,pngしか受け付けない
