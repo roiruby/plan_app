@@ -7,10 +7,12 @@ class PlansController < ApplicationController
 
   def show
     @plan = Plan.find(params[:id])
+    @schedules = @plan.schedules
   end
   
   def new
     @plan = current_user.plans.build
+    @plan.schedules.build
   end
 
   def create
@@ -49,7 +51,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id)
+    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id, schedules_attributes:[:schedule_title, :start_time, :end_time, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :_destroy, :id])
   end
   
   def correct_user

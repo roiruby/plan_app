@@ -7,6 +7,24 @@
 <p><%= @plan.content %></p>
 </div>
 
+<% @schedules.each do |schedule| %>
+<h2><%= schedule.schedule_title %></h2>
+<p>開始時刻：<%= schedule.start_time %></p>
+<p>終了時刻：<%= schedule.end_time %></p>
+<p><%= schedule.content %></p>
+<h4><%= schedule.spot_name %></h4>
+<p>住所：<%= schedule.address %></p>
+<p>アクセス：<%= schedule.access %></p>
+<p>営業時間：<%= schedule.business_hour %></p>
+<p>定休日：<%= schedule.regular_holiday %></p>
+<p>電話番号：<%= schedule.tel %></p>
+<p>駐車場：<%= schedule.parking %></p>
+<p>価格・予算：<%= schedule.budget %></p>
+<p>リンク：<%= schedule.link_url %></p>
+<p><%= schedule.comment %></p>
+
+<% end %>
+
 
 <% if logged_in? %>
 <% if current_user == @plan.user %>
