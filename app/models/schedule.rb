@@ -1,7 +1,8 @@
 class Schedule < ApplicationRecord
   belongs_to :plan
   
-  validates :schedule_title, presence: true, length: { maximum: 50 }
+  validates :schedule_title, length: { maximum: 50 }
+  validates :sub_title, length: { maximum: 50 }
   validates :content, length: { maximum: 700 }
   validates :spot_name, length: { maximum: 50 }
   validates :address, length: { maximum: 50 }

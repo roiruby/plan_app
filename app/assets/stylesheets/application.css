@@ -61,4 +61,8 @@ a:hover .span2box {
   min-width: 320px;
 }
 
-
+/*-----プラン投稿-----*/
+.required {
+  color: #E00;
+ font-weight: bold; 
+}

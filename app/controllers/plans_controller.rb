@@ -21,7 +21,7 @@ class PlansController < ApplicationController
       flash[:success] = 'プランを投稿しました。'
       redirect_to root_path
     else
-      flash.now[:danger] = 'プランの投稿に失敗しました。'
+      flash[:danger] = 'プランの投稿に失敗しました。'
       redirect_to new_plan_path    
     end
   end
@@ -51,7 +51,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id, schedules_attributes:[:schedule_title, :start_time, :end_time, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :_destroy, :id])
+    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id, schedules_attributes:[:schedule_title, :start_time, :end_time, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :_destroy, :id])
   end
   
   def correct_user

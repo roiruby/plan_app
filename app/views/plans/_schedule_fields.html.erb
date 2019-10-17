@@ -1,0 +1,51 @@
+<div class="nested-fields">
+        <div class="form-group">
+        <%= f.label :schedule_title, '見出しを入力' %>
+        <%= f.text_field :schedule_title, placeholder: '50文字以内', class: 'form-control' %>
+        
+        <%= f.label :start_time, '開始時刻' %>
+        <%= f.time_field :start_time, class: 'form-control' %>
+        
+        <%= f.label :end_time, '終了時刻' %>
+        <%= f.time_field :end_time, class: 'form-control' %>
+        
+        <%= f.label :sub_title, 'サブタイトル' %>
+        <%= f.text_field :sub_title, placeholder: '50文字以内', class: 'form-control' %>
+        
+        <%= f.label :content, '説明を追加' %>
+        <%= f.text_area :content, :size => "80x5",  class: 'form-control'  %>
+        
+        <%= f.label :spot_name, 'スポット名' %>
+        <%= f.text_field :spot_name, placeholder: 'スポット名や店名などを入力', class: 'form-control' %>
+        
+        <%= f.label :address, '住所' %>
+        <%= f.text_field :address, placeholder: '住所を入力', class: 'form-control' %>
+        
+        <%= f.label :access, 'アクセス' %>
+        <%= f.text_field :access, placeholder: '最寄り駅からの時間や道順などを入力', class: 'form-control' %>
+        
+        <%= f.label :business_hour, '営業時間' %>
+        <%= f.text_field :business_hour, placeholder: '営業時間を入力', class: 'form-control' %>
+        
+        <%= f.label :regular_holiday, '定休日' %>
+        <%= f.text_field :regular_holiday, class: 'form-control' %>
+        
+        <%= f.label :tel, '電話番号' %>
+        <%= f.text_field :tel, class: 'form-control' %>
+        
+        <%= f.label :parking, '駐車場' %>
+        <%= f.text_field :parking, placeholder: '駐車場の有無など', class: 'form-control' %>
+        
+        <%= f.label :budget, '価格・予算' %>
+        <%= f.text_field :budget, class: 'form-control' %>
+        
+        <%= f.label :link_url, 'リンク' %>
+        <%= f.url_field :link_url, placeholder: 'リンクを追加', class: 'form-control' %>
+        
+        <%= f.label :comment, 'コメント' %>
+        <%= f.text_area :comment, :size => "80x3",  class: 'form-control'  %>
+        
+        <%= link_to_remove_association "スケジュールを削除", f %>
+        <hr>
+      </div>
+</div>

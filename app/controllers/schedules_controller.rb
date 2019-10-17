@@ -15,7 +15,7 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment)
+    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :sub_title, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment)
   end
   
 end
