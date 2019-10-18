@@ -14,5 +14,10 @@ class Schedule < ApplicationRecord
   validates :budget, length: { maximum: 200 }
   validates :link_url, length: { maximum: 255 }
   validates :comment, length: { maximum: 255 }
+  
+  mount_uploader :image1, ImageUploader
+  mount_uploader :image2, ImageUploader
+  mount_uploader :image3, ImageUploader
+  mount_uploader :image4, ImageUploader
 end
 

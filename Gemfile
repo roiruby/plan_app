@@ -61,3 +61,5 @@ gem 'rmagick'
 
 gem 'jquery-rails'
 gem 'cocoon'
+
+gem 'pry-byebug', group: :development

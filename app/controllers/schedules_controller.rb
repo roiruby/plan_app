@@ -1,6 +1,7 @@
 class SchedulesController < ApplicationController
   before_action :require_user_logged_in, only: [:create]
   
+
   def create
     @schedule = current_user.schedules.build(schedule_params)
     if @schedule.save
@@ -15,7 +16,7 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :sub_title, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment)
+    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :image1, :image2, :image3, :image4, :sub_title, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :remove_image1)
   end
   
 end

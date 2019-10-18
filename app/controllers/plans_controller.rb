@@ -35,7 +35,7 @@ class PlansController < ApplicationController
 
     if @plan.update(plan_params)
       flash[:success] = '正常に更新されました'
-      redirect_to root_path
+      redirect_to plan_path
     else
       flash.now[:danger] = '更新されませんでした'
       render :edit
@@ -51,7 +51,7 @@ class PlansController < ApplicationController
   private
 
   def plan_params
-    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id, schedules_attributes:[:schedule_title, :start_time, :end_time, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :_destroy, :id])
+    params.require(:plan).permit(:plan_title, :content, :image, :remove_image, :user_id, schedules_attributes:[:schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :_destroy, :id])
   end
   
   def correct_user

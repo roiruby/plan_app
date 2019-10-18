@@ -5,23 +5,57 @@
     <%= image_tag @plan.image.url %>
 <% end %>
 <p><%= @plan.content %></p>
-</div>
 
 <% @schedules.each do |schedule| %>
 <h2><%= schedule.schedule_title %></h2>
+<% if schedule.start_time.present? %>
 <p>開始時刻：<%= schedule.start_time %></p>
+<% end %>
+<% if schedule.end_time.present? %>
 <p>終了時刻：<%= schedule.end_time %></p>
+<% end %>
 <h5><%= schedule.sub_title %></h5>
+
+<% if schedule.image1.present? %>
+<%= image_tag schedule.image1.url %>
+<% end %>
+<% if schedule.image2.present? %>
+<%= image_tag schedule.image2.url %>
+<% end %>
+<% if schedule.image3.present? %>
+<%= image_tag schedule.image3.url %>
+<% end %>
+<% if schedule.image4.present? %>
+<%= image_tag schedule.image4.url %>
+<% end %>
+</div>
+
 <p><%= schedule.content %></p>
 <h5><%= schedule.spot_name %></h5>
+<% if schedule.address.present? %>
 <p>住所：<%= schedule.address %></p>
+<% end %>
+<% if schedule.access.present? %>
 <p>アクセス：<%= schedule.access %></p>
+<% end %>
+<% if schedule.business_hour.present? %>
 <p>営業時間：<%= schedule.business_hour %></p>
+<% end %>
+<% if schedule.regular_holiday.present? %>
 <p>定休日：<%= schedule.regular_holiday %></p>
+<% end %>
+<% if schedule.tel.present? %>
 <p>電話番号：<%= schedule.tel %></p>
+<% end %>
+<% if schedule.parking.present? %>
 <p>駐車場：<%= schedule.parking %></p>
+<% end %>
+<% if schedule.budget.present? %>
 <p>価格・予算：<%= schedule.budget %></p>
-<p>リンク：<%= schedule.link_url %></p>
+<% end %>
+<% if schedule.link_url.present? %>
+<p>リンク：<%= text_url_to_link(h(schedule.link_url)).html_safe %></p>
+<% end %>
 <p><%= schedule.comment %></p>
 
 <% end %>
