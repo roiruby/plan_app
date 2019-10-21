@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_083539) do
+ActiveRecord::Schema.define(version: 2019_10_20_162227) do
+
+  create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "area"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "plan_title"
@@ -19,7 +31,20 @@ ActiveRecord::Schema.define(version: 2019_10_17_083539) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "category_id"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_plans_on_area_id"
+    t.index ["category_id"], name: "index_plans_on_category_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
+  end
+
+  create_table "plans_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_plans_categories_on_category_id"
+    t.index ["plan_id"], name: "index_plans_categories_on_plan_id"
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -59,6 +84,10 @@ ActiveRecord::Schema.define(version: 2019_10_17_083539) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "plans", "areas"
+  add_foreign_key "plans", "categories"
   add_foreign_key "plans", "users"
+  add_foreign_key "plans_categories", "categories"
+  add_foreign_key "plans_categories", "plans"
   add_foreign_key "schedules", "plans"
 end

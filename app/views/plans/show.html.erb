@@ -60,6 +60,13 @@
 
 <% end %>
 
+<% if @plan.area.present? %>
+<p>エリア：<%= @plan.area.area if @plan.area_id? %></p>
+<% end %>
+
+<% if @plan.category.present? %>
+<p>カテゴリ：<%= @plan.category.category if @plan.category_id? %></p>
+<% end %>
 
 <% if logged_in? %>
 <% if current_user == @plan.user %>
