@@ -18,6 +18,21 @@
   font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
 }
 
+h2 {
+  font-size: 170%;
+  font-weight: bold;
+}
+h3 {
+  font-weight: bold;
+  margin-top: 30px;
+  line-height: 2;
+  border-bottom: solid 3px deeppink;
+}
+h4 {
+  font-size: 110%;
+  font-weight: bold;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -54,15 +69,98 @@ a:hover .span2box {
   width: 200px;
 }
 
-/*-----プラン詳細-----*/
-.planshow-image img {
-  max-height: 576px;
-  max-width: 100%;
-  min-width: 320px;
-}
-
 /*-----プラン投稿-----*/
 .required {
   color: #E00;
  font-weight: bold; 
+}
+
+/*-----プラン詳細-----*/
+.web_container {
+  width: 1260px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+}
+.web-flex {
+  display: flex;
+}
+.web-mt40 {
+  margin-top: 40px;
+}
+.web-mt20 {
+  margin-top: 20px;
+}
+.web-center {
+  text-align: center;
+}
+
+.container_left {
+  width: 800px;
+  margin-right: 60px;
+}
+
+.planshow-image img {
+  width: 800px;
+  height: auto;
+}
+.schedule_time {}
+.end_time {}
+.schedule_title {
+  font-weight: bold;
+  margin-left: 30px;
+}
+#schedule_title {}
+
+.schedule_access {
+  line-height: 1;
+}
+
+.spot_image_container {
+  position: relative;
+  max-width: 800px;
+  box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+}
+.box_image1 img{
+    max-height: 398px;             /* 高さ指定 */
+    width:  800px;              /* 幅指定 */
+}
+.box_image1 {
+    display:  inline-block;     /* インラインブロックにする */
+    vertical-align:  bottom;    /* 下揃えにする */
+    box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+}
+.box_image234 img{
+  margin-top: 3px;
+    height: 198px;             /* 高さ指定 */
+    width:  264px;              /* 幅指定 */
+}
+.box_image234 {
+    display:  inline-block;     /* インラインブロックにする */
+    vertical-align:  bottom;    /* 下揃えにする */
+    box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+}
+
+.sub_title {
+  font-size: 110%;
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+.plan-details_container {
+  border-radius: 10px;
+  background-color: #eeeeee;
+  padding: 10px 20px;
+  line-height: 2;
+}
+
+.spot-details_container {
+  border-radius: 10px;
+  line-height: 0.3;
+  background-color: #eeeeee;
+  padding: 20px 20px 5px;
+}
+
+.container_right {
+  width: 340px;
 }
