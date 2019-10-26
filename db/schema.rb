@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_20_162227) do
+ActiveRecord::Schema.define(version: 2019_10_25_075519) do
 
   create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "area"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ancestry"
+    t.index ["ancestry"], name: "index_areas_on_ancestry"
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -32,8 +34,6 @@ ActiveRecord::Schema.define(version: 2019_10_20_162227) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id"
-    t.bigint "area_id"
-    t.index ["area_id"], name: "index_plans_on_area_id"
     t.index ["category_id"], name: "index_plans_on_category_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -84,7 +84,6 @@ ActiveRecord::Schema.define(version: 2019_10_20_162227) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "plans", "areas"
   add_foreign_key "plans", "categories"
   add_foreign_key "plans", "users"
   add_foreign_key "plans_categories", "categories"

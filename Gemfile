@@ -62,4 +62,7 @@ gem 'rmagick'
 gem 'jquery-rails'
 gem 'cocoon'
 
+gem 'ancestry'
+gem 'seed-fu'
+
 gem 'pry-byebug', group: :development

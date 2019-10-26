@@ -7,3 +7,19 @@
     </div>
   </div>
 <% end %>
+
+
+<% @parents.each do |parent| %>
+
+<span class="web-flex"><%= parent.name %></span>
+<% end %>
+
+<% @parents.each do |parent| %>
+<% parent.children.each do |child| %>
+<%= child.name %>
+
+<% child.children.each do |grandchild| %>
+<%= grandchild.name %>
+<% end %>
+<% end %>
+<% end %>
