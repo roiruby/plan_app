@@ -3,12 +3,14 @@ class UsersController < ApplicationController
   before_action :correct_user,   only: [:edit, :update, :destroy]
   
   def index
-    @users = User.order(id: :desc).page(params[:page]).per(10)
+    @users = User.order(id: :desc).page(params[:page]).per(30).limit(100)
   end
 
   def show
     @user = User.find(params[:id])
     @plans = Plan.find_by(id: params[:id])
+    @user_plans = @user.plans.page(params[:page]).per(20).reverse_order
+    counts(@user)
   end
 
   def new
@@ -21,7 +23,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user
       flash[:success] = 'ユーザを登録しました。'
-      redirect_to @user
+      redirect_to mypage_path
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
@@ -37,7 +39,7 @@ class UsersController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = '正常に更新されました'
-      redirect_to @user
+      redirect_to mypage_path
     else
       flash.now[:danger] = '更新されませんでした'
       render :edit
@@ -47,6 +49,13 @@ class UsersController < ApplicationController
 
   def destroy
   end
+  
+  def likes
+    @user = User.find(params[:id])
+    @favplans = @user.favplans.page(params[:page])
+    counts(@user)
+  end
+  
   
   private
 

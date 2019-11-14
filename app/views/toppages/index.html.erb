@@ -1,25 +1,162 @@
-<% if logged_in? %>
-  <p>ログインユーザ: <%= current_user.name %></p>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h2> 現在ログインしていません </h2>
+  <%= render 'layouts/topform' %>
+
+  <div class="slide-image">
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide1.jpg"></a>
+      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+    </div>
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide2.jpg"></a>
+      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選</p>
+    </div>
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide3.jpg"></a>
+      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+    </div>
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide4.jpg"></a>
+      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
+    </div>
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide1.jpg"></a>
+      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+    </div>
+    <div class="slide-title">
+      <a href="/"><img src="assets/slide3.jpg"></a>
+      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
     </div>
   </div>
-<% end %>
+
+  <div class="container-fluid">
+    <div class="row">
+      <div class="top-saide col-md-3">
+        
+        <div class="category_top">
+          <p class="font-weight-bold">カテゴリーからプランを探す</p>
+            <p class="category_item"><img src="assets/icon_jyoshikai.png">女子会</p>
+            <p class="category_item"><img src="assets/icon_date.png">デート</p>
+            <p class="category_item"><img src="assets/icon_odekake.png">お出かけ</p>
+            <p class="category_item"><img src="assets/icon_drive.png">ドライブ</p>
+            <p class="category_item"><img src="assets/icon_travel.png">旅行・観光</p>
+            <p class="category_item"><img src="assets/icon_suprise.png">サプライズ</p>
+            <p class="category_item"><img src="assets/icon_diet.png">ダイエット</p>
+            <p class="category_item"><img src="assets/icon_training.png">トレーニング</p>
+            <p class="category_item"><img src="assets/icon_study.png">スタディ</p>
+            <p class="category_item"><img src="assets/icon_etc.png">その他</p>
+        </div>
+        
+        <div>
+          <p class="font-weight-bold mt-4">エリアからプランを探す</p>
+          
+          <div class="area_top">
+            <p class="category_item">北海道</p>
+              <p class="small mt-2 ml-3">北海道</p>
+            <p class="category_item web-mt-8">東北</p>
+              <p class="small mt-2 ml-3">青森 岩手 宮城 秋田山形 福島</p>
+            <p class="category_item web-mt-8">関東</p>
+             <p class="small mt-2 ml-3">茨城 栃木 群馬 埼玉 千葉 東京 神奈川</p>
+            <p class="category_item web-mt-8">甲信越</p>
+              <p class="small mt-2 ml-3">山梨 長野 新潟</p>
+            <p class="category_item web-mt-8">北陸</p>
+              <p class="small mt-2 ml-3">富山 石川 福井</p>
+            <p class="category_item web-mt-8">東海</p>
+              <p class="small mt-2 ml-3">静岡 岐阜 愛知 三重</p>
+            <p class="category_item web-mt-8">関西</p>
+              <p class="small mt-2 ml-3">滋賀 京都 大阪 兵庫 奈良 和歌山</p>
+            <p class="category_item web-mt-8">中国</p>
+              <p class="small mt-2 ml-3">鳥取 島根 岡山 広島 山口</p>
+            <p class="category_item web-mt-8">四国</p>
+              <p class="small mt-2 ml-3">徳島 香川 愛媛 高知</p>
+            <p class="category_item web-mt-8">九州</p>
+              <p class="small mt-2 ml-3">福岡 佐賀 長崎 熊本 大分 宮崎 鹿児島</p>
+            <p class="category_item web-mt-8">沖縄</p>
+              <p class="small mt-2 ml-3">沖縄</p>
+            <p class="category_item web-mt-8">海外</p>
+              <p class="small mt-2 ml-3">海外</p>
+          </div>
+            
+        </div>
+        <div>
+          <p class="font-weight-bold mt-4">話題のキーワード</p>
+          
+          <div class="tag_top">
+            <p>
+            <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "おしゃれ", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "ランチ", root_path, class: 'btn btn-outline-info btn-sm' %>
+            </p>
+            <p class="web-mt-8">
+            <%= link_to "デート", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "インスタ映え", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>
+            </p>
+            <p class="web-mt-8">
+            <%= link_to "デート", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "インスタ映え", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>
+            <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>
+            </p>
+
+          </div>
+        </div>
+        
+      </div>
+      
+      <div class="top-main col-md-9">
+        <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
+        <div class="web-flex row">
+        <% @plans.each do |plan| %>
+          <div class="top-planimage col-md-3">
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <p class="top-plantitle"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+          </div>
+        <% end %>
+        </div>
+        <p style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+        
+        <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
+        <div class="web-flex row">
+        <% @plans.each do |plan| %>
+          <div class="top-planimage col-md-3">
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <p class="top-plantitle"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+          </div>
+        <% end %>
+        </div>
+        <p style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+        
+        <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
+        <div class="web-flex row">
+        <% @plans.each do |plan| %>
+          <div class="top-planimage col-md-3">
+            <%= image_tag plan.image.to_s %>
+            <p class="top-plantitle"><%= plan.plan_title.truncate(42) %></p>
+          </div>
+        <% end %>
+        </div>
+        <p style="text-align: right">新着のプランをもっと見る　＞</p>
+        
+        <p class="newplan_title"><img src="assets/icon_popular.png">人気のプランナー</p>
+        <!--プランナー一覧取得-->
+        <div class="web-flex row">
+        <% @users.each do |user| %>
+          <div class="circle-image col-md-2">
+            <%= link_to image_tag(user.image.to_s), user_path(user) %>
+            <p class="top-username"><%= link_to user.name, user_path(user) %></p>
+          </div>
+        <% end %>
+        </div>
+            <p style="text-align: right"><%= link_to "人気のプランナーをもっと見る　＞", users_path %></p>
+        
+      </div>
+      
+      <Hr Size="5" Color="#ff0000">
+      
+    </div>
+  </div>
 
 
-<% @parents.each do |parent| %>
 
-<span class="web-flex"><%= parent.name %></span>
-<% end %>
 
-<% @parents.each do |parent| %>
-<% parent.children.each do |child| %>
-<%= child.name %>
-
-<% child.children.each do |grandchild| %>
-<%= grandchild.name %>
-<% end %>
-<% end %>
-<% end %>

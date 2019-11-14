@@ -11,7 +11,7 @@ class EditProfileController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = '正常に更新されました'
-      redirect_to @user
+      redirect_to mypage_path
     else
       flash.now[:danger] = '更新されませんでした'
       render :edit

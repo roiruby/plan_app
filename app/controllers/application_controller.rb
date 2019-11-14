@@ -9,4 +9,10 @@ private
       redirect_to login_url
     end
   end
+  
+  def counts(user)
+    @count_plans = user.plans.count
+    @count_favplans = user.favplans.count
+  end
+  
 end

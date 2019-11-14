@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_075519) do
+ActiveRecord::Schema.define(version: 2019_11_11_151015) do
 
   create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,31 @@ ActiveRecord::Schema.define(version: 2019_10_25_075519) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "prefecture_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
+  end
+
+  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "plan_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plan_id"], name: "index_favorites_on_plan_id"
+    t.index ["user_id", "plan_id"], name: "index_favorites_on_user_id_and_plan_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_keywords_on_name", unique: true
+  end
+
   create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "plan_title"
     t.string "content"
@@ -34,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_10_25_075519) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id"
+    t.bigint "area_id"
+    t.index ["area_id"], name: "index_plans_on_area_id"
     t.index ["category_id"], name: "index_plans_on_category_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
@@ -45,6 +72,21 @@ ActiveRecord::Schema.define(version: 2019_10_25_075519) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_plans_categories_on_category_id"
     t.index ["plan_id"], name: "index_plans_categories_on_plan_id"
+  end
+
+  create_table "plans_keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "plan_id"
+    t.bigint "keyword_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["keyword_id"], name: "index_plans_keywords_on_keyword_id"
+    t.index ["plan_id"], name: "index_plans_keywords_on_plan_id"
+  end
+
+  create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "schedules", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -73,6 +115,39 @@ ActiveRecord::Schema.define(version: 2019_10_25_075519) do
     t.index ["plan_id"], name: "index_schedules_on_plan_id"
   end
 
+  create_table "spots", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.bigint "city_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_spots_on_city_id"
+  end
+
+  create_table "taggings", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "tag_id"
+    t.string "taggable_type"
+    t.integer "taggable_id"
+    t.string "tagger_type"
+    t.integer "tagger_id"
+    t.string "context", limit: 128
+    t.datetime "created_at"
+    t.index ["context"], name: "index_taggings_on_context"
+    t.index ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+    t.index ["tag_id"], name: "index_taggings_on_tag_id"
+    t.index ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context"
+    t.index ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy"
+    t.index ["taggable_id"], name: "index_taggings_on_taggable_id"
+    t.index ["taggable_type"], name: "index_taggings_on_taggable_type"
+    t.index ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type"
+    t.index ["tagger_id"], name: "index_taggings_on_tagger_id"
+  end
+
+  create_table "tags", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", collation: "utf8_bin"
+    t.integer "taggings_count", default: 0
+    t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -84,9 +159,16 @@ ActiveRecord::Schema.define(version: 2019_10_25_075519) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "cities", "prefectures"
+  add_foreign_key "favorites", "plans"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "plans", "areas"
   add_foreign_key "plans", "categories"
   add_foreign_key "plans", "users"
   add_foreign_key "plans_categories", "categories"
   add_foreign_key "plans_categories", "plans"
+  add_foreign_key "plans_keywords", "keywords"
+  add_foreign_key "plans_keywords", "plans"
   add_foreign_key "schedules", "plans"
+  add_foreign_key "spots", "cities"
 end

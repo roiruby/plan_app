@@ -1,29 +1,55 @@
-<header class="mb-4">
-  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Pladuce</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+<header>
+  <nav class="navbar navbar-expand-sm navbar-light bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><%= image_tag "logo.svg" %></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="navbar-nav form-group form-inline">
+        <%= form_with(url: search_path, method: :get, local: true) do |f| %>
+          <div class="input-group">
+            <%= f.text_field :search, placeholder: "キーワードで検索", class: 'form-control' %>
+            <span class="input-group-btn">
+              <%= button_tag '<i class="fas fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-search", :style => "color:white;" %>
+            </span>
+          </div>
+          
+        <% end %>
+      </div>
+    
+        <!--<form class="form-inline">-->
+        <!--    <input class="form-control mr-sm-1" type="search">-->
+        <!--    <button class="btn btn-coral" type="submit">検索</button>-->
+        <!--</form>-->
 
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       <ul class="navbar-nav">
+        
         <% if logged_in? %>
+        
+          <div class="nav-image">
+            <%= link_to image_tag(current_user.image.thumb130.url), mypage_path %>
+          </div>
+        
           <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+          
           <li class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
               <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'Logout', logout_path, method: :delete %></li>
+              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
             </ul>
           </li>
-          <li class="nav-item"><%= link_to 'プランを投稿する', new_plan_path, class: 'nav-link' %></li>
+          <li class="nav-item btn btn-sm btn-plan"><%= link_to new_plan_path, data: {"turbolinks" => false}, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
         <% else %>
           <li class="nav-item"><%= link_to 'Signup', signup_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Login', login_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'プランを投稿する', login_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
+    </div>
     </div>
   </nav>
 </header>

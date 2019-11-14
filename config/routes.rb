@@ -10,10 +10,45 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   
-  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  get 'plans/new_arrival', to: 'plans#new_arrival',  as: :new_arrival
   
-  resources :plans, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  get '/keywords/autocomplete.json', to: 'plans#keywordAutocomplete'
+  
+  get 'search', to: 'plans#search', as: :search
+  
+  get 'mypage', to: 'mypage#index', as: :mypage
+  
+  # get "plans/image_count"
+  
+
+  resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    
+    member do
+      get :followings
+      get :followers
+      get :likes
+    end
+  end
+  
+  resources :plans, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
+    
+    #Ajaxで動くアクションのルートを作成
+    collection do
+      get 'get_area_children', defaults: { format: 'json' }
+      get 'get_area_grandchildren', defaults: { format: 'json' }
+      
+      get '/:id/city' => 'plans#city', as: "city"
+    end
+  end
   
   resources :schedules, only: [:create]
+  resources :favorites, only: [:create, :destroy]
+  
+  resources :prefectures, only: [] do
+    resources :cities, only: :index do
+      resources :spots, only: :index
+    end
+  end
+  
   
 end

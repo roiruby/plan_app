@@ -1,0 +1,22 @@
+
+        <div class="mypage-left">
+          
+          <div class="circle-image">
+            <%= image_tag @user.image.thumb150.url %>
+          </div>
+            <p class="myname mt-2"><%= @user.name %></p>
+            <%= link_to "プロフィール変更", edit_user_path(current_user) %>
+        </div>
+            
+            <Hr Align="center" Width="75%"> 
+            
+          <div class="mypage-ul">
+            <ul>
+              <li><%= link_to 'マイページ', mypage_path %></li>
+              <li>お知らせ</li>
+              <li><%= link_to 'お気に入り', likes_user_path(@user) %></li>
+              <li>フォロー/フォロワー</li>
+              <li>ヘルプ</li>
+              <li><%= link_to "アカウント情報変更", edit_profile_path(current_user) %></li>
+            </ul>
+          </div>

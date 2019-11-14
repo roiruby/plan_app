@@ -1,5 +1,22 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
-<div class="circle-image">
-<%= render 'layouts/planner' %>
-</div>
+  <div class="container-fluid mt-4">
+    
+    <h2>人気のプランナー</h2>
+
+    <div class="web-flex row">
+      <% @users.each do |user| %>
+        <div class="circle-image col-md-2 mt-3 web-center">
+          <%= link_to image_tag(user.image.to_s), user_path(user) %>
+          <p class="top-username"><%= link_to user.name, user_path(user) %></p>
+          <p class="small web-mt-15"><%= user.catchphrase %></p>
+        </div>
+      <% end %>
+      
+    </div>
+    
+      <div class="pagination justify-content-end pagination-sm">
+        <%= paginate @users %>
+      </div>
+      
+    
+    
+  </div>

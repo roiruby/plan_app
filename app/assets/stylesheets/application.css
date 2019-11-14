@@ -11,11 +11,18 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require jquery-ui.min
+ *= require jquery.tagsinput.min
  *= require_self
  */
- 
- body{
-  font-family: 'Lato', 'Noto Sans JP', '游ゴシック Medium', '游ゴシック体', 'Yu Gothic Medium', YuGothic, 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+
+
+body{
+  font-family: "メイリオ","Meiryo","ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","ＭＳ Ｐゴシック",sans-serif; 
+  overflow-x: hidden;
+}
+.container-fluid {
+  width: 1340px;
 }
 
 h2 {
@@ -24,7 +31,6 @@ h2 {
 }
 h3 {
   font-weight: bold;
-  margin-top: 30px;
   line-height: 2;
   border-bottom: solid 3px deeppink;
 }
@@ -33,19 +39,113 @@ h4 {
   font-weight: bold;
 }
 
+a {color:black; text-decoration:none }
 a:hover {
     text-decoration: none;
 }
 
+.btn-coral,
+.btn-coral.disabled, .btn-coral:disabled {
+  color: #fff;
+  background-color: coral;
+  border-color: coral;
+}
+.btn-plan,
+.btn-plan.disabled, .btn-plan:disabled {
+  font-size: 14px;
+  background-color: #FF1493;
+  border-color: #FF1493l;
+  border-radius: 12px;
+  height: 39px;
+  padding-top: 0px;
+}
+.btn-plan img {
+  width: 22px;
+  margin-right: 3px;
+  padding-bottom: 3px;
+}
+.web-flex {
+  display: flex;
+}
+.web-mt40 {
+  margin-top: 40px;
+}
+.web-mt20 {
+  margin-top: 20px;
+}
+.web-mt-15 {
+  margin-top: -15px;
+}
+.web-mt-8 {
+  margin-top: -8px;
+}
+.web-center {
+  text-align: center;
+}
+.xsmall {
+  font-size: 12px;
+}
+.bold {
+  font-weight: bold;
+}
+.right {
+  text-align: right;
+}
+
+/*-----navbar-----*/
+.btn-search,
+.btn-search.disabled, .btn-search:disabled {
+  font-size: 14px;
+  background-color: #FF1493;
+  border-color: #FF1493l;
+  border-radius: 4px;
+  height: 38px;
+  padding-top: 7px;
+}
+.nav-image img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/*----------mypage----------*/
+.mypage-left {
+  text-align: center;
+}
+.myname {
+  font-weight: bold;
+}
+.mypage-ul {
+  font-weight: bold;
+  text-align: center;
+	display: block;
+	line-height: 2;
+}
+.mypage-ul ul {
+  padding-left: 0;
+	list-style: square;
+	display: inline-block;
+}
+.mypage-ul ul li {
+  text-align: left;
+}
+
+.mypage-center {
+  font-weight: bold;
+}
+.mypage_right {
+  text-align: center;
+}
+/*----------toppage----------*/
 /*-----topic-----*/
 .span2box {
   display: block;
-  height: 40px;
+  height: 36px;
   background-color: yellow;
-  margin-top: -15px;
-  font-size: 120%;
+  font-size: 115%;
   text-align: center;
-  padding-top: 6px;
+  padding-top: 2px;
 }
 a .span2box{
   font-weight: bold;
@@ -55,12 +155,84 @@ a:hover .span2box {
   color: rgba(0,0,0,0.5);
 }
 
+/*-----slide-show-----*/
+.slide-image img{
+  height: 396px;
+  width :100%;
+}
+.slide-title {
+   position: relative;
+   width: 50%;
+}
+.slide-title p {
+  position: absolute;
+  background-color: rgba( 204, 255, 204, 0.35 );
+  color: white;
+  font-weight: bold;
+  font-size: 90%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  padding: 15px;
+  top: 300px;
+}
+
+/*-----top-----*/
+.category_top {
+}
+.category_item {
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+.category_item img {
+  width: 20px;
+  padding-bottom: 5px;
+  margin-right: 7px;
+  margin-left: 15px;
+}
+.area_top {
+  line-height: 1;
+  margin-left: 15px;
+}
+.tag_top a{
+  font-size: small;
+}
+.top-planimage {
+}
+.top-planimage img {
+  width: 240px;
+  height: 135px;
+}
+.top-plantitle {
+  font-weight: bold;
+  font-size: 12px;
+  padding-top: 10px;
+  width: 241px;
+}
+.newplan_title {
+  font-size: 22px;
+  font-weight: bold;
+}
+.newplan_title img {
+  width: 30px;
+  margin-right: 5px;
+  padding-bottom: 4px;
+}
+.top-username {
+  text-align: center;
+}
+
+
 /*-----プランナー詳細-----*/
 .circle-image img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.planshow {
+  font-weight: bold;
 }
 
 /*-----プラン投稿-----*/
@@ -76,32 +248,8 @@ a:hover .span2box {
 }
 
 /*-----プラン詳細-----*/
-.web_container {
-  width: 1260px;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-}
-.web-flex {
-  display: flex;
-}
-.web-mt40 {
-  margin-top: 40px;
-}
-.web-mt20 {
-  margin-top: 20px;
-}
-.web-center {
-  text-align: center;
-}
-
-.container_left {
-  width: 800px;
-  margin-right: 60px;
-}
-
 .planshow-image img {
-  width: 800px;
+  width: 100%;
   height: auto;
 }
 .schedule_time {}
@@ -116,29 +264,33 @@ a:hover .span2box {
   line-height: 1;
 }
 
-.spot_image_container {
-  position: relative;
-  max-width: 800px;
-  box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+
+.row-0{ margin-left:0px;  margin-right:0px}
+.row-0 >div{ padding-right:0px;  padding-left:0px}
+.image_box {
 }
-.box_image1 img{
-    max-height: 398px;             /* 高さ指定 */
-    width:  800px;              /* 幅指定 */
+.box3 img {
+  width: 100%;
+  height: 398px;
 }
-.box_image1 {
-    display:  inline-block;     /* インラインブロックにする */
-    vertical-align:  bottom;    /* 下揃えにする */
-    box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+.box3-2 img {
+  width: 100%;
+  height: 198px; 
+  object-fit: cover;
 }
-.box_image234 img{
-  margin-top: 3px;
-    height: 198px;             /* 高さ指定 */
-    width:  264px;              /* 幅指定 */
+.box2 img {
+  width: 100%;
+  height: 398px;
+  object-fit: cover;
 }
-.box_image234 {
-    display:  inline-block;     /* インラインブロックにする */
-    vertical-align:  bottom;    /* 下揃えにする */
-    box-sizing: border-box;     /* 余白や線を幅と高さに含める */
+.box2-2 img {
+  width: 100%;
+  height: 398px; 
+  object-fit: cover;
+}
+.box1 img {
+  width: 100%;
+  height: 498px;
 }
 
 .sub_title {
@@ -153,7 +305,6 @@ a:hover .span2box {
   padding: 10px 20px;
   line-height: 2;
 }
-
 .spot-details_container {
   border-radius: 10px;
   line-height: 0.3;
@@ -161,6 +312,72 @@ a:hover .span2box {
   padding: 20px 20px 5px;
 }
 
+.schedule_links a {
+  color: white;
+  font-size: 13px;
+}
+
 .container_right {
-  width: 340px;
+  /*background-color: yellow;*/
+}
+.introduce {
+  padding: 0.5em 1em;
+  border: solid 1px gray;/*線*/
+  border-radius: 10px;/*角の丸み*/
+}
+.introduce p {
+  margin: 0; 
+  padding: 0;
+}
+.introduce img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;  
+}
+.introduce-name {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin-left: 40px;
+  margin-bottom: 20px;
+}
+.introduce-name p {
+  font-size: 10px;
+  color: gray;
+}
+.follow-btn {
+  font-size: 11px;
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: #FFF;
+  background: orange;
+  border: solid 1px orange;/*線色*/
+  border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+}
+
+.follow-btn:active {
+  /*押したとき*/
+  border: solid 1px #CCFFFF;
+  box-shadow: none;
+  text-shadow: none;
+}
+.fa-clock {
+  color: gray;
+  margin-right: 3px;
+}
+
+
+
+
+/*-----footer-----*/
+footer {
+  background-color: #D3D3D3;
+}
+.copy {
+  background-color: #FF1493;
 }

@@ -65,4 +65,7 @@ gem 'cocoon'
 gem 'ancestry'
 gem 'seed-fu'
 
+gem 'jquery-ui-rails'
+gem 'acts-as-taggable-on'
+
 gem 'pry-byebug', group: :development

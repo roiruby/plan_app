@@ -1,0 +1,36 @@
+  <div class="container-fluid">
+    <div class="row web-mt40">
+      
+      <div class="col-md-3">
+        <%= render 'mypage/mypage_left' %>
+      </div>
+      
+      <div class="col-md-6">
+        <h3>お気に入り 　<span class="small bold"><%= @count_favplans %> プラン</span></h3>
+        
+        <div class="mypage-center mt-3">
+        <% @favplans.each do |favorite| %>
+          <p><%= link_to favorite.plan_title.truncate(42), plan_path(favorite) %></p>
+        <% end %>
+        </div>
+        
+        <div class="pagination justify-content-end pagination-sm">
+          <%= paginate @favplans %>
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="mypage_right">
+        <image src="/assets/ad1.gif"></image>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+
+  

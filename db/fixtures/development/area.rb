@@ -23,7 +23,7 @@ okinawa = Area.create(name: "沖縄")
 # 海外
 overseas = Area.create(name: "海外")
 
-hokkaido_hokkaido = hokkaido.children.create(name: "北海道")
+hokkaido_hokkaido = hokkaido.children.create(name: "北海道のエリアを選択")
 hokkaido_hokkaido.children.create([{name: "札幌市"},{name: "小樽・ニセコ・積丹"},{name: "釧路・根室・阿寒・摩周・知床羅臼"},{name: "網走・知床斜里・北見・紋別"},{name: "函館・大沼・松前"},{name: "千歳・石狩・夕張・深川"},{name: "旭川・富良野・士別"},{name: "洞爺・苫小牧・室蘭・えりも"},{name: "稚内・留萌・音威子府"},{name: "離島 (利尻・礼文・天売・焼尻)"}])
 
 
@@ -171,7 +171,7 @@ kyusyu_kagoshima = kyusyu.children.create(name: "鹿児島")
 kyusyu_kagoshima.children.create([{name: "薩摩川内・出水・北薩摩"},{name: "鹿児島・南薩摩"},{name: "諸島・列島"},{name: "伊佐・霧島"},{name: "大隅半島"},{name: "その他"}])
 
 
-okinawa_okinawa = okinawa.children.create(name: "沖縄")
+okinawa_okinawa = okinawa.children.create(name: "沖縄のエリアを選択")
 okinawa_okinawa.children.create([{name: "沖縄本島北部"},{name: "那覇市"},{name: "久米島・慶良間群島"},{name: "沖縄本島南部"},{name: "石垣島・宮古島・先島諸島"},{name: "沖縄本島中部"},{name: "その他"}])
 
 

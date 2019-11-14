@@ -13,6 +13,7 @@ class SchedulesController < ApplicationController
     end
   end
   
+
   private
 
   def schedule_params

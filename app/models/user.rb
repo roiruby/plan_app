@@ -11,4 +11,21 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   
   has_many :plans
+  
+  has_many :favorites
+  has_many :favplans, through: :favorites, source: :plan
+  
+  def like(plan)
+    favorites.find_or_create_by(plan_id: plan.id)
+  end
+
+  def unlike(plan)
+    favorite = favorites.find_by(plan_id: plan.id)
+    favorite.destroy if favorite
+  end
+
+  def  favplan?(plan)
+    self.favplans.include?(plan)
+  end
+  
 end
