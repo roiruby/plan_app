@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:edit, :update, :followings, :followers, :destroy]
+  before_action :correct_user,   only: [:edit, :update]
   
   def index
     @users = User.order(id: :desc).page(params[:page]).per(30).limit(100)
@@ -53,6 +53,18 @@ class UsersController < ApplicationController
   def likes
     @user = User.find(params[:id])
     @favplans = @user.favplans.page(params[:page])
+    counts(@user)
+  end
+  
+  def followings
+    @user = User.find(params[:id])
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
+  
+  def followers
+    @user = User.find(params[:id])
+    @followers = @user.followers.page(params[:page])
     counts(@user)
   end
   

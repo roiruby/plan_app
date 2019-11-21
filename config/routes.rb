@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   
   get 'plans/new_arrival', to: 'plans#new_arrival',  as: :new_arrival
+  get 'plans/popular', to: 'plans#popular',  as: :popular
   
   get '/keywords/autocomplete.json', to: 'plans#keywordAutocomplete'
   
@@ -18,7 +19,8 @@ Rails.application.routes.draw do
   
   get 'mypage', to: 'mypage#index', as: :mypage
   
-  # get "plans/image_count"
+  get 'categories/:id', to: 'categories#show', as: :category
+
   
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
   
   resources :schedules, only: [:create]
   resources :favorites, only: [:create, :destroy]
+  resources :relationships, only: [:create, :destroy]
   
   resources :prefectures, only: [] do
     resources :cities, only: :index do

@@ -48,7 +48,7 @@
     <div class="form-group">
       <span class="required">*</span>
       <%= f.label 'カテゴリ' %>
-      <%= f.collection_select :category_id, Category.all, :id, :category, include_blank: 'カテゴリを選択', include_hidden: false, class: 'form-control' %>
+      <%= f.collection_select :category_id, Category.all, :id, :category, {include_blank: 'カテゴリを選択', include_hidden: false}, class: 'form-control border-warning' %>
     </div>
     
 

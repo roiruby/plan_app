@@ -5,7 +5,6 @@ class MypageController < ApplicationController
   def index
     @user = current_user
     @plans = @user.plans.page(params[:page]).per(20).reverse_order
-    # @count_likes = Favorite.where(: ).count
     counts(@user)
   end
   

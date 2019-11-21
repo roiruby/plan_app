@@ -1,4 +1,6 @@
   <div class="container-fluid">
+    <% breadcrumb :mypage %>
+    <%= render "layouts/breadcrumbs" %>
     <div class="row web-mt40">
       
       <div class="col-md-3">
@@ -15,12 +17,13 @@
             <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
           </div>
           <div class="ml-3">
-            <p><%= link_to plan.plan_title.truncate(55), plan_path(plan) %></p>
+            <p><%= link_to plan.plan_title.truncate(49), plan_path(plan) %></p>
             <p class="small web-mt-8"><%= plan.content.truncate(63) %></p>
-            <span class="small right">
+            <span class="small web-gray right">
               <p>
               <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
-              <span class="ml-2"><i class="far fa-heart mr-1"></i><%= @count_likes %></span></p>
+              <span class="ml-2"><i class="far fa-heart mr-1"></i><%= plan.favorites.count %></span>
+              <span class="ml-1"><i class="far fa-eye mr-1"></i><%= plan.impressions_count %></span></p>
             </span>
           </div>
         </div>  

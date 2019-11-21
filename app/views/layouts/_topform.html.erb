@@ -1,21 +1,22 @@
 <div class="container">
-  <form>
-  <div class="form-row align-items-center">
-    <div class="col-md-3">
-      <label class="sr-only" for="text5a">First Name</label>
-      <input type="text" class="form-control mb-3 mt-4" id="text5a" placeholder="行先を選択">
+  <div class="form-row mt-4">
+    <div class="form-group col-md-3">
+      <input type="text" class="form-control" id="text5a" placeholder="行先を選択">
     </div>
-    <div class="col-md-3">
-      <label class="sr-only" for="text5b">Last Name</label>
-      <input type="text" class="form-control mb-3 mt-4" id="text5b" placeholder="カテゴリを選択">
+    
+    <div class="form-group col-md-3">
+      <%= form_with(url: search_path, method: :get, local: true) do |f| %>
+        <%= f.collection_select :search, Category.all, :category, :category, {include_blank: 'カテゴリを選択', include_hidden: false}, class: 'form-control' %>
     </div>
-    <div class="col-md-3">
-      <label class="sr-only" for="text5b">Last Name</label>
-      <input type="text" class="form-control mb-3 mt-4" id="text5b" placeholder="予算を選択">
+    
+    <div class="form-group col-md-3">
+      <input type="text" class="form-control" id="text5b" placeholder="予算を選択">
     </div>
-    <div class="col-md-3">
-      <button type="submit" class="btn btn-coral mb-3 mt-4 w-100">プランを検索</button>
+    
+    <div class="form-group col-md-3">
+        <%= button_tag 'プランを検索'.html_safe, :type => "submit", :class =>"btn btn-coral w-100" %>
     </div>
+      <% end %>
+
   </div>
-</form>
 </div>

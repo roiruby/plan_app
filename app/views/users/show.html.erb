@@ -1,4 +1,6 @@
   <div class="container-fluid">
+    <% breadcrumb :user, @user %>
+    <%= render "layouts/breadcrumbs" %>
     <div class="row web-mt40">
       
       <div class="col-md-3 web-center">
@@ -6,7 +8,16 @@
         <div class="circle-image">
           <%= image_tag @user.image.thumb150.url %>
         </div>
-        <a href="#" class="follow-btn mt-4">フォローする</a>
+        
+        <% if logged_in? %>
+          <div class="mt-4">
+            <%= render 'relationships/follow_button', user: @user %>
+          </div>
+        <% else %>
+            <%= link_to "フォローする", login_path, class: "follow-btn mt-4" %>
+        <% end %>
+        
+        <p class="small mt-2">フォロー：<%= @count_followings %>人　フォロワー：<%= @count_followers %>人</p>
         
       </div>
 
@@ -15,7 +26,7 @@
         <p class="bold"><%= @user.name %></p>
         <p class="small web-mt-15"><%= @user.catchphrase %></p>
         <%= simple_format(@user.introduce) %>
-        <p class="bold">フォロー0人　フォロワー0人</p>
+        
         
       </div>
       

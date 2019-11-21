@@ -1,6 +1,10 @@
-  <div class="container-fluid mt-4">
+  <div class="container-fluid">
+    <% breadcrumb :users %>
+    <%= render "layouts/breadcrumbs" %>
     
-    <h2>人気のプランナー</h2>
+    <div class="mt-4">
+      <h2>人気のプランナー</h2>
+    </div>
 
     <div class="web-flex row">
       <% @users.each do |user| %>

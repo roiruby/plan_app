@@ -42,6 +42,13 @@ h4 {
 a {color:black; text-decoration:none }
 a:hover {
     text-decoration: none;
+    color: pink;
+}
+.a a{
+color: hotpink;  
+}
+.a a:hover{
+color: pink;  
 }
 
 .btn-coral,
@@ -73,14 +80,29 @@ a:hover {
 .web-mt20 {
   margin-top: 20px;
 }
+.web-mt10 {
+  margin-top: 10px;
+  margin-right: -4px;
+}
 .web-mt-15 {
   margin-top: -15px;
 }
 .web-mt-8 {
   margin-top: -8px;
 }
+.web-pb3 {
+  margin-bottom: 3px;
+}
+.web-mr-7 {
+  margin-right: -7px;
+}
+
 .web-center {
   text-align: center;
+}
+.flex {
+  display: flex;
+  justify-content: center;
 }
 .xsmall {
   font-size: 12px;
@@ -90,6 +112,36 @@ a:hover {
 }
 .right {
   text-align: right;
+}
+.bg-gray {
+  border-radius: 10px;
+  background-color: #eeeeee;
+  padding: 40px 40px 25px 40px;
+}
+.web-gray {
+  color: gray;
+}
+.tag {
+  position: relative;
+  display: inline-block;
+  padding: 0.25em 0.5em;
+  text-decoration: none;
+  color: white;
+  background: pink;
+  border: solid 1px pink;
+  border-radius: 4px;
+}
+.tag a {
+  color: white;
+}
+
+
+/*-----breadcrumbs-----*/
+.breadcrumbs, .breadcrumbs a {
+  color: gray;
+}
+.breadcrumbs a:hover {
+  color: pink;
 }
 
 /*-----navbar-----*/
@@ -157,7 +209,7 @@ a:hover .span2box {
 
 /*-----slide-show-----*/
 .slide-image img{
-  height: 396px;
+  height: 414px;
   width :100%;
 }
 .slide-title {
@@ -166,15 +218,24 @@ a:hover .span2box {
 }
 .slide-title p {
   position: absolute;
-  background-color: rgba( 204, 255, 204, 0.35 );
+  /*background-color: rgba( 204, 255, 204, 0.35 );*/
   color: white;
   font-weight: bold;
-  font-size: 90%;
+  font-size: 100%;
   right: 0;
   left: 0;
   margin: auto;
   padding: 15px;
-  top: 300px;
+  top: 350px;
+  text-shadow: 0px 0px 10px #3d3d3d;
+}
+.mypattern .slick-slide:not(.slick-center) {
+  -webkit-filter: opacity(70%);
+  -moz-filter: opacity(70%);
+  -o-filter: opacity(70%);
+  -ms-filter: opacity(70%);
+  filter: opacity(70%);
+  transition: 0.2s linear;
 }
 
 /*-----top-----*/
@@ -221,12 +282,24 @@ a:hover .span2box {
 .top-username {
   text-align: center;
 }
+.top-user img{
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
 
 /*-----プランナー詳細-----*/
 .circle-image img {
   width: 150px;
   height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.circle-image130 img {
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -320,6 +393,9 @@ a:hover .span2box {
 .container_right {
   /*background-color: yellow;*/
 }
+.plan_edit {
+  border-radius: 10px;
+}
 .introduce {
   padding: 0.5em 1em;
   border: solid 1px gray;/*線*/
@@ -354,21 +430,52 @@ a:hover .span2box {
   text-decoration: none;
   color: #FFF;
   background: orange;
-  border: solid 1px orange;/*線色*/
+  border: solid 1px orange;
   border-radius: 4px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
-  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  font-weight: bold;
 }
 
 .follow-btn:active {
   /*押したとき*/
   border: solid 1px #CCFFFF;
-  box-shadow: none;
-  text-shadow: none;
 }
 .fa-clock {
   color: gray;
   margin-right: 3px;
+}
+
+.icon {
+  font-size: 19px;
+}
+.instaicon {
+  color: #CF2E92;
+}
+.lineicon {
+  color: #00B900;
+}
+.twicon {
+  color: #00acee;
+}
+.fbicon {
+  color: #3C5A99;
+}
+.likeicon {
+  color: hotpink;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: 4px;
+}
+.likeicon:hover {
+  color: pink;
+}
+.likeiconed {
+  color: red;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: 4px;
+}
+.likeiconed:hover {
+  color: pink;
 }
 
 

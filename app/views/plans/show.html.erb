@@ -1,10 +1,19 @@
   <div class="container">
+    <% breadcrumb :plan, @plan %>
+    <%= render "layouts/breadcrumbs" %>
     <div class="row">
       
-      <div class="web_container web-mt40 col-md-9">
+      <div class="web_container mt-4 col-md-9">
         
+        <div class="web-gray">
         <i class="far fa-clock"></i><%= @plan.updated_at.strftime('%Y/%m/%d') %>
         <span class="ml-2"><i class="far fa-heart mr-1"></i><%= @count_likes %></span>
+        <span class="ml-1"><i class="far fa-eye mr-1"></i><%= @plan.impressions_count %></span>
+        </div>
+        
+          <div class="mt-2 tag small bold">
+            <%= @plan.category.category if @plan.category_id? %>
+          </div>
 
         <div>
           <% @keywords.each do |keyword| %>
@@ -12,7 +21,9 @@
           <% end %>
         </div>
 
-        <h2><%= @plan.plan_title %></h2>
+        <div class="mt-3">
+          <h2><%= @plan.plan_title %></h2>
+        </div>
 
         <div class="planshow-image web-mt20">
           <% if @plan.image? %>
@@ -30,9 +41,12 @@
 
           <% @schedules.each do |schedule| %>
           <div class="web-flex">
-            <% if schedule.start_time.present? %><% if schedule.end_time.present? %>
-            ▶ <%= schedule.start_time %>～<%= schedule.end_time %>　
-            <% end %><% end %>
+            <% if schedule.start_time.present? %>
+              ▶ <%= schedule.start_time %>～
+            <% end %>
+            <% if schedule.end_time.present? %>
+              <%= schedule.end_time %>　
+            <% end %>
           
             <div class="schedule_title">
             <%= link_to schedule.schedule_title, "#schedule_title#{schedule.id}", :style=>"color:black;" %>
@@ -45,13 +59,13 @@
         <% @schedules.each do |schedule| %>
         
           <% if schedule.schedule_title.present? %>
-            <div id="schedule_title<%= schedule.id %>">
+            <div class="mt-3 mb-4" id="schedule_title<%= schedule.id %>">
               <h3><%= schedule.schedule_title %></h3>
             </div>
           <% end %>
             
           <% if schedule.sub_title.present? %>
-            <p class="sub_title"><%= schedule.sub_title %></p>
+            <span class="sub_title"><%= schedule.sub_title %></span>
           <% end %>
           
 
@@ -124,7 +138,7 @@
 
           
           <% else schedule.image1.present? %>
-          <div class="image_box row row-0 mt-4">
+          <div class="image_box row row-0">
             <div class="box1 col-12">
               <% if schedule.image1.present? %>
                 <%= image_tag schedule.image1.url %>
@@ -188,45 +202,69 @@
           <% end %>
           
         <% end %>
-
-
-        <% if @plan.category.present? %>
-          <p>カテゴリ：<%= @plan.category.category if @plan.category_id? %></p>
-        <% end %>
         
-
-        <%= render 'favorites/like_button', plan: @plan %>
-
-
-
-        <% if logged_in? %>
-          <% if current_user == @plan.user %>
-            <%= link_to "プランを編集", edit_plan_path, class: 'btn btn-primary btn-sm' %>
-            <%= link_to "削除する", plan_path(@plan.id), method: :delete, data: { confirm: "本当に削除してもいいですか？" }, class: 'btn btn-danger btn-sm' %>
-          <% end %>
-        <% end %>
+          <p class="xsmall mt-3">※掲載されている情報は、<%= @plan.updated_at.strftime('%Y/%m/%d') %>時点の情報です。情報が変更されている可能性がありますので、必ず事前にお調べください。</p>
         
       </div>
 
 
       <div class="container_right col-md-3 web-mt40">
-        <div class="introduce">
+        
+        <% if logged_in? %>
+          <% if current_user == @plan.user %>
+            <div class="plan_edit text-center">
+            <%= link_to "プランを編集", edit_plan_path, class: 'btn btn-primary btn-sm' %>
+            <%= link_to "削除", plan_path(@plan.id), method: :delete, data: { confirm: "本当に削除してもいいですか？" }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          <% end %>
+        <% end %>
+        
+        <div class="introduce mt-3">
           
           <div class="web-flex">
             <div>
               <%= link_to image_tag(@plan.user.image.thumb130.url), user_path(@plan.user) %>
             </div>
+            
             <div class="introduce-name">
-              <%= link_to @plan.user.name, user_path(@plan.user),:style=>"color:black;" %>
-              <p><%= @plan.user.catchphrase %></p>
-              <a href="#" class="follow-btn">フォローする</a>
+              
+              <% if current_user == @plan.user %>
+                <div class="mt-3">
+                  <%= link_to @plan.user.name, user_path(@plan.user),:style=>"color:black;" %>
+                  <p><%= @plan.user.catchphrase %></p>
+                </div>
+              <% else %>
+                  <%= link_to @plan.user.name, user_path(@plan.user),:style=>"color:black;" %>
+                  <p><%= @plan.user.catchphrase %></p>
+              <% end %>  
+              
+              <% if logged_in? %>
+                <%= render 'relationships/follow_button_other', plan: @plan %>
+              <% else %>
+                <%= link_to "フォローする", login_path, class: "follow-btn mt-2" %>
+              <% end %>
             </div>
           </div>
           
-          <p class="xsmall"><%= @plan.user.introduce %></p>
+          <% if current_user == @plan.user %>
+            <p class="xsmall mt-3"><%= @plan.user.introduce %></p>
+          <% else %>
+            <p class="xsmall"><%= @plan.user.introduce %></p>
+          <% end %>
         </div>
         
+          <div class="flex icon text-center">
+              <%= render 'favorites/like_button', plan: @plan %>
+            <div class="mt-3">
+              <i class="fab fa-instagram fa-2x instaicon"></i>
+              <i class="fab fa-line fa-2x lineicon"></i>
+              <i class="fab fa-twitter-square fa-2x twicon"></i>
+              <i class="fab fa-facebook-square fa-2x fbicon"></i>
+            </div>
+          </div>
+        
       </div>
+      
 
     </div>
   </div>

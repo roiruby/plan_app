@@ -29,7 +29,7 @@ $(document).on 'turbolinks:load', ->
   replaceGrandChildrenOptions = ->
     grandchildrenPath = $(@).find('option:selected').data().Path
     $selectGrandChildren = $(@).closest('form').find('.select-grandchildren')
-    console.log($(@).find('option:selected').data().grandchildrenPath)
+    console.log($(@).find('option:selected').data().Path)
 
     if grandchildrenPath?
       $.ajax

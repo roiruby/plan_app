@@ -1,0 +1,20 @@
+      <div class="container">
+      <% breadcrumb :category, @category %>
+      <%= render "layouts/breadcrumbs" %>
+
+        <p class="newplan_title mt-4"><i class="fas fa-chess-queen mr-1 web-pb3"></i><%= @category.category %>プランの一覧　<span class="small"><%= @plans.count %>件</span></p>
+    
+        <div class="web-flex row">
+          <% @plans.each do |plan| %>
+          <div class="top-planimage col-md-3">
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <p class="top-plantitle"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+          </div>
+          <% end %>
+        </div>
+    
+        <div class="pagination justify-content-end pagination-sm">
+        <%= paginate @plans %>
+        </div>
+    
+      </div>

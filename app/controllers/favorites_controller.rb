@@ -4,14 +4,12 @@ class FavoritesController < ApplicationController
   def create
     plan = Plan.find(params[:plan_id])
     current_user.like(plan)
-    flash[:success] = 'お気に入り登録をしました。'
     redirect_back(fallback_location: root_path)
   end
 
   def destroy
     plan = Plan.find(params[:plan_id])
     current_user.unlike(plan)
-    flash[:success] = 'お気に入り登録を解除しました。'
     redirect_back(fallback_location: root_path)
   end
   

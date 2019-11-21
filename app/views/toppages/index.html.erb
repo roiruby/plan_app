@@ -1,29 +1,29 @@
   <%= render 'layouts/topform' %>
 
-  <div class="slide-image">
-    <div class="slide-title">
+  <div class="slide-image mypattern mt-2">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide1.jpg"></a>
-      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
     </div>
-    <div class="slide-title">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide2.jpg"></a>
-      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選</p>
+      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選</p>
     </div>
-    <div class="slide-title">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide3.jpg"></a>
-      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
     </div>
-    <div class="slide-title">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide4.jpg"></a>
-      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
+      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
     </div>
-    <div class="slide-title">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide1.jpg"></a>
-      <p>沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
     </div>
-    <div class="slide-title">
+    <div class="slide-title mr-1">
       <a href="/"><img src="assets/slide3.jpg"></a>
-      <p>大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
+      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
     </div>
   </div>
 
@@ -33,16 +33,16 @@
         
         <div class="category_top">
           <p class="font-weight-bold">カテゴリーからプランを探す</p>
-            <p class="category_item"><img src="assets/icon_jyoshikai.png">女子会</p>
-            <p class="category_item"><img src="assets/icon_date.png">デート</p>
-            <p class="category_item"><img src="assets/icon_odekake.png">お出かけ</p>
-            <p class="category_item"><img src="assets/icon_drive.png">ドライブ</p>
-            <p class="category_item"><img src="assets/icon_travel.png">旅行・観光</p>
-            <p class="category_item"><img src="assets/icon_suprise.png">サプライズ</p>
-            <p class="category_item"><img src="assets/icon_diet.png">ダイエット</p>
-            <p class="category_item"><img src="assets/icon_training.png">トレーニング</p>
-            <p class="category_item"><img src="assets/icon_study.png">スタディ</p>
-            <p class="category_item"><img src="assets/icon_etc.png">その他</p>
+            <p class="category_item"><img src="assets/icon_jyoshikai.png"><%= link_to "女子会", category_path(1) %></p>
+            <p class="category_item"><img src="assets/icon_date.png"><%= link_to "デート", category_path(2) %></p>
+            <p class="category_item"><img src="assets/icon_odekake.png"><%= link_to "お出かけ", category_path(3) %></p>
+            <p class="category_item"><img src="assets/icon_drive.png"><%= link_to "ドライブ", category_path(4) %></p>
+            <p class="category_item"><img src="assets/icon_travel.png"><%= link_to "旅行・観光", category_path(5) %></p>
+            <p class="category_item"><img src="assets/icon_suprise.png"><%= link_to "サプライズ", category_path(6) %></p>
+            <p class="category_item"><img src="assets/icon_diet.png"><%= link_to "ダイエット", category_path(7) %></p>
+            <p class="category_item"><img src="assets/icon_training.png"><%= link_to "トレーニング", category_path(8) %></p>
+            <p class="category_item"><img src="assets/icon_study.png"><%= link_to "スタディ", category_path(9) %></p>
+            <p class="category_item"><img src="assets/icon_etc.png"><%= link_to "その他", category_path(10) %></p>
         </div>
         
         <div>
@@ -105,38 +105,59 @@
       </div>
       
       <div class="top-main col-md-9">
-        <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
+
+        <p class="newplan_title"><img src="assets/icon_star.png">人気のプラン</p>
+        
         <div class="web-flex row">
-        <% @plans.each do |plan| %>
-          <div class="top-planimage col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-            <p class="top-plantitle"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
-          </div>
-        <% end %>
+          <% @most_viewed.each.with_index(1) do |rank| %>
+            <div class="top-planimage col-md-3">
+              <%= link_to image_tag(rank.image.to_s), plan_path(rank) %>
+              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(42), plan_path(rank) %></p>
+              <div class="tag small bold mt-2">
+                <%= link_to rank.category.category, category_path(rank.category.id) %>
+              </div>
+              <div class="top-user mt-2 web-gray xsmall">
+                <!--<%= link_to image_tag(rank.user.image.thumb130.url), user_path(rank.user) %>-->
+                <i class="far fa-clock"></i><%= rank.updated_at.strftime('%Y/%m/%d') %>
+              </div>
+            </div>
+          <% end %>
         </div>
-        <p style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+        <p style="text-align: right"><%= link_to "人気のプランをもっと見る　＞", popular_path %></p>
         
         <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
         <div class="web-flex row">
         <% @plans.each do |plan| %>
           <div class="top-planimage col-md-3">
             <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-            <p class="top-plantitle"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <div class="tag small bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            <div class="top-user mt-2 web-gray xsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+              </div>
           </div>
         <% end %>
         </div>
-        <p style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+        <p class="mt-3" style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
         
-        <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
+        <p class="newplan_title"><img src="assets/icon_recommend.png">トレンドおすすめプラン</p>
         <div class="web-flex row">
-        <% @plans.each do |plan| %>
+        <% @recomends.each do |plan| %>
           <div class="top-planimage col-md-3">
-            <%= image_tag plan.image.to_s %>
-            <p class="top-plantitle"><%= plan.plan_title.truncate(42) %></p>
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <div class="tag small bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            <div class="top-user mt-2 web-gray xsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+              </div>
           </div>
         <% end %>
         </div>
-        <p style="text-align: right">新着のプランをもっと見る　＞</p>
+        <p class="mt-3" style="text-align: right"><%= link_to "トレンドおすすめプランをもっと見る　＞", new_arrival_path %></p>
         
         <p class="newplan_title"><img src="assets/icon_popular.png">人気のプランナー</p>
         <!--プランナー一覧取得-->

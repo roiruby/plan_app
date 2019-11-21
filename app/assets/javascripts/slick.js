@@ -1,7 +1,10 @@
 $(document).on('turbolinks:load', function() {
     $('.slide-image').slick({
+        centerMode: true,
+        centerPadding: '20%',
+        
         dots: true,
-        slidesToShow: 3,
+        // slidesToShow: 3,
         accessibility: true,
         autoplay: true,
         arrows: true,

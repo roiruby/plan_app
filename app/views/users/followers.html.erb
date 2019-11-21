@@ -1,0 +1,37 @@
+  <div class="container-fluid">
+    <% breadcrumb :followers %>
+    <%= render "layouts/breadcrumbs" %>
+    <div class="row web-mt40">
+      
+      <div class="col-md-3">
+        <%= render 'mypage/mypage_left' %>
+      </div>
+      
+      <div class="col-md-6">
+
+        <ul class="nav nav-tabs nav-justified mb-3">
+          <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォロー  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
+          <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
+        </ul>
+        
+        <div class="row">
+        <% @followers.each do |user| %>
+          <div class="circle-image130 col-md-3 mt-3 web-center">
+            <%= link_to image_tag(user.image.to_s), user_path(user) %>
+            <p class="top-username bold"><%= link_to user.name, user_path(user) %></p>
+            <p class="xsmall web-mt-15"><%= user.catchphrase %></p>
+          </div>
+        <% end %>
+        </div>
+        
+      </div>
+      
+      
+      <div class="col-md-3">
+        <div class="mypage_right">
+        <image src="/assets/ad1.gif"></image>
+        </div>
+      </div>
+      
+    </div>
+  </div>

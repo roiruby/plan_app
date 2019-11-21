@@ -10,6 +10,8 @@ class PlansController < ApplicationController
     @schedules = @plan.schedules
     @keywords = @plan.keywords
     @count_likes = Favorite.where(plan: @plan.id).count
+    @user = @plan.user
+    impressionist(@plan, nil, :unique => [:session_hash])
     
     
 
@@ -92,6 +94,9 @@ class PlansController < ApplicationController
   def new_arrival
     @plans = Plan.order('id DESC').page(params[:page]).per(20)
   end
+  def popular
+    @plans = Plan.order('impressions_count DESC').limit(300).page(params[:page]).per(20)
+  end
   
   def keywordAutocomplete
     @keywords = Keyword.includes(:plans).all.where('name LIKE ?', "%#{params[:term]}%")
@@ -100,6 +105,7 @@ class PlansController < ApplicationController
   
   def search
     @plans = Plan.search(params[:search]).reverse_order.page(params[:page]).per(20)
+    @search_word = (params[:search])
   end
   
   #エリア動的フォーム
@@ -120,7 +126,7 @@ class PlansController < ApplicationController
     {schedules_attributes: [
         :schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :remove_image2, :remove_image3, :remove_image4, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget, :link_url, :comment, :_destroy, :id]},
     {keywords_attributes: [
-        :name]})
+        :name, :_destroy, :id]})
   end
   
   def correct_user

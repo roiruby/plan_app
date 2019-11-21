@@ -24,12 +24,14 @@ class Plan < ApplicationRecord
   
   mount_uploader :image, ImageUploader
   
+  is_impressionable counter_cache: true
+  
   
   def self.search(search)
       return Plan.all unless search
       Plan.includes([:schedules, :category])
-      .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR categories.category LIKE ?',
-      "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category])
+      .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR categories.category LIKE ? OR categories.id LIKE ?',
+      "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category])
   end
   
 
