@@ -13,9 +13,11 @@
           <p class="top-username"><%= link_to user.name, user_path(user) %></p>
           <p class="small web-mt-15"><%= user.catchphrase %></p>
           
-          <% if current_user.admin? && !(current_user == user) %>
+          <% if logged_in? %>
+          <% if current_user.admin? && !(current_user == User) %>
             <div><%= user.email %></div>
             <%= link_to "削除", user_path(user), :method => :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger btn-sm mb-4" %>
+          <% end %>
           <% end %>
           
         </div>

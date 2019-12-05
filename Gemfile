@@ -67,6 +67,7 @@ gem 'seed-fu'
 
 gem 'jquery-ui-rails'
 gem 'acts-as-taggable-on'
+gem 'gon'
 
 gem 'pry-byebug', group: :development
 

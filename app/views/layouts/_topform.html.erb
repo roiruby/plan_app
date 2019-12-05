@@ -1,22 +1,27 @@
 <div class="container">
-  <div class="form-row mt-4">
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" id="text5a" placeholder="行先を選択">
-    </div>
+  
+  <%= form_with(url: select_search_path, method: :get, local: true) do |f| %>
     
-    <div class="form-group col-md-3">
-      <%= form_with(url: search_path, method: :get, local: true) do |f| %>
-        <%= f.collection_select :search, Category.all, :category, :category, {include_blank: 'カテゴリを選択', include_hidden: false}, class: 'form-control' %>
-    </div>
-    
-    <div class="form-group col-md-3">
-      <input type="text" class="form-control" id="text5b" placeholder="予算を選択">
-    </div>
-    
-    <div class="form-group col-md-3">
-        <%= button_tag 'プランを検索'.html_safe, :type => "submit", :class =>"btn btn-coral w-100" %>
-    </div>
-      <% end %>
+    <div class="form-row mt-4">
 
-  </div>
+      <div class="form-group col-md-3">
+        <!--<%= f.collection_select :prefecture, Prefecture.all, :id, :name, {include_blank: '都道府県を選択', include_hidden: false}, class: 'form-control border-warning' %>-->
+        <%= f.text_field :plan, :placeholder => "\uf041 エリア・スポット名", :class => 'form-control border-warning use_icon' %>
+      </div>
+
+      <div class="form-group col-md-3">
+        <%= f.collection_select :category, Category.all, :id, :category, {include_blank: "&#xf1c0; カテゴリーを選択".html_safe, include_hidden: false}, class: 'form-control border-warning use_icon' %>
+      </div>
+      
+      <div class="form-group col-md-3">
+        <%= f.collection_select :budget, Budget.all, :id, :name, {include_blank: "&#xf157; 予算を選択".html_safe, include_hidden: false}, class: 'form-control border-warning use_icon' %>
+      </div>
+      
+      <div class="form-group col-md-3">
+        <%= f.submit "プランを検索", :class=>"btn btn-coral w-100" %>
+      </div>
+      
+    </div>
+  <% end %>
+  
 </div>

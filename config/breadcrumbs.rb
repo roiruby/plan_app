@@ -14,6 +14,19 @@ crumb :mypage do
   link "マイページ", mypage_path
 end
 
+crumb :information do
+  link "お知らせ", information_index_path
+end
+
+crumb :news do |news|
+  link "#{news.title}", information_path(news)
+  parent :information
+end
+
+crumb :likes do
+  link "お気に入り", likes_user_path
+end
+
 crumb :followings do
   link "フォロー", followings_user_path
 end
@@ -33,11 +46,26 @@ end
 
 crumb :plan do |plan|
   link "#{plan.plan_title}", plan_path(plan)
-  parent :category, plan.category
+  parent :spot, plan.spot
+  # parent :category, plan.category
 end
 
 crumb :category do |category|
   link "#{category.category}", category_path(category)
+end
+
+crumb :prefecture do |prefecture|
+  link "#{prefecture.name}", prefecture_path(prefecture)
+end
+
+crumb :city do |city|
+  link "#{city.name}", city_path(city)
+  parent :prefecture, city.prefecture
+end
+
+crumb :spot do |spot|
+  link "#{spot.name}", spot_path(spot)
+  parent :city, spot.city
 end
 
 crumb :popular do
@@ -47,6 +75,15 @@ end
 crumb :new_arrival do
   link "新着のプラン", new_arrival_path
 end
+
+crumb :recommend do
+  link "トレンドおすすめのプラン", recommend_path
+end
+
+crumb :keywords do |tag|
+  link "#{params[:tag]}", recommend_path
+end
+
 
 # crumb :projects do
 #   link "Projects", projects_path

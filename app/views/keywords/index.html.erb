@@ -1,0 +1,33 @@
+      <div class="container">
+        <% breadcrumb :keywords, @plans %>
+        <%= render "layouts/breadcrumbs" %>
+
+        <% if @keywords.present? %>
+          <p class="newplan_title mt-4 mb-0"><i class="fas fa-chess-queen mr-1 web-pb3"></i>【<%= @keywords %>】プランの一覧　<span class="small"><%= @plans.count %>件</span></p>
+        <% else %>
+          <p class="newplan_title mt-4 mb-0"><i class="fas fa-chess-queen mr-1 web-pb3"></i>すべてのプラン一覧　<span class="small"><%= Plan.count %>件</span></p>
+        <% end %>
+    
+        <div class="web-flex row">
+          <% @plans.each do |plan| %>
+          <div class="image-gold col-md-3 mt-3">
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <div class="tag small bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            <div class="tag small bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+            <div class="top-user mt-2 web-gray xsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+    
+        <div class="pagination justify-content-end pagination-sm">
+        <%= paginate @plans %>
+        </div>
+    
+      </div>

@@ -10,4 +10,10 @@ class CitiesController < ApplicationController
     end
     render json: cities
   end
+  
+  def show
+    @city = City.find(params[:id])
+    @plans = @city.plans.order('id DESC').page(params[:page]).per(20)
+  end
+  
 end

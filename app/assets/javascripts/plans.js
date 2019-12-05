@@ -26,7 +26,7 @@ $(document).on('turbolinks:load',function(){
     $('#formKeywordInput_tag').data('ui-autocomplete')._renderItem = function(ul, item) {
       return $('<li class="w-200">').data('item.autocomplete', item).append('<a class="w-200 d-flex">' + item.name + '  (' + item.count +')　</a>')
         .appendTo(ul);
-    }  
+    }
   }
-  
+  $('#formKeywordInput_tag').attr('placeholder', '例）ペット ファミリー向け 日帰り');
 });

@@ -12,14 +12,22 @@ Rails.application.routes.draw do
   
   get 'plans/new_arrival', to: 'plans#new_arrival',  as: :new_arrival
   get 'plans/popular', to: 'plans#popular',  as: :popular
+  get 'plans/recommend', to: 'plans#recommend',  as: :recommend
   
   get '/keywords/autocomplete.json', to: 'plans#keywordAutocomplete'
   
   get 'search', to: 'plans#search', as: :search
+  get 'select_search', to: 'plans#select_search', as: :select_search
   
   get 'mypage', to: 'mypage#index', as: :mypage
   
   get 'categories/:id', to: 'categories#show', as: :category
+  
+  get 'prefectures/:id', to: 'prefectures#show', as: :prefecture
+  get 'cities/:id', to: 'cities#show', as: :city
+  get 'spots/:id', to: 'spots#show', as: :spot
+  
+  get 'keywords', to: 'keywords#index', as: :keyword
 
   
 
@@ -34,11 +42,7 @@ Rails.application.routes.draw do
   
   resources :plans, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     
-    #Ajaxで動くアクションのルートを作成
     collection do
-      get 'get_area_children', defaults: { format: 'json' }
-      get 'get_area_grandchildren', defaults: { format: 'json' }
-      
       get '/:id/city' => 'plans#city', as: "city"
     end
   end
@@ -46,6 +50,7 @@ Rails.application.routes.draw do
   resources :schedules, only: [:create]
   resources :favorites, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
+  resources :information, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   
   resources :prefectures, only: [] do
     resources :cities, only: :index do

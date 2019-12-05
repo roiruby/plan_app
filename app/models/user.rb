@@ -20,6 +20,8 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: 'Relationship', foreign_key: 'follow_id', dependent: :destroy
   has_many :followers, through: :reverses_of_relationship, source: :user, dependent: :destroy
   
+  has_many :information
+  
   def like(plan)
     favorites.find_or_create_by(plan_id: plan.id)
   end

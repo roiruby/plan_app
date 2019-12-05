@@ -9,7 +9,7 @@
       <div class="navbar-nav form-group form-inline">
         <%= form_with(url: search_path, method: :get, local: true) do |f| %>
           <div class="input-group">
-            <%= f.text_field :search, placeholder: "キーワードで検索", class: 'form-control' %>
+            <%= f.text_field :search, value: params[:search], placeholder: "キーワードで検索", class: 'form-control' %>
             <span class="input-group-btn">
               <%= button_tag '<i class="fas fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-search", :style => "color:white;" %>
             </span>
@@ -22,24 +22,30 @@
         
         <% if logged_in? %>
         
-          <div class="nav-image">
-            <%= link_to image_tag(current_user.image.thumb130.url), mypage_path %>
-          </div>
-        
-          <li class="nav-item"><%= link_to 'Users', users_path, class: 'nav-link' %></li>
+          <!--<div class="nav-image">-->
+          <!--  <%= link_to image_tag(current_user.image.thumb150.url), mypage_path %>-->
+          <!--</div>-->
           
-          <li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
+          
+          <li class="nav-image nav-item dropdown mr-3">
+              <a href="#" data-toggle="dropdown"><%= image_tag current_user.image.thumb150.url %></a>
             <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item"><%= link_to 'My profile', user_path(current_user) %></li>
-              <li class="dropdown-divider"></li>
-              <li class="dropdown-item"><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+              <li class="dropdown-item small"><i class="far fa-id-card mr-1"></i><%= link_to 'マイページ', mypage_path %></li>
+              <li class="dropdown-item small"><i class="fas fa-user-circle mr-1"></i><%= link_to 'マイプロフィール', user_path(current_user) %></li>
+              <!--<li class="dropdown-divider"></li>-->
+              <li class="dropdown-item small"><i class="fas fa-sign-out-alt mr-1"></i><%= link_to 'ログアウト', logout_path, method: :delete %></li>
             </ul>
           </li>
+          
+          <%= link_to information_index_path do %>
+          <i class="fas fa-info-circle news mr-3 mt-2"></i>
+          <% end %>
+            
+        
           <li class="nav-item btn btn-sm btn-plan"><%= link_to new_plan_path, data: {"turbolinks" => false}, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
         <% else %>
           <i class="fas fa-user web-mt10"></i><li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
-          <li class="nav-item mr-2"><%= link_to '会員登録(無料)', signup_path, class: 'nav-link' %></li>
+          <li class="nav-item mr-3"><%= link_to '会員登録(無料)', signup_path, class: 'nav-link' %></li>
           <li class="nav-item btn btn-sm btn-plan"><%= link_to login_path, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
         <% end %>
       </ul>

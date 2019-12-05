@@ -1,0 +1,43 @@
+  <div class="container">
+    
+    <p class="newplan_title mt-4"><i class="fas fa-search mr-1"></i>
+    <% if @name == "" and @category_name == nil and @budget_name == nil %>
+      すべてのプラン　<span class="small bold"><%= @plan.count %>プラン</span>
+    <% else %>
+      <% if @name.present? %>
+        [<%= @name %>]
+      <% end %>
+      <% if @category_name.present? %>
+        [<%= @category_name %>]
+      <% end %>
+      <% if @budget_name.present? %>
+        [<%= @budget_name %>]
+      <% end %>
+        のプラン　<span class="small bold"><%= @plans.count %>プラン</span>
+    <% end %>
+    </p>
+    
+    
+    <div class="web-flex row mt-3">
+      <% @plans.each do |plan| %>
+        <div class="image-gold col-md-3 mt-3">
+        <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+        <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <div class="tag xsmall bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            <div class="tag xsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+            <div class="top-user mt-2 web-gray xsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+          <% end %>
+    </div>
+  
+    <div class="pagination justify-content-end pagination-sm mt-3">
+      <%= paginate @plans %>
+    </div>
+    
+  </div>

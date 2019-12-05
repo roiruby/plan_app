@@ -9,7 +9,7 @@
     <div class="web-flex">  
       <div class="plan-image">
         <% if @plan.image? %>
-          <%= image_tag @plan.image.thumb200.url, id: :img_prev %>
+          <%= image_tag @plan.image.url, id: :img_prev %>
           <p><%= f.check_box :remove_image %>画像を削除する</p>
         <% else %>
           <%= image_tag "default_plan.jpg", id: :img_prev %>
@@ -44,97 +44,71 @@
     </script>
       
       
+    <div class="form-row">
       
-    <div class="form-group">
-      <span class="required">*</span>
-      <%= f.label 'カテゴリ' %>
-      <%= f.collection_select :category_id, Category.all, :id, :category, {include_blank: 'カテゴリを選択', include_hidden: false}, class: 'form-control border-warning' %>
-    </div>
+      <div class="col-md-2">
+        <div class="form-group">
+          <span class="required">*</span>
+          <%= f.label 'カテゴリー' %>
+          <%= f.collection_select :category_id, Category.all, :id, :category, {include_blank: 'カテゴリーを選択', include_hidden: false}, class: 'form-control border-warning' %>
+        </div>
+      </div>
     
-
-      
-    <div>
-    <% prefecture_options = Prefecture.order(:id).map { |c| [c.name, c.id, data: { children_path: prefecture_cities_path(c) }] } %>
-    <%= f.label :prefecture_id,"都道府県" %><br>
-    <%= f.select :prefecture_id, prefecture_options, { include_blank: true }, class: 'select-parent' %>
-    </div>
-
-    <div>
-    <% cities = @plan.prefecture.try(:cities) || [] %>
-    <% city_options = cities.map { |c| [c.name, c.id, data: { path: prefecture_city_spots_path(c) }] } %>
-    <%= f.label :city_id,"市区町村" %><br>
-    <%= f.select :city_id, city_options, { include_blank: true }, class: 'select-children' %>
-    </div>
     
-    <div>
-    <% spots = @plan.city.try(:spots) || [] %>
-    <% spot_options = spots.map { |c| [c.name, c.id] } %>
-    <%= f.label :spot_id,"スポット" %><br>
-    <%= f.select :spot_id, spot_options, { include_blank: true }, class: 'select-grandchildren' %>
-    </div>
+      <div class="col-md-8">
+        <div>
+          <span class="required">*</span>
+          <%= f.label :prefecture_id,"エリア" %><br>
+        </div>
+        <div class="form-row">
+          <div class="col-md-4">
+            <% prefecture_options = Prefecture.order(:id).map { |c| [c.name, c.id, data: { children_path: prefecture_cities_path(c) }] } %>
+            <%= f.select :prefecture_id, prefecture_options, { include_blank: "都道府県を選択", include_hidden: false}, class: 'select-parent form-control border-warning' %>
+          </div>
 
-  
-      
-      <div class="form-group">
-        <%= f.fields_for :keywords do |tf| %>
-          <%= tf.label :name, "キーワード"  %>
-          <%= tf.text_field :name, id:"formKeywordInput", class:"form-control" %>
-        <% end %>
+          <div class="col-md-4">
+            <% cities = @plan.prefecture.try(:cities) || [] %>
+            <% city_options = cities.map { |c| [c.name, c.id, data: { path: prefecture_city_spots_path(c, city_id:c) }] } %>
+            <!--<%= f.label :city_id,"市区町村" %><br>-->
+            <%= f.select :city_id, city_options, { include_blank: "市区町村を選択", include_hidden: false}, class: 'select-children form-control border-warning' %>
+          </div>
+    
+          <div class="col-md-4">
+            <% spots = @plan.city.try(:spots) || [] %>
+            <% spot_options = spots.map { |c| [c.name, c.id] } %>
+            <!--<%= f.label :spot_id,"スポット" %><br>-->
+            <%= f.select :spot_id, spot_options, { include_blank: "スポットを選択", include_hidden: false}, class: 'select-grandchildren form-control border-warning' %>
+          </div>
+        </div>
       </div>
       
+      <div class="col-md-2">
+        <div class="form-group">
+          <span class="required">*</span>
+          <%= f.label '予算' %>
+          <%= f.collection_select :budget_id, Budget.all, :id, :name, {include_blank: '予算を選択', include_hidden: false}, class: 'form-control border-warning' %>
+        </div>
+      </div>
       
-
-親カテゴリ<select id="SEL1">
-	<option value="">---</option>
-	<option value="tohoku">東北</option>
-	<option value="kanto">関東</option>
-</select>
-子カテゴリ<select id="SEL2">
-	<option value="">---</option>
-  <optgroup label="tohoku">
-	<option value="aomori">青森</option>
-	<option value="iwate">岩手</option>
-  </optgroup>
-  <optgroup label="kanto">
-	<option value="tokyo">東京</option>
-	<option value="kanagawa">神奈川</option>
-  </optgroup>
-</select>
-孫カテゴリ<select id="SEL3">
-	<option value="">---</option>
-  <optgroup label="aomori">
-	<option value="mutu">むつ・下北半島</option>
-	<option value="aomori">青森・東津軽・八甲田山</option>
-	<option value="hirosaki">弘前・黒石・中津軽・南津軽</option>
-	<option value="aomori">八戸・三沢・十和田</option>
-	<option value="hirosaki">西津軽・北津軽・五所川原</option>
-	<option value="aomori">その他</option>
-  </optgroup>
-  <optgroup label="iwate">
-	<option value="morioka">盛岡・雫石</option>
-	<option value="hachimandaira">八幡平・二戸</option>
-	<option value="ichinoseki">一関・平泉・奥州</option>
-	<option value="hanamaki">花巻・北上・遠野</option>
-	<option value="sanrikukaigan">三陸海岸沿岸</option>
-	<option value="iwate6">その他</option>
-  </optgroup>
-  <optgroup label="tokyo">
-	<option value="tokyo1">銀座・日本橋・東京駅周辺</option>
-	<option value="tokyo2">お茶の水・湯島・九段</option>
-	<option value="tokyo3">六本木・麻布・赤坂・青山</option>
-  </optgroup>
-  <optgroup label="kanagawa">
-	<option value="murasaki">ムラサキキャベツ</option>
-	<option value="saboi">サボイキャベツ</option>
-	<option value="ha">ハキャベツ</option>
-  </optgroup>
-</select>
-
-<script type="text/javascript">
-ConnectedSelect(['SEL1','SEL2','SEL3']);
-</script>
+    </div>
 
 
+      <div class="form-group">
+          <%= f.label "キーワード"  %>
+          <span class="xsmall ml-2" %>※関連したワードやシーンを入力！Enterキーで決定、最大10個まで登録可</span>
+          <ul id="plan-tags">
+          </ul>
+      </div>
+      
+      <!--<div class="form-group">-->
+      <!--  <%= f.fields_for :keywords do |tf| %>-->
+      <!--    <%= tf.label :name, "キーワード"  %>-->
+      <!--    <%= tf.text_field :name, id:"formKeywordInput", class:"form-control" %>-->
+      <!--  <% end %>-->
+      <!--</div>-->
+      
+      
+      
       
       <hr>
       

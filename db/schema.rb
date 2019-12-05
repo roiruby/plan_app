@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_21_155058) do
+ActiveRecord::Schema.define(version: 2019_11_29_060144) do
 
   create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,12 @@ ActiveRecord::Schema.define(version: 2019_11_21_155058) do
     t.datetime "updated_at", null: false
     t.string "ancestry"
     t.index ["ancestry"], name: "index_areas_on_ancestry"
+  end
+
+  create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -70,6 +76,16 @@ ActiveRecord::Schema.define(version: 2019_11_21_155058) do
     t.index ["user_id"], name: "index_impressions_on_user_id"
   end
 
+  create_table "information", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "text_content"
+    t.index ["user_id"], name: "index_information_on_user_id"
+  end
+
   create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -87,8 +103,16 @@ ActiveRecord::Schema.define(version: 2019_11_21_155058) do
     t.bigint "category_id"
     t.bigint "area_id"
     t.integer "impressions_count", default: 0
+    t.bigint "prefecture_id"
+    t.bigint "city_id"
+    t.bigint "spot_id"
+    t.bigint "budget_id"
     t.index ["area_id"], name: "index_plans_on_area_id"
+    t.index ["budget_id"], name: "index_plans_on_budget_id"
     t.index ["category_id"], name: "index_plans_on_category_id"
+    t.index ["city_id"], name: "index_plans_on_city_id"
+    t.index ["prefecture_id"], name: "index_plans_on_prefecture_id"
+    t.index ["spot_id"], name: "index_plans_on_spot_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
@@ -200,8 +224,13 @@ ActiveRecord::Schema.define(version: 2019_11_21_155058) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "favorites", "plans"
   add_foreign_key "favorites", "users"
+  add_foreign_key "information", "users"
   add_foreign_key "plans", "areas"
+  add_foreign_key "plans", "budgets"
   add_foreign_key "plans", "categories"
+  add_foreign_key "plans", "cities"
+  add_foreign_key "plans", "prefectures"
+  add_foreign_key "plans", "spots"
   add_foreign_key "plans", "users"
   add_foreign_key "plans_categories", "categories"
   add_foreign_key "plans_categories", "plans"

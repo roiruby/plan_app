@@ -3,4 +3,10 @@ class SpotsController < ApplicationController
     city = City.find(params[:city_id])
     render json: city.spots.select(:id, :name)
   end
+  
+  def show
+    @spot = Spot.find(params[:id])
+    @plans = @spot.plans.order('id DESC').page(params[:page]).per(20)
+  end
+  
 end

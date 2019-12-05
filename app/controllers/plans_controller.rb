@@ -1,8 +1,11 @@
 class PlansController < ApplicationController
   before_action :require_user_logged_in, only: [:create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_plan_tags_to_gon, only: [:edit]
+  before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update]
   
   def index
+    @plans = Plan.all.reverse_order.page(params[:page]).per(20)
   end
 
   def show
@@ -12,23 +15,14 @@ class PlansController < ApplicationController
     @count_likes = Favorite.where(plan: @plan.id).count
     @user = @plan.user
     impressionist(@plan, nil, :unique => [:session_hash])
-    
-    
-
-    
-    # @plans = Plan.includes(keywords: :plans).all
+    @relation_plans = Plan.includes([:category, :spot]).where(["category_id = ? and spot_id = ?","#{@plan.category_id}", "#{@plan.spot_id}"]).references([:category, :spot]).order("RAND()").limit(4).where.not(id: @plan.id)
+      
   end
   
   def new
     @plan = current_user.plans.build
     @plan.schedules.build
     @plan.keywords.build
-    
-    @area_parent_array = ["---"]
-    Area.where(ancestry: nil).each do |parent|
-      @area_parent_array << parent.name
-    end
-    
   end
 
   def create
@@ -44,33 +38,6 @@ class PlansController < ApplicationController
 
   def edit
     @plan = Plan.find(params[:id])
-    
-    # @parents = Area.where(ancestry:nil)
-    # # 登録されているエリアの孫カテゴリーのレコードを取得
-    # @selected_grandchild_area = @plan.area
-    # # 孫カテゴリー選択肢用の配列作成
-    # @area_grandchildren_array = [{id: "---", name: "---"}]
-    # Area.find("#{@selected_grandchild_area.id}").siblings.each do |grandchild|
-    #   grandchildren_hash = {id: "#{grandchild.id}", name: "#{grandchild.name}"}
-    #   @area_grandchildren_array << grandchildren_hash
-    # end
-    # # 選択されている子カテゴリーのレコードを取得
-    # @selected_child_area = @selected_grandchild_area.parent
-    # # 子カテゴリー選択肢用の配列作成
-    # @area_children_array = [{id: "---", name: "---"}]
-    # Area.find("#{@selected_child_area.id}").siblings.each do |child|
-    #   children_hash = {id: "#{child.id}", name: "#{child.name}"}
-    #   @area_children_array << children_hash
-    # end
-    # # 選択されている親カテゴリーのレコードを取得
-    # @selected_parent_area = @selected_child_area.parent
-    # # 親カテゴリー選択肢用の配列作成
-    # @area_parents_array = [{id: "---", name: "---"}]
-    # Area.find("#{@selected_parent_area.id}").siblings.each do |parent|
-    #   parent_hash = {id: "#{parent.id}", name: "#{parent.name}"}
-    #   @area_parents_array << parent_hash
-    # end
-    
   end
 
   def update
@@ -97,6 +64,9 @@ class PlansController < ApplicationController
   def popular
     @plans = Plan.order('impressions_count DESC').limit(300).page(params[:page]).per(20)
   end
+  def recommend
+    @plans = Plan.tagged_with("タピオカ").page(params[:page]).per(20)
+  end
   
   def keywordAutocomplete
     @keywords = Keyword.includes(:plans).all.where('name LIKE ?', "%#{params[:term]}%")
@@ -104,25 +74,53 @@ class PlansController < ApplicationController
   end
   
   def search
-    @plans = Plan.search(params[:search]).reverse_order.page(params[:page]).per(20)
-    @search_word = (params[:search])
+    @plan = Plan.all
+    @search_word = params[:search]
+    
+    if params[:search] == ""
+      @plans = Plan.all
+    else
+      searches = params[:search].split(/[[:blank:]]+/).select(&:present?)
+      @plans = Plan
+      searches.each do |search|
+      @plans = @plans.includes([:schedules, :category, :prefecture, :city, :spot, :tags])
+      .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR schedules.content LIKE ? OR categories.category LIKE ? OR prefectures.name LIKE ? OR cities.name LIKE ? OR spots.name LIKE ? OR tags.name LIKE ?',
+      "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category, :prefecture, :city, :spot, :tags])
+      end
+    end
+    @plans = @plans.reverse_order.page(params[:page]).per(20)
   end
   
-  #エリア動的フォーム
-  # 親カテゴリーが選択された後に動くアクション
-  def get_area_children
-    #選択された親カテゴリーに紐付く子カテゴリーの配列を取得
-    @area_children = Area.find_by(name: "#{params[:parent_name]}", ancestry: nil).children
+  def select_search
+    @plans = Plan.all
+    @plan = Plan.all
+    @name = params[:plan]
+    
+    if params[:plan].present?
+    @plans = @plans.get_by_plan params[:plan]
+    end
+    # if params[:prefecture].present?
+    # @plans = @plans.get_by_prefecture params[:prefecture]
+    # end
+    if params[:category].present?
+    @plans = @plans.get_by_category params[:category]
+    @category_name = Category.find(params[:category]).category
+    end
+    if params[:budget].present?
+    @plans = @plans.get_by_budget params[:budget]
+    @budget_name = Budget.find(params[:budget]).name
+    end
+    @plans = @plans.reverse_order.page(params[:page]).per(20)
   end
-  def get_area_grandchildren
-    @area_grandchildren = Area.find("#{params[:child_id]}").children
-  end
+  
+  
+
   
   private
 
   def plan_params
     params.require(:plan).permit(
-    :plan_title, :content, :image, :remove_image, :user_id, :category_id, :area_id,
+    :plan_title, :content, :image, :remove_image, :user_id, :category_id, :budget_id, :prefecture_id, :city_id, :spot_id, :tag_list,
     {schedules_attributes: [
         :schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :remove_image2, :remove_image3, :remove_image4, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget, :link_url, :comment, :_destroy, :id]},
     {keywords_attributes: [
@@ -134,6 +132,13 @@ class PlansController < ApplicationController
     unless @plan
       redirect_to root_url
     end
+  end
+  
+  def set_plan_tags_to_gon
+    gon.plan_tags = @plan.tag_list
+  end
+  def set_available_tags_to_gon
+    gon.available_tags = Plan.tags_on(:tags).pluck(:name)
   end
 
 

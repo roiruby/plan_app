@@ -27,9 +27,9 @@ $(document).on 'turbolinks:load', ->
 
 #市区町村からスポット
   replaceGrandChildrenOptions = ->
-    grandchildrenPath = $(@).find('option:selected').data().Path
+    grandchildrenPath = $(@).find('option:selected').data().path
     $selectGrandChildren = $(@).closest('form').find('.select-grandchildren')
-    console.log($(@).find('option:selected').data().Path)
+    console.log($(@).find('option:selected').data().grandchildrenPath)
 
     if grandchildrenPath?
       $.ajax
