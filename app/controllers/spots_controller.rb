@@ -6,7 +6,7 @@ class SpotsController < ApplicationController
   
   def show
     @spot = Spot.find(params[:id])
-    @plans = @spot.plans.order('id DESC').page(params[:page]).per(20)
+    @plans = @spot.plans.published.order('id DESC').page(params[:page]).per(20)
   end
   
 end

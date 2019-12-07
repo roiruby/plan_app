@@ -74,3 +74,5 @@ gem 'pry-byebug', group: :development
 gem "gretel"
 
 gem 'impressionist'
+
+gem 'enum_help'

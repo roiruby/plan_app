@@ -44,6 +44,7 @@ Rails.application.routes.draw do
     
     collection do
       get '/:id/city' => 'plans#city', as: "city"
+      get 'confirm'
     end
   end
   

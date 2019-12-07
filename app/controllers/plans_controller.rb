@@ -5,30 +5,34 @@ class PlansController < ApplicationController
   before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update]
   
   def index
-    @plans = Plan.all.reverse_order.page(params[:page]).per(20)
+    @plans = Plan.published.all.reverse_order.page(params[:page]).per(20)
   end
 
   def show
     @plan = Plan.find(params[:id])
     @schedules = @plan.schedules
-    @keywords = @plan.keywords
+    # @keywords = @plan.keywords
     @count_likes = Favorite.where(plan: @plan.id).count
     @user = @plan.user
     impressionist(@plan, nil, :unique => [:session_hash])
-    @relation_plans = Plan.includes([:category, :spot]).where(["category_id = ? and spot_id = ?","#{@plan.category_id}", "#{@plan.spot_id}"]).references([:category, :spot]).order("RAND()").limit(4).where.not(id: @plan.id)
-      
+    @relation_plans = Plan.published.includes([:category, :spot]).where(["category_id = ? and spot_id = ?","#{@plan.category_id}", "#{@plan.spot_id}"]).references([:category, :spot]).order("RAND()").limit(4).where.not(id: @plan.id)
+    @most_viewed = Plan.published.order('impressions_count DESC').limit(5).where.not(id: @plan.id)
+    @plans = Plan.published.order(time: "DESC").limit(5).where.not(id: @plan.id)
+    @recomends = Plan.published.tagged_with("タピオカ").limit(5).where.not(id: @plan.id)
+    
+    if @plan.draft?
+      draftplan
+    end
   end
   
   def new
     @plan = current_user.plans.build
     @plan.schedules.build
-    @plan.keywords.build
   end
 
   def create
     @plan = current_user.plans.build(plan_params,)
     if @plan.save
-      flash[:success] = 'プランを投稿しました。'
       redirect_to user_path(@plan.user_id)
     else
       flash[:danger] = 'プランの投稿に失敗しました。'
@@ -44,7 +48,6 @@ class PlansController < ApplicationController
     @plan = Plan.find(params[:id])
 
     if @plan.update(plan_params)
-      flash[:success] = '正常に更新されました'
       redirect_to plan_path
     else
       flash.now[:danger] = '更新されませんでした'
@@ -59,41 +62,47 @@ class PlansController < ApplicationController
   end
   
   def new_arrival
-    @plans = Plan.order('id DESC').page(params[:page]).per(20)
+    @plans = Plan.published.order(time: "DESC").page(params[:page]).per(20)
   end
   def popular
-    @plans = Plan.order('impressions_count DESC').limit(300).page(params[:page]).per(20)
+    @plans = Plan.published.order('impressions_count DESC').limit(300).page(params[:page]).per(20)
   end
   def recommend
-    @plans = Plan.tagged_with("タピオカ").page(params[:page]).per(20)
+    @plans = Plan.published.order(time: "DESC").tagged_with("タピオカ, 食べ歩き").page(params[:page]).per(20)
   end
   
-  def keywordAutocomplete
-    @keywords = Keyword.includes(:plans).all.where('name LIKE ?', "%#{params[:term]}%")
-    render json: @keywords.map{ |keyword| {name:keyword.name, count: keyword.plans.size}}.to_json
+  # def keywordAutocomplete
+  #   @keywords = Keyword.includes(:plans).all.where('name LIKE ?', "%#{params[:term]}%")
+  #   render json: @keywords.map{ |keyword| {name:keyword.name, count: keyword.plans.size}}.to_json
+  # end
+  
+  def confirm
+    @user = current_user
+    @plans = @user.plans.draft.order("time DESC").page(params[:page]).per(20)
+    @count_draft = @user.plans.draft.count
   end
   
   def search
-    @plan = Plan.all
+    @plan = Plan.published.order("time DESC")
     @search_word = params[:search]
     
     if params[:search] == ""
-      @plans = Plan.all
+      @plans = Plan.published.order("time DESC")
     else
       searches = params[:search].split(/[[:blank:]]+/).select(&:present?)
       @plans = Plan
       searches.each do |search|
-      @plans = @plans.includes([:schedules, :category, :prefecture, :city, :spot, :tags])
+      @plans = @plans.published.includes([:schedules, :category, :prefecture, :city, :spot, :tags])
       .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR schedules.content LIKE ? OR categories.category LIKE ? OR prefectures.name LIKE ? OR cities.name LIKE ? OR spots.name LIKE ? OR tags.name LIKE ?',
       "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category, :prefecture, :city, :spot, :tags])
       end
     end
-    @plans = @plans.reverse_order.page(params[:page]).per(20)
+    @plans = @plans.published.order("time DESC").page(params[:page]).per(20)
   end
   
   def select_search
-    @plans = Plan.all
-    @plan = Plan.all
+    @plans = Plan.published.order("time DESC")
+    @plan = Plan.published.order("time DESC")
     @name = params[:plan]
     
     if params[:plan].present?
@@ -110,7 +119,11 @@ class PlansController < ApplicationController
     @plans = @plans.get_by_budget params[:budget]
     @budget_name = Budget.find(params[:budget]).name
     end
-    @plans = @plans.reverse_order.page(params[:page]).per(20)
+    @plans = @plans.page(params[:page]).per(20)
+  end
+  
+  def draftplan
+    redirect_to root_path unless current_user == @user
   end
   
   
@@ -120,7 +133,7 @@ class PlansController < ApplicationController
 
   def plan_params
     params.require(:plan).permit(
-    :plan_title, :content, :image, :remove_image, :user_id, :category_id, :budget_id, :prefecture_id, :city_id, :spot_id, :tag_list,
+    :plan_title, :content, :image, :remove_image, :user_id, :category_id, :budget_id, :prefecture_id, :city_id, :spot_id, :tag_list, :status,
     {schedules_attributes: [
         :schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :remove_image2, :remove_image3, :remove_image4, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget, :link_url, :comment, :_destroy, :id]},
     {keywords_attributes: [

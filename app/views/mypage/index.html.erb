@@ -14,10 +14,10 @@
         <% @plans.each do |plan| %>
         <div class="web-flex mb-4">
           <div>
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
           </div>
           <div class="ml-3">
-            <p><%= link_to plan.plan_title.truncate(49), plan_path(plan) %></p>
+            <p><%= link_to plan.plan_title.truncate(49), plan_path(plan), data: {"turbolinks" => false} %></p>
             <p class="small web-mt-8"><%= plan.content.truncate(63) %></p>
             <span class="small web-gray right">
               <p>

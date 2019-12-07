@@ -8,10 +8,10 @@ class Plan < ApplicationRecord
   
   belongs_to :area, optional: true
   
-  has_many :plans_keywords, dependent: :destroy
-  has_many :keywords, through: :plans_keywords
-  accepts_nested_attributes_for :keywords, :reject_if => proc { |att| att[:name].blank?}
-  before_save :find_or_create_keyword
+  # has_many :plans_keywords, dependent: :destroy
+  # has_many :keywords, through: :plans_keywords
+  # accepts_nested_attributes_for :keywords, :reject_if => proc { |att| att[:name].blank?}
+  # before_save :find_or_create_keyword
   
   belongs_to :prefecture, optional: true
   belongs_to :city, optional: true
@@ -23,15 +23,15 @@ class Plan < ApplicationRecord
   validates :plan_title, presence: true, length: { maximum: 50 }
   validates :category, presence: true
   
-  validates :prefecture, presence: true
-  validates :city, presence: true
-  validates :spot, presence: true
-  
   mount_uploader :image, ImageUploader
   
   is_impressionable counter_cache: true
   
   acts_as_taggable
+  
+  enum status: { published: 0, draft: 1 }
+  before_create :time_create
+  before_update :time_update
   
   
   scope :get_by_plan, ->(plan) {includes([:schedules, :prefecture, :city, :spot, :tags])
@@ -49,17 +49,31 @@ class Plan < ApplicationRecord
   
   private
   
-  def find_or_create_keyword
-    keyword_array = [] 
-    self.keywords.map{ |keyword| 
-        keyword.name.strip.split(",").each do |name|
-          keyword_array << name
-        end
-      }
-      self.keywords.destroy_all
-      keyword_array.each do |keyword|
-        self.keywords << Keyword.find_or_create_by(name: keyword)
-      end            
+  # def find_or_create_keyword
+  #   keyword_array = [] 
+  #   self.keywords.map{ |keyword| 
+  #       keyword.name.strip.split(",").each do |name|
+  #         keyword_array << name
+  #       end
+  #     }
+  #     self.keywords.destroy_all
+  #     keyword_array.each do |keyword|
+  #       self.keywords << Keyword.find_or_create_by(name: keyword)
+  #     end            
+  # end
+  
+  def time_create
+    if self.published?
+      self.time = Time.zone.now
+    end
+  end
+  
+  def time_update
+    if self.status_changed?(from: "draft", to:"published")
+      self.time = Time.zone.now
+    elsif self.status_changed?(from: "published", to:"draft")
+      self.time = nil
+    end
   end
   
   

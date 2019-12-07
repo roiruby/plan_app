@@ -11,7 +11,7 @@ private
   end
   
   def counts(user)
-    @count_plans = user.plans.count
+    @count_plans = user.plans.published.count
     @count_favplans = user.favplans.count
     @count_followings = user.followings.count
     @count_followers = user.followers.count

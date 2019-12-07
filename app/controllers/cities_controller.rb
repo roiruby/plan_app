@@ -13,7 +13,7 @@ class CitiesController < ApplicationController
   
   def show
     @city = City.find(params[:id])
-    @plans = @city.plans.order('id DESC').page(params[:page]).per(20)
+    @plans = @city.plans.published.order('id DESC').page(params[:page]).per(20)
   end
   
 end

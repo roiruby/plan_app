@@ -4,14 +4,27 @@ class UsersController < ApplicationController
   before_action :admin_user, only: :destroy
   
   def index
-    @users = User.order(id: :desc).page(params[:page]).per(30).limit(100)
+    @users = User.order("rand()").page(params[:page]).per(30).limit(100)
   end
 
   def show
     @user = User.find(params[:id])
-    @plans = Plan.find_by(id: params[:id])
-    @user_plans = @user.plans.page(params[:page]).per(20).reverse_order
+    # @plans = Plan.find_by(id: params[:id])
+    @plans = @user.plans.published.order("time DESC").page(params[:page]).per(20)
     counts(@user)
+    
+    if params[:search] == ""
+      @plans = @user.plans.published.order("time DESC").page(params[:page]).per(20)
+    else
+      searches = params[:search].to_s.split(/[[:blank:]]+/).select(&:present?)
+      @plans = @user.plans
+      searches.each do |search|
+      @plans = @plans.published.includes([:schedules, :category, :prefecture, :city, :spot, :tags])
+      .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR schedules.content LIKE ? OR categories.category LIKE ? OR prefectures.name LIKE ? OR cities.name LIKE ? OR spots.name LIKE ? OR tags.name LIKE ?',
+      "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category, :prefecture, :city, :spot, :tags])
+      end
+    end
+    @plans = @plans.published.order("time DESC").page(params[:page]).per(20)
   end
 
   def new
@@ -23,7 +36,6 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in @user
-      flash[:success] = 'ユーザを登録しました。'
       redirect_to mypage_path
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
@@ -39,7 +51,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      flash[:success] = '正常に更新されました'
       redirect_to mypage_path
     else
       flash.now[:danger] = '更新されませんでした'

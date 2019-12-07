@@ -18,11 +18,11 @@
       <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide1.jpg"></a>
+      <a href="/"><img src="assets/slide5.jpg"></a>
       <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide3.jpg"></a>
+      <a href="/"><img src="assets/slide6.jpg"></a>
       <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
     </div>
   </div>
@@ -123,8 +123,8 @@
         <div class="web-flex row">
           <% @most_viewed.each.with_index(1) do |rank| %>
             <div class="top-planimage col-md-3">
-              <%= link_to image_tag(rank.image.to_s), plan_path(rank) %>
-              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(42), plan_path(rank) %></p>
+              <%= link_to image_tag(rank.image.to_s), plan_path(rank), data: {"turbolinks" => false} %>
+              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(42), plan_path(rank), data: {"turbolinks" => false} %></p>
               <div class="tag xsmall bold mt-2">
                 <%= link_to rank.category.category, category_path(rank.category.id) %>
               </div>
@@ -143,28 +143,33 @@
         <div class="web-flex row">
         <% @plans.each do |plan| %>
           <div class="top-planimage col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
+            
+            <% if plan.spot.present? %>
             <div class="tag xsmall bold mt-2">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
+            <% end %>
+            
             <div class="top-user mt-2 web-gray xsmall">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>
           </div>
         <% end %>
         </div>
+        
         <p class="mt-3" style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
         
         <p class="newplan_title"><img src="assets/icon_recommend.png">トレンドおすすめプラン</p>
         <div class="web-flex row">
         <% @recomends.each do |plan| %>
           <div class="top-planimage col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>

@@ -1,7 +1,7 @@
   <div class="container-fluid">
     <% breadcrumb :user, @user %>
     <%= render "layouts/breadcrumbs" %>
-    <div class="row web-mt40">
+    <div class="row mt-4">
       
       <div class="col-md-3 web-center">
           <!--<p class="bold">投稿数 <%= @count_plans %> プラン</p>-->
@@ -45,28 +45,67 @@
         <Hr>
           
         <% if @count_plans >= 1 %>
-          <h3>投稿したプラン一覧 　<span class="small bold"><%= @count_plans %> プラン</span></h3>
-        <% end %>
+          <div class="row border-b mb-3">
+            <div class="col-md-9 pt-2">
+              <span class="h3 bold">投稿したプラン一覧 　</span><span class="bold"><%= @count_plans %> プラン</span>
+            </div>
+          
+            <div class="col-md-3">
+              <div class="form-group form-inline">
+                <%= form_with(url: user_path, method: :get, local: true) do |f| %>
+                  <div class="input-group">
+                    <%= f.text_field :search, value: params[:search], placeholder: "プラン絞り込み", class: 'form-control' %>
+                    <span class="input-group-btn">
+                      <%= button_tag '<i class="fas fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-search", :style => "color:white;" %>
+                    </span>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
 
-        <% @user_plans.each do |plan| %>
-          <div class="web-flex planshow top-planimage mb-4">
-          <div>
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
+        <% @plans.each do |plan| %>
+          <div class="row planshow top-planimage mt-2">
+            
+          <div class="col-md-3">
+            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
           </div>
-          <div class="ml-3">
-            <p><%= link_to plan.plan_title.truncate(55), plan_path(plan) %></p>
-            <p class="small web-mt-8"><%= plan.content.truncate(115) %></p>
-            <span class="small right">
-              <p>
+          
+          <div class="col-md-9 pl-4 pt-2">
+            <%= link_to plan.plan_title.truncate(55), plan_path(plan), data: {"turbolinks" => false} %>
+            <div class="small mt-1"><%= plan.content.truncate(114) %></div>
+            
+            <div class="tag xsmall bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            
+            <% if plan.spot.present? %>
+            <div class="tag xsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+            <% end %>
+            
+
+          <!--<% plan.tags.each do |tag| %>-->
+          <!--  <div class="mt-2 tag small bold">-->
+          <!--    <%= link_to "#{tag.name}", keyword_path(tag: tag.name) %>-->
+          <!--  </div>-->
+          <!--<% end %>-->
+            
+            <div class="small text-right mt-2">
               <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
-              <span class="ml-2"><i class="far fa-heart mr-1"></i><%= @count_likes %></span></p>
-            </span>
+              <span class="ml-2"><i class="far fa-heart mr-1"></i><%= plan.favorites.count %></span>
+            </div>
+            
           </div>
+          
         </div>  
         <% end %>
         
         <div class="pagination justify-content-end pagination-sm">
-          <%= paginate @user_plans %>
+          <%= paginate @plans %>
         </div>
         
       </div>

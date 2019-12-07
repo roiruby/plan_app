@@ -1,9 +1,12 @@
   <div class="container">
     <% breadcrumb :plan, @plan %>
     <%= render "layouts/breadcrumbs" %>
+  </div>
+    
+  <div class="container-fluid">
     <div class="row">
       
-      <div class="web_container mt-4 col-md-9">
+      <div class="web_container mt-4 offset-md-1 col-md-7">
         
         <div class="web-gray">
           <i class="far fa-clock"></i><%= @plan.updated_at.strftime('%Y/%m/%d') %>
@@ -16,9 +19,11 @@
             <%= link_to @plan.category.category, category_path(@plan.category) %>
           </div>
 
+          <% if @plan.spot.present? %>
           <div class="mt-2 tag small bold">
             <%= link_to @plan.spot.name, spot_path(@plan.spot) %>
           </div>
+          <% end %>
           
           <!--<% if @plan.budget.present? %>-->
           <!--<div class="mt-2 tag small bold">-->
@@ -27,15 +32,6 @@
           <!--<% end %>-->
           
           <%= render partial: 'tags', locals: { tags: @plan.tags } %>
-
-        
-          <!--<% @keywords.each do |keyword| %>-->
-          <!--  <div class="mt-2 tag small bold">-->
-          <!--    <span><%= keyword.name %></span>-->
-          <!--  </div>-->
-          <!--<% end %>-->
-          
-        
 
         <div class="mt-3">
           <h2><%= @plan.plan_title %></h2>
@@ -93,30 +89,30 @@
           <% end %>
           
 
-
           <% if schedule.image4.present? %>
           <div class="image_box row row-0 mt-4">
             <div class="box3 col-12 mb-1">
               <% if schedule.image1.present? %>
-                <%= image_tag schedule.image1.url %>
+                <!--<%= image_tag schedule.image1.url %>-->
+                <%= link_to image_tag(schedule.image1.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
               <% end %>
             </div>
 
             <div class="box3-2 col-4 pr-1">
             <% if schedule.image2.present? %>
-              <%= image_tag schedule.image2.url %>
+              <%= link_to image_tag(schedule.image2.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
             
             <div class="box3-2 col-4">
             <% if schedule.image3.present? %>
-              <%= image_tag schedule.image3.url %>
+              <%= link_to image_tag(schedule.image3.url),schedule.image3.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
             
             <div class="box3-2 col-4 pl-1">
             <% if schedule.image4.present? %>
-              <%= image_tag schedule.image4.url %>
+              <%= link_to image_tag(schedule.image4.url),schedule.image4.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
           </div>
@@ -127,19 +123,19 @@
           <div class="image_box row row-0 mt-4">
             <div class="box3 col-12 mb-1">
               <% if schedule.image1.present? %>
-                <%= image_tag schedule.image1.url %>
+                <%= link_to image_tag(schedule.image1.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
               <% end %>
             </div>
 
             <div class="box3-2 col-6 pr-1">
             <% if schedule.image2.present? %>
-              <%= image_tag schedule.image2.url %>
+              <%= link_to image_tag(schedule.image2.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
             
             <div class="box3-2 col-6">
             <% if schedule.image3.present? %>
-              <%= image_tag schedule.image3.url %>
+              <%= link_to image_tag(schedule.image3.url),schedule.image3.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
           </div>
@@ -149,13 +145,13 @@
           <div class="image_box row row-0 mt-4">
             <div class="box2 col-6 pr-1">
               <% if schedule.image1.present? %>
-                <%= image_tag schedule.image1.url %>
+                <%= link_to image_tag(schedule.image1.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
               <% end %>
             </div>
 
             <div class="box2-2 col-6">
             <% if schedule.image2.present? %>
-              <%= image_tag schedule.image2.url %>
+              <%= link_to image_tag(schedule.image2.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
             <% end %>
             </div>
           </div>
@@ -165,7 +161,7 @@
           <div class="image_box row row-0">
             <div class="box1 col-12">
               <% if schedule.image1.present? %>
-                <%= image_tag schedule.image1.url %>
+                <%= link_to image_tag(schedule.image1.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
               <% end %>
             </div>
           </div>
@@ -229,14 +225,15 @@
         
           <p class="xsmall mt-3">※掲載されている情報は、<%= @plan.updated_at.strftime('%Y/%m/%d') %>時点の情報です。情報が変更されている可能性がありますので、必ず事前にお調べください。</p>
 
+        <% if @relation_plans.present? %>
           <p class="newplan_title mt-4"><img src="../assets/icon_relation.png">関連したプラン</p>
-          <div class="web-flex row">
+        <% end %>
+          <div class="row">
             <% @relation_plans.each do |plan| %>
               
               <div class="relation-planimage col-md-3">
-                
-                  <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-                  <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+                  <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+                  <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
 
                 <div class="tag xsmall bold mt-2">
                   <%= link_to plan.category.category, category_path(plan.category.id) %>
@@ -251,10 +248,11 @@
 
             <% end %>
           </div>
+        
         </div>
 
 
-      <div class="container_right col-md-3 web-mt40">
+      <div class="container_right col-md-3 mt-4">
         
         <% if logged_in? %>
           <% if current_user == @plan.user %>
@@ -265,6 +263,7 @@
           <% end %>
         <% end %>
         
+
         <div class="introduce mt-3">
           
           <div class="web-flex">
@@ -309,17 +308,121 @@
             </div>
           </div>
           
-          <div class="mypage_right">
-        <image src="/assets/ad1.gif"></image>
-        </div>
-        <div class="mypage_right">
-        <image src="/assets/ad1.gif"></image>
-        </div>
-        <div class="mypage_right">
-        <image src="/assets/ad1.gif"></image>
-        </div>
-        
+          <div class="mypage_right mt-2">
+            <image src="/assets/ad1.gif"></image>
+          </div>
+
+          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_star.png">人気のプラン</p>
+          
+          <div class="row">
+          <% @most_viewed.each.with_index(1) do |rank| %>
+          
+            <div class="side-planimage col-md-5 mt-2">
+              <%= link_to image_tag(rank.image.to_s), plan_path(rank), data: {"turbolinks" => false} %>
+            </div>
+            
+            <div class="col-md-7">
+              <div class="xsmall bold mt-2">
+                <%= link_to rank.plan_title.truncate(28), plan_path(rank), data: {"turbolinks" => false} %>
+              </div>
+            
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to rank.category.category, category_path(rank.category.id) %>
+              </div>
+              
+              <% if rank.spot.present? %>
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to rank.spot.name, spot_path(rank.spot.id) %>
+              </div>
+              <% end %>
+              
+              <div class="top-user mt-3 web-gray xxsmall">
+                <i class="far fa-clock"></i><%= rank.updated_at.strftime('%Y/%m/%d') %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+
+          <p class="text-right mt-3 small bold"><%= link_to "人気のプランをもっと見る　＞", popular_path %></p>
+
+
+          
+          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_new.png">新着のプラン</p>
+          
+          <div class="row">
+          <% @plans.each do |plan| %>
+          
+            <div class="side-planimage col-md-5 mt-2">
+              <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+            </div>
+            
+            <div class="col-md-7">
+              <div class="xsmall bold mt-2">
+                <%= link_to plan.plan_title.truncate(28), plan_path(plan), data: {"turbolinks" => false} %>
+              </div>
+            
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.category.category, category_path(plan.category.id) %>
+              </div>
+              
+              <% if plan.spot.present? %>
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+              </div>
+              <% end %>
+              
+              <div class="top-user mt-3 web-gray xxsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+
+          <p class="text-right mt-3 small bold"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+          
+          
+          
+          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_recommend.png">トレンドおすすめプラン</p>
+          
+          <div class="row">
+          <% @recomends.each do |plan| %>
+          
+            <div class="side-planimage col-md-5 mt-2">
+              <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+            </div>
+            
+            <div class="col-md-7">
+              <div class="xsmall bold mt-2">
+                <%= link_to plan.plan_title.truncate(28), plan_path(plan), data: {"turbolinks" => false} %>
+              </div>
+            
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.category.category, category_path(plan.category.id) %>
+              </div>
+              
+              <% if plan.spot.present? %>
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+              </div>
+              <% end %>
+              
+              <div class="top-user mt-3 web-gray xxsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+              </div>
+            </div>
+          <% end %>
+          </div>
+
+          <p class="text-right mt-3 small bold"><%= link_to "トレンドおすすめプランをもっと見る　＞", recommend_path %></p>
+          
+          
+          <div class="mypage_right mt-2">
+            <image src="/assets/ad1.gif"></image>
+          </div>
+          
+          
       </div>
+        
       
 
     </div>

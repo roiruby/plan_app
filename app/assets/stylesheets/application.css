@@ -65,8 +65,8 @@ color: pink;
 .btn-coral,
 .btn-coral.disabled, .btn-coral:disabled {
   color: #fff;
-  background-color: coral;
-  border-color: coral;
+  background-color: tomato;
+  border-color: tomato;
 }
 
 .btn-plan,
@@ -119,6 +119,9 @@ color: pink;
 .xsmall {
   font-size: 12px;
 }
+.xxsmall {
+  font-size: 10px;
+}
 .bold {
   font-weight: bold;
 }
@@ -155,6 +158,10 @@ color: pink;
 }
 .image-gold img:hover {
 	opacity: 0.6 ;
+}
+.hr{
+  background-color:deeppink;
+  height:5px;
 }
 
 
@@ -246,8 +253,9 @@ a:hover .span2box {
 
 /*-----slide-show-----*/
 .slide-image img{
-  height: 414px;
+  height: 450px;
   width :100%;
+  object-fit: cover; 
 }
 .slide-title {
    position: relative;
@@ -258,12 +266,12 @@ a:hover .span2box {
   /*background-color: rgba( 204, 255, 204, 0.35 );*/
   color: white;
   font-weight: bold;
-  font-size: 100%;
+  font-size: 110%;
   right: 0;
   left: 0;
   margin: auto;
   padding: 15px;
-  top: 350px;
+  top: 390px;
   text-shadow: 0px 0px 10px #3d3d3d;
 }
 .mypattern .slick-slide:not(.slick-center) {
@@ -340,6 +348,8 @@ a:hover .span2box {
   object-fit: cover;
 }
 
+/*-----プロフィール編集-----*/
+
 
 /*-----プランナー詳細-----*/
 .circle-image img {
@@ -358,6 +368,10 @@ a:hover .span2box {
 .planshow {
   font-weight: bold;
 }
+.border-b {
+  border-bottom: solid 3px deeppink;
+  margin: 0px;
+}
 
 /*-----プラン投稿-----*/
 .plan-image img {
@@ -369,6 +383,14 @@ a:hover .span2box {
 .required {
   color: #E00;
  font-weight: bold; 
+}
+.plan-submit-row {
+  background-color: lightyellow;
+}
+.plan-submit {
+  padding: 7px 15px 7px 15px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /*-----プラン詳細-----*/
@@ -449,8 +471,8 @@ a:hover .span2box {
 }
 .introduce {
   padding: 0.5em 1em;
-  border: solid 1px gray;/*線*/
-  border-radius: 10px;/*角の丸み*/
+  border: solid 1px gray;
+  border-radius: 10px;
 }
 .introduce p {
   margin: 0; 
@@ -528,10 +550,23 @@ a:hover .span2box {
 .likeiconed:hover {
   color: pink;
 }
+.relation-planimage {
+  padding: 0px;
+  padding-left: 3px;
+}
 .relation-planimage img {
-  width: 208px;
+  width: 190px;
   height: 117px;
   border-radius: 3%;
+}
+.side-planimage img {
+  width: 130px;
+  height: 98px;
+  border-radius: 3%;
+  object-fit: cover; 
+}
+.side-planimage img:hover {
+	opacity: 0.6 ;
 }
 
 

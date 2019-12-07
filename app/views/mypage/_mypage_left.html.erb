@@ -14,6 +14,7 @@
             <ul>
               <li><%= link_to 'マイページ', mypage_path %></li>
               <li><%= link_to 'マイプロフィール', user_path(@user) %></li>
+              <li><%= link_to '下書き編集', confirm_plans_path %></li>
               <li><%= link_to 'お知らせ', information_index_path %></li>
               <li><%= link_to 'お気に入り', likes_user_path(@user) %></li>
               <li><%= link_to "フォロー/フォロワー", followings_user_path(@user) %></li>

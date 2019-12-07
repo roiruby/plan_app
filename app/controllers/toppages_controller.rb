@@ -1,13 +1,14 @@
 class ToppagesController < ApplicationController
   
   def index
-    @plans = Plan.limit(4).order('id DESC')
-    @users = User.order(id: :desc).page(params[:page]).per(6)
-    @most_viewed = Plan.order('impressions_count DESC').limit(4)
+    @most_viewed = Plan.published.order('impressions_count DESC').limit(4)
+    @plans = Plan.published.order(time: "DESC").limit(4)
+    @users = User.order("RAND()").limit(6)
     
-    @tags = Plan.all_tags.order("taggings_count DESC").limit(10)
     
-    @recomends = Plan.tagged_with("タピオカ").limit(4)
+    @tags = Plan.published.all_tags.order("taggings_count DESC").limit(10)
+    
+    @recomends = Plan.published.order(time: "DESC").tagged_with("タピオカ, 食べ歩き").limit(4)
     
   end
 end

@@ -46,8 +46,8 @@ end
 
 crumb :plan do |plan|
   link "#{plan.plan_title}", plan_path(plan)
-  parent :spot, plan.spot
-  # parent :category, plan.category
+  # parent :spot, plan.spot
+  parent :category, plan.category
 end
 
 crumb :category do |category|

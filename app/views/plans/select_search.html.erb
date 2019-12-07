@@ -21,14 +21,18 @@
     <div class="web-flex row mt-3">
       <% @plans.each do |plan| %>
         <div class="image-gold col-md-3 mt-3">
-        <%= link_to image_tag(plan.image.to_s), plan_path(plan) %>
-        <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan) %></p>
+        <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+        <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
+            
+            <% if plan.spot.present? %>
             <div class="tag xsmall bold mt-2">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
+            <% end %>
+            
             <div class="top-user mt-2 web-gray xsmall">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>

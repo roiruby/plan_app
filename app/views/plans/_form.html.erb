@@ -1,6 +1,29 @@
   <%= form_with(model: @plan, local: true) do |f| %>
+  
+    <div class="plan-submit-row sticky-top">
+      <div class="container plan-submit">
 
-    <div class="form-group">
+        <div class="pt-1">
+          <h4>プラン作成</h4>
+        </div>
+
+          <div class="web-flex">
+            <div class="mr-2">
+              <%= f.select :status, Plan.statuses.keys.map { |k| [t("enums.plan.status.#{k}"),k]}, {}, {class: 'form-control-sm'} %>
+            </div>
+            <div>
+              <%= f.submit '投稿する', class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+
+
+
+  <div class="container">
+
+    <div class="form-group mt-3">
       <span class="required">*</span>
       <%= f.label :plan_title, 'プランタイトル' %>
       <%= f.text_field :plan_title, placeholder: 'プランのタイトルを入力 （50文字以内）', class: 'form-control border-warning' %>
@@ -57,7 +80,7 @@
     
       <div class="col-md-8">
         <div>
-          <span class="required">*</span>
+          <!--<span class="required">*</span>-->
           <%= f.label :prefecture_id,"エリア" %><br>
         </div>
         <div class="form-row">
@@ -84,7 +107,7 @@
       
       <div class="col-md-2">
         <div class="form-group">
-          <span class="required">*</span>
+          <!--<span class="required">*</span>-->
           <%= f.label '予算' %>
           <%= f.collection_select :budget_id, Budget.all, :id, :name, {include_blank: '予算を選択', include_hidden: false}, class: 'form-control border-warning' %>
         </div>
@@ -109,7 +132,6 @@
       
       
       
-      
       <hr>
       
       <%= f.fields_for :schedules do |s| %>
@@ -123,11 +145,13 @@
           <div class="schedule_links btn  btn-sm btn-info">
             <%= link_to_add_association '+ スケジュールを追加',f, :schedules %>
           </div>
+          
+      <!--    <div class="mt-2">-->
+      <!--      <%= f.select :status, Plan.statuses.keys.map { |k| [t("enums.plan.status.#{k}"),k]} %>-->
+      <!--    </div>-->
 
-      
-      <%= f.submit '投稿する', class: 'btn btn-primary btn-block mt-3' %>
+      <!--<%= f.submit '投稿する', class: 'btn btn-primary btn-block mt-3' %>-->
 
     <% end %>
-
 
   </div>

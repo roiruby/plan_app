@@ -4,7 +4,7 @@ class MypageController < ApplicationController
   
   def index
     @user = current_user
-    @plans = @user.plans.page(params[:page]).per(20).reverse_order
+    @plans = @user.plans.published.order("time DESC").page(params[:page]).per(20)
     counts(@user)
   end
   
