@@ -30,5 +30,8 @@ module Pladuce10
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    
+    # security
+    config.middleware.use Rack::Attack
   end
 end

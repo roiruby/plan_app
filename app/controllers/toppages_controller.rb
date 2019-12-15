@@ -4,7 +4,7 @@ class ToppagesController < ApplicationController
     @most_viewed = Plan.published.order('impressions_count DESC').limit(4)
     @plans = Plan.published.order(time: "DESC").limit(4)
     @users = User.order("RAND()").limit(6)
-    
+    @news = Information.all.limit(6).reverse_order
     
     @tags = Plan.published.all_tags.order("taggings_count DESC").limit(10)
     

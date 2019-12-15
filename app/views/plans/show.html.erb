@@ -301,10 +301,13 @@
           <div class="flex icon text-center">
               <%= render 'favorites/like_button', plan: @plan %>
             <div class="mt-3">
-              <i class="fab fa-instagram fa-2x instaicon"></i>
-              <i class="fab fa-line fa-2x lineicon"></i>
-              <i class="fab fa-twitter-square fa-2x twicon"></i>
-              <i class="fab fa-facebook-square fa-2x fbicon"></i>
+              <!--<i class="fab fa-instagram fa-2x instaicon"></i>-->
+              <a href="https://timeline.line.me/social-plugin/share?url=?<%= request.url %>" rel="nofollow" target="_blank"><i class="fab fa-line fa-2x lineicon", title="LINEでシェア"></i></a>
+              
+              <a href="https://twitter.com/share?url=<%= request.url %>&text=<%= @plan.plan_title %>" rel="nofollow" target="_blank"><i class="fab fa-twitter-square fa-2x twicon", title="twitterでシェア"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" rel="nofollow" target="_blank"><i class="fab fa-facebook-square fa-2x fbicon", title="facebookでシェア"></i></a>
+              
+
             </div>
           </div>
           

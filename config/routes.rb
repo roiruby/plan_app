@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
+  get 'register', to: 'sessions#register'
+  
+  get 'reset', to: 'password_resets#reset'
   
   get 'users/:id/edit_profile', to: 'edit_profile#edit',  as: :edit_profile
   patch 'users/:id/edit_profile', to: 'edit_profile#update',  as: :update_profile
@@ -52,11 +55,17 @@ Rails.application.routes.draw do
   resources :favorites, only: [:create, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :information, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  resources :account_activations, only: [:edit]
+  resources :password_resets,     only: [:new, :create, :edit, :update]
   
   resources :prefectures, only: [] do
     resources :cities, only: :index do
       resources :spots, only: :index
     end
+  end
+  
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
   
   

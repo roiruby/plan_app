@@ -17,14 +17,24 @@
             <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
           </div>
           <div class="ml-3">
-            <p><%= link_to plan.plan_title.truncate(49), plan_path(plan), data: {"turbolinks" => false} %></p>
-            <p class="small web-mt-8"><%= plan.content.truncate(63) %></p>
-            <span class="small web-gray right">
-              <p>
+            <%= link_to plan.plan_title.truncate(46), plan_path(plan), data: {"turbolinks" => false} %>
+            <div class="small mt-1"><%= plan.content.truncate(62) %></div>
+            
+            <div class="tag xsmall bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            
+            <% if plan.spot.present? %>
+            <div class="tag xsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+            <% end %>
+            
+            <div class="mt-2 small web-gray right">
               <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
               <span class="ml-2"><i class="far fa-heart mr-1"></i><%= plan.favorites.count %></span>
-              <span class="ml-1"><i class="far fa-eye mr-1"></i><%= plan.impressions_count %></span></p>
-            </span>
+              <span class="ml-1"><i class="far fa-eye mr-1"></i><%= plan.impressions_count %></span>
+            </div>
           </div>
         </div>  
         <% end %>

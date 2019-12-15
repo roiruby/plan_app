@@ -1,5 +1,5 @@
 class EditProfileController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update, :destroy]
+  before_action :require_user_logged_in, only: [:edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   
   def edit
@@ -21,7 +21,7 @@ class EditProfileController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation,)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
   
   def correct_user

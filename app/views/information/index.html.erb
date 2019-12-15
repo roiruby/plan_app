@@ -10,18 +10,19 @@
       <div class="col-md-6">
         <h2>Pladuce News</h2>
         
-        <div class="mypage-center top-planimage mt-3">
+        <div class="mypage-center top-planimage mt-4">
           <% @news.each do |news| %>
-            <h3><%= link_to news.title, information_path(news) %></h3>
+            <%= link_to news.title, information_path(news) %>
             
             <% if current_user.admin? && !(current_user == User) %>
             <%= link_to "編集", edit_information_path(news), class: 'btn btn-info btn-sm' %>
             <%= link_to "削除", information_path(news), method: :delete, data: { confirm: "本当に削除しますか?" }, class: 'btn btn-danger btn-sm' %>
             <% end %>
             
-            <div class="text-right">
+            <div class="text-right small bold">
             <i class="far fa-clock"></i><%= news.updated_at.strftime('%Y/%m/%d') %>
             </div>
+            <hr>
           <% end %>
         </div>
         

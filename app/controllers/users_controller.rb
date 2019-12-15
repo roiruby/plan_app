@@ -35,12 +35,13 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      log_in @user
-      redirect_to mypage_path
+      UserMailer.account_activation(@user).deliver_now
+      redirect_to register_path
     else
       flash.now[:danger] = 'ユーザの登録に失敗しました。'
       render :new
     end
+
   end
 
   def edit
@@ -68,19 +69,32 @@ class UsersController < ApplicationController
   
   def likes
     @user = User.find(params[:id])
-    @favplans = @user.favplans.page(params[:page])
+    @favplans = @user.favplans.page(params[:page]).per(20).reverse_order
     counts(@user)
+    
+    if params[:search] == ""
+      @favplans = @user.favplans.order("time DESC").page(params[:page]).per(20)
+    else
+      searches = params[:search].to_s.split(/[[:blank:]]+/).select(&:present?)
+      @favplans = @user.favplans
+      searches.each do |search|
+      @favplans = @favplans.published.includes([:schedules, :category, :prefecture, :city, :spot, :tags])
+      .where(['plans.plan_title LIKE ? OR plans.content LIKE ? OR schedules.schedule_title LIKE ? OR schedules.content LIKE ? OR categories.category LIKE ? OR prefectures.name LIKE ? OR cities.name LIKE ? OR spots.name LIKE ? OR tags.name LIKE ?',
+      "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%", "%#{search}%"]).references([:schedules, :category, :prefecture, :city, :spot, :tags])
+      end
+    end
+    @favplans = @favplans.order("time DESC").page(params[:page]).per(20)
   end
   
   def followings
     @user = User.find(params[:id])
-    @followings = @user.followings.page(params[:page])
+    @followings = @user.followings.page(params[:page]).per(20)
     counts(@user)
   end
   
   def followers
     @user = User.find(params[:id])
-    @followers = @user.followers.page(params[:page])
+    @followers = @user.followers.page(params[:page]).per(20)
     counts(@user)
   end
   

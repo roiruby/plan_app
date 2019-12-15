@@ -576,6 +576,33 @@ a:hover .span2box {
 footer {
   background-color: #D3D3D3;
 }
+footer a:hover{
+  color: white;
+}
+footer img {
+  width: 100%;
+}
 .copy {
   background-color: #FF1493;
+  color: white;
+}
+.footer {
+  display: block;
+  text-align: center;
+}
+.footer ul{
+  display: inline-block;
+  padding-left: 0;
+}
+.footer ul li{
+  text-align: left;
+}
+.footer p{
+  text-align: left;
+	display: inline-block;
+}
+
+/*-----認証-----*/
+.thanks {
+  color: deeppink;
 }

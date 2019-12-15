@@ -3,7 +3,7 @@ class InformationController < ApplicationController
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
   
   def index
-    @news = Information.all.page(params[:page]).per(20).reverse_order
+    @news = Information.all.page(params[:page]).per(10).reverse_order
     @user = current_user
   end
 
