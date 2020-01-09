@@ -3,6 +3,7 @@ class SchedulesController < ApplicationController
   
 
   def create
+    @id = schedule_id
     @schedule = current_user.schedules.build(schedule_params)
     if @schedule.save
       flash[:success] = 'プランを投稿しました。'
@@ -17,7 +18,7 @@ class SchedulesController < ApplicationController
   private
 
   def schedule_params
-    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :image1, :image2, :image3, :image4, :sub_title, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :remove_image1)
+    params.require(:schedule).permit(:schedule_title, :content, :start_time, :end_time, :image1, :image2, :image3, :image4, :sub_title, :spot_name, :address, :access, :access2, :business_hour, :regular_holiday, :tel, :parking, :budget,:link_url, :comment, :remove_image1)
   end
   
 end

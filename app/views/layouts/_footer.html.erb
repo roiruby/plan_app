@@ -2,7 +2,7 @@
       <div class="container mt-5">
         <div class="row pt-4">
           
-          <div class="footer1 col-md-4 p-3">
+          <div class="footer1 col-sm-4 p-3">
             <p class="h6"><strong>Pladuce（プラデュース）とは</strong></p>
             <p class="small">
               旅のしおりが作れちゃう☆★<br>
@@ -11,37 +11,25 @@
               様々なカテゴリのプラン情報を検索・共有・投稿できるソーシャルコミュニティプラン共有サイトです!!</p>
           </div>
           
-          <div class="col-md-8">
-            <div class="row">
           
-              <div class="col-md-4 p-3 footer">
-                
-                <ul class="small pl-3">
-                  <p class="h6"><strong>ご利用ガイド</strong></p>
-                  <li><%= link_to "会員登録をする", root_path %></li>
-                  <li><%= link_to "投稿をする", root_path %></li>
-                  <li><%= link_to "よくある質問", root_path %></li>
-                </ul>
-              </div>
-          
-              <div class="col-md-4 p-3 footer">
-                <p class="h6"><strong>サイト情報</strong></p>
+              <div class="col-sm-4 p-3 footer">
                 <ul class="small pl-5">
-                  <li><%= link_to "利用規約", root_path %></li>
-                  <li><%= link_to "運営会社", root_path %></li>
-                  <li><%= link_to "プライバシーポリシー", root_path %></li>
-                  <li><%= link_to "お問い合わせ", root_path %></li>
+                  <li><%= link_to "よくある質問", faq_path %></li>
+                  <li><%= link_to "利用規約", tos_path %></li>
+                  <li><%= link_to "運営会社", company_path %></li>
+                  <li><%= link_to "プライバシーポリシー", privacy_path %></li>
+                  <li><%= link_to "お問い合わせ", contact_path %></li>
                 </ul>
               </div>
             
           
-              <div class="col-md-4 p-3 footer">
+              <div class="col-sm-4 p-3 footer">
                 <p>
-                  <%= link_to root_path do %>
+                  <%= link_to "https://www.instagram.com/pladuce/", target: :_blank do %>
                   <i class="fab fa-instagram mr-2"></i>instagram<br>
                   <% end %>
                   
-                  <%= link_to root_path do %>
+                  <%= link_to "https://twitter.com/pladuce_jp", target: :_blank do %>
                   <i class="fab fa-twitter-square mr-2"></i>twitter<br>
                   <% end %>
                   
@@ -50,9 +38,6 @@
                   <% end %>
                 </p>
               </div>
-          
-        </div>
-      </div>
 
         </div>
       </div>

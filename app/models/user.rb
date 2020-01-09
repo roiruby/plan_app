@@ -27,6 +27,8 @@ class User < ApplicationRecord
   
   has_many :information
   
+
+  
   def like(plan)
     favorites.find_or_create_by(plan_id: plan.id)
   end
@@ -44,6 +46,7 @@ class User < ApplicationRecord
   def follow(other_user)
     unless self == other_user
       self.relationships.find_or_create_by(follow_id: other_user.id)
+      Relationship.send_follow_email(other_user, self)
     end
   end
 

@@ -24,7 +24,7 @@ body{
   overflow-x: hidden;
 }
 .container-fluid {
-  width: 1340px;
+  max-width: 1340px;
 }
 
 h2 {
@@ -32,6 +32,7 @@ h2 {
   font-weight: bold;
 }
 h3 {
+  font-size: 150%;
   font-weight: bold;
   line-height: 2;
   border-bottom: solid 3px deeppink;
@@ -116,6 +117,9 @@ color: pink;
   display: flex;
   justify-content: center;
 }
+.medium {
+  font-size: 15px;
+}
 .xsmall {
   font-size: 12px;
 }
@@ -136,6 +140,9 @@ color: pink;
 .web-gray {
   color: gray;
 }
+.red {
+  color: red;
+}
 .tag {
   position: relative;
   display: inline-block;
@@ -150,8 +157,9 @@ color: pink;
   color: white;
 }
 .image-gold img {
-  width: 276px;
+  /*width: 276px;*/
   /*height: 276px;*/
+  width: 100%;
   height: 171px;
   border-radius: 3%;
   object-fit: cover;  
@@ -163,9 +171,14 @@ color: pink;
   background-color:deeppink;
   height:5px;
 }
+.navbar-light .navbar-toggler {
+  border-color: rgba(0,0,0,0);
+}
+.navbar-light .navbar-toggler :hover{
+  color: white;
+}
 
-
-/*-----breadcrumbs-----*/
+/*--------------------------------------------------------------breadcrumbs-----*/
 .breadcrumbs, .breadcrumbs a {
   color: gray;
 }
@@ -173,7 +186,7 @@ color: pink;
   color: pink;
 }
 
-/*-----navbar-----*/
+/*------------------------------------------------------------------navbar-----*/
 .btn-search,
 .btn-search.disabled, .btn-search:disabled {
   font-size: 14px;
@@ -189,12 +202,26 @@ color: pink;
   border-radius: 50%;
   object-fit: cover;
 }
+.nav-icon {
+  padding-top: 16px;
+}
+.nav-icon img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 .news {
   font-size: 30px;
   color: #D3D3D3;
 }
+.navi {
+  margin-top: 10px;
+  margin-right: 12px;
+  font-size: 95%;
+}
 
-/*----------mypage----------*/
+/*------------------------------------------------------------mypage----------*/
 .mypage-left {
   text-align: center;
 }
@@ -222,6 +249,9 @@ color: pink;
 .mypage_right {
   text-align: center;
 }
+.mypage_right img{
+  width: 100%;
+}
 .news-title {
   color: white;
   background-color: lightpink;
@@ -233,8 +263,8 @@ color: pink;
   padding: 10px 16px;
   margin: 0px 10px;
 }
-/*----------toppage----------*/
-/*-----topic-----*/
+/*-----------------------------------------------------------------------toppage----------*/
+/*---------------------------------------------------------------topic-----*/
 .span2box {
   display: block;
   height: 36px;
@@ -251,7 +281,7 @@ a:hover .span2box {
   color: rgba(0,0,0,0.5);
 }
 
-/*-----slide-show-----*/
+/*--------------------------------------------------------------slide-show-----*/
 .slide-image img{
   height: 450px;
   width :100%;
@@ -283,9 +313,7 @@ a:hover .span2box {
   transition: 0.2s linear;
 }
 
-/*-----top-----*/
-.category_top {
-}
+/*------------------------------------------------------------------top-----*/
 .category_item {
   font-weight: bold;
   margin-bottom: 1px;
@@ -309,16 +337,38 @@ a:hover .span2box {
 .words a:hover{
   color: white;
 }
+.keywords{
+  border:solid 1px hotpink;
+  padding: 3px 7px 3px 7px;
+  margin: 1px;
+  display: inline-block;
+  border-radius: 3px;
+}
+.keywords a{
+  color: hotpink;
+}
+.keywords a:hover{
+  color: white;
+  background-color: pink;
+}
+.keywords:hover{
+  background-color: pink;
+  color: white;
+}
 #plan-tags {
   border-color: gold;
 }
 .top-planimage {
 }
 .top-planimage img {
-  width: 245px;
+  /*width: 245px;*/
+  /*height: 151px;*/
+  width: 100%;
   height: 151px;
   border-radius: 3%;
   object-fit: cover; 
+  padding-left: 3px;
+  padding-right: 3px;
 }
 .top-planimage img:hover {
 	opacity: 0.6 ;
@@ -327,7 +377,7 @@ a:hover .span2box {
   font-weight: bold;
   font-size: 12px;
   padding-top: 10px;
-  width: 241px;
+  /*width: 241px;*/
 }
 .newplan_title {
   font-size: 22px;
@@ -347,12 +397,21 @@ a:hover .span2box {
   border-radius: 50%;
   object-fit: cover;
 }
+.topitem {
+  margin-left: 10px;
+  line-height: 1.5;
+}
 
-/*-----プロフィール編集-----*/
-
-
-/*-----プランナー詳細-----*/
+/*--------------------------------------------------------プランナー詳細-----*/
 .circle-image img {
+  /*width: 150px;*/
+  /*height: 150px;*/
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.circle-image150 img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
@@ -379,7 +438,7 @@ a:hover .span2box {
   width: 200px;
 }
 
-/*-----プラン投稿-----*/
+/*----------------------------------------------------------プラン投稿-----*/
 .required {
   color: #E00;
  font-weight: bold; 
@@ -393,23 +452,26 @@ a:hover .span2box {
   justify-content: space-between;
 }
 
-/*-----プラン詳細-----*/
+/*-----------------------------------------------------------プラン詳細-----*/
 .planshow-image img {
   width: 100%;
-  height: auto;
+  height: 530px;
+  object-fit: cover;
 }
 .schedule_time {}
 .end_time {}
 .schedule_title {
   font-weight: bold;
-  margin-left: 30px;
+
 }
 #schedule_title {}
 
 .schedule_access {
   line-height: 1;
 }
-
+.time {
+  padding-top: 2px;
+}
 
 .row-0{ margin-left:0px;  margin-right:0px}
 .row-0 >div{ padding-right:0px;  padding-left:0px}
@@ -418,6 +480,7 @@ a:hover .span2box {
 .box3 img {
   width: 100%;
   height: 398px;
+  object-fit: cover;
 }
 .box3-2 img {
   width: 100%;
@@ -437,6 +500,7 @@ a:hover .span2box {
 .box1 img {
   width: 100%;
   height: 498px;
+  object-fit: cover;
 }
 
 .sub_title {
@@ -453,9 +517,8 @@ a:hover .span2box {
 }
 .spot-details_container {
   border-radius: 10px;
-  line-height: 0.3;
   background-color: #eeeeee;
-  padding: 20px 20px 5px;
+  padding: 20px 7px 7px 15px;
 }
 
 .schedule_links a {
@@ -485,11 +548,11 @@ a:hover .span2box {
   object-fit: cover;  
 }
 .introduce-name {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   text-align: center;
-  margin-left: 40px;
-  margin-bottom: 20px;
+  /*margin-left: 40px;*/
+  /*margin-bottom: 20px;*/
 }
 .introduce-name p {
   font-size: 10px;
@@ -555,12 +618,15 @@ a:hover .span2box {
   padding-left: 3px;
 }
 .relation-planimage img {
-  width: 190px;
+  width: 100%;
   height: 117px;
   border-radius: 3%;
+  padding-left: 3px;
+  padding-right: 3px;
+  object-fit: cover; 
 }
 .side-planimage img {
-  width: 130px;
+  width: 100%;
   height: 98px;
   border-radius: 3%;
   object-fit: cover; 
@@ -572,7 +638,7 @@ a:hover .span2box {
 
 
 
-/*-----footer-----*/
+/*----------------------------------------------------------------footer-----*/
 footer {
   background-color: #D3D3D3;
 }
@@ -602,7 +668,636 @@ footer img {
 	display: inline-block;
 }
 
-/*-----認証-----*/
+/*--------------------------------------------------------------サポート-----*/
+.company {
+  background-color: peachpuff;
+  border-radius: 10px;
+  padding: 40px 40px 25px 40px;
+  margin-bottom: 100px;
+}
+.quitbg {
+  background-color: #eeeeee;
+  padding: 5px;
+}
+.faq {
+  font-size: 120%;
+  font-weight: bold;
+  border-bottom: solid 2px pink;
+  line-height: 2;
+}
+/*------------------------------------------------------------------認証-----*/
 .thanks {
   color: deeppink;
 }
+
+/*------------------------------------------------------ページネーション-----*/
+.pagination>li>a {          
+  border: none;
+  color: #696969;
+}
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  border-radius: 15px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  margin-top: 2px;
+  color: pink;
+}
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {      
+  color: hotpink;
+  border-radius: 15px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  margin-top: 2px;
+}
+.page-item.active .page-link{
+  background-color: pink;
+}
+
+/*--------------------------------------------------------------max-with992px----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 992px) {
+
+.small-tb {
+  font-size: 85%;
+}
+.xsmall-tb {
+  font-size: 70%
+}
+/*-------------------------------------------------------slide-show-----*/
+.slide-image img{
+  height: 430px;
+}
+.slide-title p {
+  /*font-size: 90%;*/
+  top: 350px;
+}
+
+.planshow-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+.box1 img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+.prev img{
+  width: 100%;
+  object-fit: cover;
+}
+.prev label{
+  border:solid 1px lightgray;
+  background-color: whitesmoke;
+  padding: 3px 8px 3px 8px;
+  border-radius: 1px;
+  margin-top: 3px;
+  border-radius: 3px;
+}
+.upload {
+  display: none;
+}
+
+}
+
+/*--------------------------------------------------------------max-with768px----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+.container-fluid {
+  max-width: 768px;
+}
+h2 {
+  font-size: 140%;
+}
+.medium-tb {
+  font-size: 90%;
+}
+.small-tb {
+  font-size: 75%;
+}
+.xsmall-tb {
+  font-size: 60%
+}
+.h3-tb {
+  font-size: 110%;
+  font-weight: bold;
+}
+/*input::-webkit-input-placeholder {*/
+/*    font-size: 75%;*/
+/*}*/
+/*---------------------------------------------------------------navbar-----*/
+.navi {
+  margin-top: 10px;
+  margin-right: 12px;
+  font-size: 95%;
+  text-align: center;
+  border-bottom: solid 1px gainsboro;
+  padding-bottom: 3px;
+}
+.btn-plan {
+  margin-top: 10px;
+}
+.use_icon {
+  font-size: 80%;
+}
+/*---------------------------------------------------------------topic-----*/
+.span2box {
+  height: 30px;
+  font-size: 100%;
+  padding-top: 3px;
+}
+/*-------------------------------------------------------slide-show-----*/
+.slide-image img{
+  height: 360px;
+}
+.slide-title {
+   width: 70%;
+}
+.slide-title p {
+  font-size: 85%;
+  padding: 15px;
+  top: 295px;
+}
+/*---------------------------------------------------------------toppage-----*/
+.top-planimage img {
+  width: 100%;
+  height: 130px;
+  border-radius: 6%;
+  object-fit: cover; 
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.tag {
+  font-size: 60%;
+}
+.top-username {
+  font-size: 70%
+}
+.category_item {
+  font-size: 90%;
+  margin-bottom: 1px;
+}
+.category_item img {
+  width: 18px;
+  padding-bottom: 5px;
+  margin-right: 7px;
+  margin-left: 0px;
+}
+.side-title {
+  font-size: 70%;
+}
+.area_top {
+  line-height: 1;
+  margin-left: 0px;
+}
+.topitem {
+  font-size: 70%;
+  margin-left: 0px;
+  line-height: 1.5;
+}
+.toptag {
+  font-size: 65%;
+}
+/*------------------------------------------------------------------プラン詳細-----*/
+
+.planshow-image img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+.box3 img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+}
+.box3-2 img {
+  width: 100%;
+  height: 110px; 
+  object-fit: cover;
+}
+.box2 img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+.box2-2 img {
+  width: 100%;
+  height: 300px; 
+  object-fit: cover;
+}
+.box1 img {
+  width: 100%;
+  height: 300px;
+}
+.sub_title {
+  font-size: 90%;
+  margin-top: 20px;
+}
+.relation-planimage img {
+  width: 100%;
+  height: 100px;
+  border-radius: 6%;
+}
+.newplan_title {
+  font-size: 110%;
+}
+.newplan_title img {
+  width: 26px;
+}
+.text-right {
+  font-size: 50%;
+}
+/*.plan-details_container {*/
+/*  line-height: 1.5;*/
+/*}*/
+
+.image-gold img {
+  width: 100%;
+  height: 150px;
+  border-radius: 6%;
+}
+
+/*------------------------------------------------------------mypage----------*/
+.mypage-ul {
+  /*font-size: 90%;*/
+  font-weight: bold;
+  text-align: center;
+	display: block;
+	line-height: 2;
+}
+.mypage-ul ul {
+  padding-left: 10px;
+	list-style: square;
+	display: inline-block;
+}
+.mypage-ul ul li {
+  text-align: left;
+}
+.tag {
+  font-size: 60%;
+}
+
+.prev img{
+  width: 100%;
+  object-fit: cover;
+}
+.prev label{
+  border:solid 1px lightgray;
+  background-color: whitesmoke;
+  padding: 3px 8px 3px 8px;
+  border-radius: 1px;
+  margin-top: 3px;
+  border-radius: 3px;
+}
+.upload {
+  display: none;
+}
+
+
+
+  
+  
+  
+  
+}
+
+/*--------------------------------------------------------------max-with767px----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 767px) {
+.use_icon {
+  font-size: 50%;
+}
+.toptag {
+  font-size: 50%;
+}
+
+
+  
+}
+
+/*--------------------------------------------------------------max-with576px----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------------------------------------------------------------*/
+@media screen and (max-width: 576px) {
+  
+.container-fluid {
+  max-width: 576px;
+}
+body {
+
+}
+h2 {
+  font-size: 110%;
+  font-weight: bold;
+}
+h3 {
+  font-size: 116%;
+  line-height: 1.3;
+  padding-bottom: 3px;
+}
+
+.sp-medium {
+  font-size: 14px;
+}
+
+/*------------------------------------------------------------------navbar-----*/
+
+
+/*------------------------------------------------------------------toppage-----*/
+/*---------------------------------------------------------------topic-----*/
+.span2box {
+  height: 21px;
+  font-size: 90%;
+}
+/*-------------------------------------------------------slide-show-----*/
+.slide-image img{
+  height: 180px;
+}
+.slide-title {
+   width: 50%;
+}
+.slide-title p {
+  font-size: 65%;
+  padding: 15px;
+  top: 130px;
+}
+/*-------------------------------------------------------top-----*/
+.top-planimage img {
+  width: 100%;
+  height: 130px;
+  border-radius: 3%;
+  object-fit: cover; 
+  padding-left: 3px;
+  padding-right: 3px;
+}
+.newplan_title {
+  font-size: 18px;
+}
+.newplan_title img {
+  width: 25px;
+}
+.top-plantitle {
+  font-weight: bold;
+  font-size: 12px;
+  padding-top: 10px;
+}
+.circle-image-sp img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+.circle-image-sp {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.circle-image-sp100 img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+
+}
+.circle-image-sp100 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.img-_scroll {
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  display: -ms-flexbox;
+  display: flex;
+}
+.line {
+  height: 10px;
+  background-color: seashell;
+}
+.top-item {
+  border-bottom: solid 1px gainsboro;
+  position: relative;
+}
+.top-item a{
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-left: 43px;
+}
+.category_item {
+  font-weight: bold;
+  margin-bottom: 1px;
+}
+.accbox {
+}
+
+/*ラベル*/
+.accbox label {
+    display: block;
+    background :white;
+    cursor :pointer;
+    transition: all 0.5s;
+    border-bottom: solid 1px gainsboro;
+    padding-bottom: 3px;
+}
+
+/*ラベルホバー時*/
+.accbox label:hover {
+    background :white;
+}
+
+/*チェックは隠す*/
+.accbox input {
+    display: none;
+}
+
+/*中身を非表示にしておく*/
+.accbox .accshow {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+/*クリックで中身表示*/
+.cssacc:checked + .accshow {
+    height: 20px;
+    background: white;
+    opacity: 1;
+    margin-bottom: 7px;
+}
+.accshow a{
+  color: gray;
+}
+
+/*--------------------------------------------------------マイページ-----*/
+.top-planimage img {
+  width: 100%;
+  height: 151px;
+}
+.post {
+  display: block;
+  background-color:deeppink;
+  color: white;
+  padding: 4px 0px;
+  border-radius: 6px;
+}
+.post img{
+  width: 22px;
+  padding-bottom: 2px;
+  margin-right: 3px;
+}
+.menu {
+  border-bottom: solid 1px gainsboro;
+}
+
+/*--------------------------------------------------------プランナー詳細-----*/
+.circle-image img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/*------------------------------------------------------------------キーワード詳細ページ-----*/
+.image-gold img {
+  width: 100%;
+  height: 230px;
+  border-radius: 3%;
+  object-fit: cover;  
+}
+
+/*------------------------------------------------------------------プラン投稿-----*/
+.planimg img{
+  height: 150px;
+  object-fit: cover;
+}
+.plan-image img{
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  
+}
+.fileup label{
+  border:solid 1px lightgray;
+  background-color: whitesmoke;
+  padding: 3px 8px 3px 8px;
+  border-radius: 1px;
+  margin-top: 3px;
+}
+.upload {
+  display: none;
+}
+
+/*------------------------------------------------------------------エリア詳細ページ-----*/
+/*ボタン装飾*/
+.hidden_box label {
+  display: block;
+  font-weight: bold;
+  cursor :pointer;
+  margin-bottom: 0px;
+  font-size: 90%;
+}
+
+/*チェックは見えなくする*/
+.hidden_box input {
+    display: none;
+}
+
+/*中身を非表示にしておく*/
+.hidden_box .hidden_show {
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+/*クリックで中身表示*/
+.hidden_box input:checked ~ .hidden_show {
+    height: auto;
+    opacity: 1;
+    margin-top: 5px;
+}
+.hidden_show {
+}
+
+
+/*------------------------------------------------------------------プラン詳細-----*/
+.planshow-image img {
+  width: 100%;
+  height: 238px;
+  object-fit: cover;
+}
+.spot-details_container {
+  line-height: 1.3;
+}
+.plan-details_container {
+  line-height: 1.5;
+}
+.box3 img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+.box3-2 img {
+  width: 100%;
+  height: 98px; 
+  object-fit: cover;
+}
+.box2 img {
+  width: 100%;
+  height: 238px;
+  object-fit: cover;
+}
+.box2-2 img {
+  width: 100%;
+  height: 238px; 
+  object-fit: cover;
+}
+.box1 img {
+  width: 100%;
+  height: 238px;
+}
+.relation-planimage img {
+  width: 100%;
+  height: 117px;
+  border-radius: 3%;
+}
+
+/*------------------------------------------------------ページネーション-----*/
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 3px;
+}
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {      
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-top: 3px;
+}
+
+
+/*-------------------------------------------------------footer-----*/
+.sns {
+  font-size:40px; 
+}
+.foot {
+  border:solid 1px gray;
+  background-color: white;
+}
+
+
+
+  
+  
+}
+
+
+

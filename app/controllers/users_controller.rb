@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:edit, :update, :followings, :followers]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user, only: :destroy
+  before_action :require_user_logged_in, only: [:edit, :update, :followings, :followers, :edit_profile, :update_profile, :index]
+  before_action :correct_user,   only: [:edit, :update, :edit_profile, :update_profile]
+  before_action :admin_user, only: [:destroy, :index]
+  before_action :devise_variant
   
   def index
-    @users = User.order("rand()").page(params[:page]).per(30).limit(100)
+    @users = User.all.page(params[:page]).per(30).reverse_order
   end
 
   def show
@@ -66,6 +67,26 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def edit_profile
+    @user = User.find(params[:id])
+  end
+
+  def update_profile
+    @user = User.find(params[:id])
+
+    if @user.update(user_params)
+      flash[:success] = 'アカウント情報を更新しました'
+      UserMailer.edit_profile(@user).deliver_now
+      redirect_to edit_profile_path
+    else
+      flash.now[:danger] = '入力に誤りがあります、もう一度入力してください'
+      render :edit_profile
+    end
+  end
+  
+  def popular
+    @users = User.order("rand()").page(params[:page]).per(30).limit(100)
+  end
   
   def likes
     @user = User.find(params[:id])
@@ -107,11 +128,24 @@ class UsersController < ApplicationController
   
   def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless @user == current_user
+      unless current_user.admin?
+        redirect_to(root_url) unless @user == current_user
+      end
   end
   
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+  
+  def devise_variant
+      case request.user_agent
+      when /iPad/
+        request.variant = :tablet
+      when /iPhone/
+        request.variant = :mobile
+      when /android/
+        request.variant = :android
+      end
   end
   
 end

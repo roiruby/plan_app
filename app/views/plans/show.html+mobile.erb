@@ -1,0 +1,425 @@
+<div class="overflow-hidden">
+
+  <div class="container">
+    <% breadcrumb :plan, @plan %>
+    <%= render "layouts/breadcrumbs" %>
+    
+    <div class="mt-3">
+      <h2><%= @plan.plan_title %></h2>
+    </div>
+    
+    <div class="planshow-image mt-2">
+      <% if @plan.image? %>
+        <%= image_tag @plan.image.thumb.url %>
+      <% end %>
+    </div>
+    
+    <div class="mt-2 tag xxsmall bold">
+      <%= link_to @plan.category.category, category_path(@plan.category) %>
+    </div>
+
+    <% if @plan.spot.present? %>
+      <div class="mt-2 tag xxsmall bold">
+        <%= link_to @plan.spot.name, spot_path(@plan.spot) %>
+      </div>
+    <% end %>
+    
+    <% @plan.tags.each do |tag| %>
+      <div class="mt-2 tag xxsmall bold">
+        <%= link_to "#{tag.name}", keyword_path(tag: tag.name) %>
+      </div>
+    <% end %>
+    
+    <div class="web-gray medium mt-2">
+      <i class="far fa-clock"></i><%= @plan.updated_at.strftime('%Y/%m/%d') %>
+      <span class="ml-2"><i class="far fa-heart mr-1"></i><%= @count_likes %></span>
+      <span class="ml-1"><i class="far fa-eye mr-1"></i><%= @plan.impressions_count %></span>
+    </div>
+  </div>
+  
+    
+    <% if logged_in? %>
+        <% if current_user == @plan.user || current_user.admin? %>
+          <div class="plan_edit text-center mt-2 mb-2">
+          <%= link_to "プランを編集", edit_plan_path, data: {"turbolinks" => false}, class: 'btn btn-primary btn-sm' %>
+          <%= link_to "削除", plan_path(@plan.id), method: :delete, data: { confirm: "本当に削除してもいいですか？" }, class: 'btn btn-danger btn-sm' %>
+          </div>
+        <% end %>
+    <% end %>
+    
+    <div class="line mt-1"></div>
+    
+    
+  <div class="container">
+    
+    <div class="mt-2 sp-medium">
+      <%= simple_format(@plan.content) %>
+    </div>
+    
+    
+    <div class="plan-details_container">
+      <p class="web-center mb-0">プラン概要 
+        <% if @plan.budget.present? %>
+          <span class="mt-2 xsmall bold">
+            [予算:
+            <%= @plan.budget.name %>
+            ]
+          </span>
+        <% end %>
+      </p>
+
+      <% @schedules.each do |schedule| %>
+        <div class="sp-medium mt-1">
+          <% if schedule.start_time.present? %>
+            ▶ <%= schedule.start_time %>～
+          <% end %>
+          <% if schedule.end_time.present? %>
+            <%= schedule.end_time %>　
+          <% end %>
+        </div>
+          
+          <div class="bold ml-2 sp-medium">
+            <%= link_to schedule.schedule_title, "#schedule_title#{schedule.id}", :style=>"color:black;" %>
+          </div>
+        
+      <% end %>
+    </div>
+    
+    
+    
+    <% @schedules.each do |schedule| %>
+        
+          <% if schedule.schedule_title.present? %>
+            <div class="mt-3" id="schedule_title<%= schedule.id %>">
+              <h3><%= schedule.schedule_title %></h3>
+            </div>
+          <% end %>
+            
+          <% if schedule.sub_title.present? %>
+            <span class="sp-medium mb-0"><%= schedule.sub_title %></span>
+          <% end %>
+          
+
+          <% if schedule.image4.present? %>
+          <div class="image_box row row-0 mt-2">
+            <div class="box3 col-12 mb-1">
+              <% if schedule.image1.present? %>
+                <%= link_to image_tag(schedule.image1.thumb.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
+              <% end %>
+            </div>
+
+            <div class="box3-2 col-4 pr-1">
+            <% if schedule.image2.present? %>
+              <%= link_to image_tag(schedule.image2.thumb.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+            
+            <div class="box3-2 col-4">
+            <% if schedule.image3.present? %>
+              <%= link_to image_tag(schedule.image3.thumb.url),schedule.image3.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+            
+            <div class="box3-2 col-4 pl-1">
+            <% if schedule.image4.present? %>
+              <%= link_to image_tag(schedule.image4.thumb.url),schedule.image4.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+          </div>
+
+          
+          
+          <% elsif schedule.image3.present? %>
+          <div class="image_box row row-0 mt-2">
+            <div class="box3 col-12 mb-1">
+              <% if schedule.image1.present? %>
+                <%= link_to image_tag(schedule.image1.thumb.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
+              <% end %>
+            </div>
+
+            <div class="box3-2 col-6 pr-1">
+            <% if schedule.image2.present? %>
+              <%= link_to image_tag(schedule.image2.thumb.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+            
+            <div class="box3-2 col-6">
+            <% if schedule.image3.present? %>
+              <%= link_to image_tag(schedule.image3.thumb.url),schedule.image3.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+          </div>
+
+          
+          <% elsif schedule.image2.present? %>
+          <div class="image_box row row-0 mt-2">
+            <div class="box2 col-6 pr-1">
+              <% if schedule.image1.present? %>
+                <%= link_to image_tag(schedule.image1.thumb.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
+              <% end %>
+            </div>
+
+            <div class="box2-2 col-6">
+            <% if schedule.image2.present? %>
+              <%= link_to image_tag(schedule.image2.thumb.url),schedule.image2.url,:rel => "lightbox=image#{schedule.id}"%>
+            <% end %>
+            </div>
+          </div>
+
+          
+          <% else schedule.image1.present? %>
+          <div class="image_box row row-0 mt-2">
+            <div class="box1 col-12">
+              <% if schedule.image1.present? %>
+                <%= link_to image_tag(schedule.image1.thumb.url),schedule.image1.url,:rel => "lightbox=image#{schedule.id}"%>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+
+          <% if schedule.content.present? %>
+            <div class="sp-medium mt-2"><%= simple_format(schedule.content) %></div>
+          <% end %>
+          
+          
+
+          <% if schedule.spot_name.present? %>
+          <div class="spot-details_container">
+  
+            <h4><%= schedule.spot_name %></h4>
+          <% end %>
+          
+          <% if schedule.address.present? %>
+            <div class="small mt-1">住所：　　　<%= schedule.address %></div>
+          <% end %>
+          
+          <% if schedule.access.present? %>
+            <div class="small mt-1">アクセス：　<%= schedule.access %></div>
+          <% end %>
+          
+          <% if schedule.access2.present? %>
+            <div class="small mt-1">　　　　　　<%= schedule.access2 %></div>
+          <% end %>
+          
+          <% if schedule.business_hour.present? %>
+            <div class="small mt-1">営業時間：　<%= schedule.business_hour %></div>
+          <% end %>
+          
+          <% if schedule.regular_holiday.present? %>
+            <div class="small mt-1">定休日：　　<%= schedule.regular_holiday %></div>
+          <% end %>
+          
+          <% if schedule.tel.present? %>
+            <div class="small mt-1">電話番号：　<%= schedule.tel %></div>
+          <% end %>
+          
+          <% if schedule.parking.present? %>
+            <div class="small mt-1">駐車場：　　<%= schedule.parking %></div>
+          <% end %>
+          
+          <% if schedule.budget.present? %>
+            <div class="small mt-1">価格・予算：<%= schedule.budget %></div>
+          <% end %>
+          
+          <% if schedule.link_url.present? %>
+            <div class="small mt-1">リンク：　　<%= text_url_to_link(h(schedule.link_url)).html_safe %></div>
+          <% end %>
+          
+          <% if schedule.comment.present? %>
+            <div class="small mt-1"><%= schedule.comment %></div>
+          <% end %>
+          
+          <% if schedule.spot_name.present? %>
+          </div>
+          <% end %>
+          
+        <% end %>
+        
+        
+        <div class="flex icon text-center">
+          <%= render 'favorites/like_button', plan: @plan %>
+            <div class="mt-3">
+              <a href="https://timeline.line.me/social-plugin/share?url=?<%= request.url %>" rel="nofollow" target="_blank"><i class="fab fa-line fa-2x lineicon", title="LINEでシェア"></i></a>
+              <a href="https://twitter.com/share?url=<%= request.url %>&text=<%= @plan.plan_title %>" rel="nofollow" target="_blank"><i class="fab fa-twitter-square fa-2x twicon", title="twitterでシェア"></i></a>
+              <a href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" rel="nofollow" target="_blank"><i class="fab fa-facebook-square fa-2x fbicon", title="facebookでシェア"></i></a>
+            </div>
+        </div>
+        
+        <p class="xsmall mt-3">※掲載されている情報は、<%= @plan.updated_at.strftime('%Y/%m/%d') %>時点の情報です。情報が変更されている可能性がありますので、必ず事前にお調べください。</p>
+    
+        
+        <% if @relation_plans.present? %>
+          <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_relation.png">関連したプラン</p>
+        <% end %>
+        
+          <div class="row row-0">
+            <% @relation_plans.each do |plan| %>
+              
+              <div class="top-planimage col-6 mt-2">
+                <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+                <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+                
+                <span class="tag xxsmall bold mt-2">
+                  <%= link_to plan.category.category, category_path(plan.category.id) %>
+                </span>
+                <% if plan.spot.present? %>
+                  <span class="mr-2">
+                  <span class="tag xxsmall bold mt-2">
+                    <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+                  </span>
+                  </span>
+                <% end %>
+                
+                <div class="top-user mt-2 web-gray xsmall">
+                  <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+                </div>
+                
+              </div>
+            <% end %>
+          </div>
+  </div>
+          
+          <div class="line"></div>
+          
+  <div class="container">
+    
+      <div class="medium bold mt-3"><i class="far fa-grin-stars mr-1"></i>このプランを投稿したプランナー</div>
+    
+          <div class="introduce">
+          
+          <div class="web-flex">
+            <div>
+              <%= link_to image_tag(@plan.user.image.plad.url), user_path(@plan.user) %>
+            </div>
+            
+            <div class="introduce-name">
+              
+              <% if current_user == @plan.user %>
+                <div class="mt-3">
+                  <%= link_to @plan.user.name, user_path(@plan.user),:style=>"color:black;" %>
+                  <p><%= @plan.user.catchphrase %></p>
+                </div>
+              <% else %>
+                  <%= link_to @plan.user.name, user_path(@plan.user),:style=>"color:black;" %>
+                  <p><%= @plan.user.catchphrase %></p>
+              <% end %>  
+              
+              <% if logged_in? %>
+                <%= render 'relationships/follow_button_other', plan: @plan %>
+              <% else %>
+                <%= link_to "フォローする", login_path, class: "follow-btn mt-2" %>
+              <% end %>
+            </div>
+          </div>
+          
+          <% if current_user == @plan.user %>
+            <p class="xsmall mt-3"><%= @plan.user.introduce %></p>
+          <% else %>
+            <p class="xsmall"><%= @plan.user.introduce %></p>
+          <% end %>
+        </div>
+        
+  </div>
+          
+      <div class="line mt-3"></div>
+          
+  <div class="container">
+
+      <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_star.png">人気のプラン</p>
+        
+      <div class="row row-0">
+        <% @most_viewed_sp.each.with_index(1) do |rank| %>
+          <div class="top-planimage col-6 mt-2">
+              <%= link_to image_tag(rank.image.to_s), plan_path(rank), data: {"turbolinks" => false} %>
+              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(26), plan_path(rank), data: {"turbolinks" => false} %></p>
+            <div class="tag xxsmall bold mt-2">
+              <%= link_to rank.category.category, category_path(rank.category.id) %>
+            </div>
+            <% if rank.spot.present? %>
+            <div class="tag xxsmall bold mt-2 mr-1">
+              <%= link_to rank.spot.name, spot_path(rank.spot.id) %>
+            </div>
+            <% end %>
+            <div class="top-user mt-2 web-gray xsmall">
+              <i class="far fa-clock"></i><%= rank.updated_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+        <div class="mt-2">
+          <p style="text-align: right"><%= link_to "人気のプランをもっと見る　＞", popular_path %></p>
+        </div>
+        
+  </div>
+          
+      <div class="line mt-3"></div>
+          
+  <div class="container">
+    
+    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_new.png">新着のプラン</p>
+      <div class="row row-0">
+        <% @plans_sp.each do |plan| %>
+          <div class="top-planimage col-6 mt-2">
+              <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+              <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+            <div class="tag xxsmall bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            
+            <% if plan.spot.present? %>
+
+            <div class="tag xxsmall bold mt-2 mr-1">
+              <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+
+            <% end %>
+            
+            <div class="top-user mt-2 web-gray xsmall">
+              <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+        <div class="mt-2">
+          <p class="mt-3" style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
+        </div>
+        
+  </div>
+          
+      <div class="line mt-3"></div>
+          
+  <div class="container">
+    
+    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_recommend.png">トレンドおすすめプラン</p>
+        <div class="row row-0">
+          <% @recomends_sp.each do |plan| %>
+            <div class="top-planimage col-6 mt-2">
+                <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+                <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.category.category, category_path(plan.category.id) %>
+              </div>
+              <div class="tag xxsmall bold mt-2">
+                <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+              </div>
+              <div class="top-user mt-2 web-gray xsmall">
+                <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+          <div class="mt-2">
+            <p class="mt-3" style="text-align: right"><%= link_to "トレンドおすすめプランをもっと見る　＞", recommend_path %></p>
+          </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </div>
+  
+</div>

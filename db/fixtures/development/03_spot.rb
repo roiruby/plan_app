@@ -362,7 +362,7 @@ end
 Spot.seed do |s|
 s.id = 61
 s.city = City.find_by(name: '東京都')
-s.name = '下北沢・三軒茶屋・自由が丘・二子玉川'
+s.name = '下北沢・三軒茶屋'
 end
 
 Spot.seed do |s|
@@ -446,7 +446,7 @@ end
 Spot.seed do |s|
 s.id = 75
 s.city = City.find_by(name: '東京都')
-s.name = '八王子・立川・町田・府中・調布'
+s.name = '八王子・町田・高尾山'
 end
 
 Spot.seed do |s|
@@ -482,13 +482,13 @@ end
 Spot.seed do |s|
 s.id = 81
 s.city = City.find_by(name: '東京都')
-s.name = '伊豆諸島・小笠原諸島'
+s.name = '府中・調布・立川'
 end
 
 Spot.seed do |s|
 s.id = 82
 s.city = City.find_by(name: '東京都')
-s.name = 'その他'
+s.name = '自由が丘・二子玉川'
 end
 
 
@@ -2311,5 +2311,17 @@ end
 Spot.seed do |s|
 s.id = 378
 s.city = City.find_by(name: 'その他')
+s.name = 'その他'
+end
+
+Spot.seed do |s|
+s.id = 379
+s.city = City.find_by(name: '東京都')
+s.name = '伊豆諸島・小笠原諸島'
+end
+
+Spot.seed do |s|
+s.id = 380
+s.city = City.find_by(name: '東京都')
 s.name = 'その他'
 end

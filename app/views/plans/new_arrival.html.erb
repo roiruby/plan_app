@@ -4,17 +4,19 @@
 
     <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_new.png", class="mr-2">新着のプラン</p>
     
-    <div class="web-flex row mt-3">
+    <div class="row row-0 mt-2">
       <% @plans.each do |plan| %>
-      <div class="image-gold col-md-3 mt-3">
-        <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
-        <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
+      <div class="image-gold col-sm-3 mt-3">
+        <div class="pr-1 pl-1">
+          <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+        </div>
+        <p class="top-plantitle mb-0 pr-1 pl-1"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
             
             <% if plan.spot.present? %>
-            <div class="tag xsmall bold mt-2">
+            <div class="tag xsmall bold mt-2 mr-1">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
             <% end %>

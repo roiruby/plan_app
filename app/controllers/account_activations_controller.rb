@@ -5,6 +5,7 @@ class AccountActivationsController < ApplicationController
       user.update_attribute(:activated,     true)
       user.update_attribute(:activated_at,  Time.zone.now)
       log_in user
+      UserMailer.send_account_activation(user).deliver_now
       flash[:success] = "アカウントを認証しました！"
       redirect_to mypage_path
     else

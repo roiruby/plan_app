@@ -28,9 +28,9 @@
       <%= f.label :plan_title, 'プランタイトル' %>
       <%= f.text_field :plan_title, placeholder: 'プランのタイトルを入力 （50文字以内）', class: 'form-control border-warning' %>
     </div>
-  
-    <div class="web-flex">  
-      <div class="plan-image">
+    
+    <div class="row row-0">  
+      <div class="plan-image col-lg-3 col-sm-4">
         <% if @plan.image? %>
           <%= image_tag @plan.image.url, id: :img_prev %>
           <p><%= f.check_box :remove_image %>画像を削除する</p>
@@ -40,12 +40,14 @@
           <p class="xsmall"><span class="required">*</span><%= f.file_field :image, id: :plan_img %></p>
       </div>
   
-      <div class="form-group">
+      <div class="form-group col-lg-9 col-sm-8">
         <%= f.label :content, 'サブタイトル・説明' %>
         <%= f.text_area :content, :maxlength => "255", :size => "80x5", placeholder: 'プランのサブタイトルや説明を入力 （255文字以内）', class: 'form-control border-warning'  %>
       </div>
+      
     </div>
-    <p class="xsmall">※プラン画像は必須です。10MB以下の JPG・PNG・GIFファイルを選択してください。</p>
+
+    <p class="xsmall">※プラン画像は必須です。5MB以下の JPG・PNG・GIFファイルを選択してください。</p>
     <p class="xsmall web-mt-8">※第三者の著作権、プライバシー権その他の権利を侵害しないよう留意してください</p>
     
     <!--画像即時にプレビューjavascript-->

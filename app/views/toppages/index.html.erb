@@ -1,3 +1,4 @@
+<div class="overflow-hidden">
   <%= render 'layouts/topform' %>
 
   <div class="slide-image mypattern mt-2">
@@ -29,10 +30,10 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="top-saide col-md-3">
+      <div class="top-saide col-sm-3">
         
         <div class="category_top">
-          <p class="font-weight-bold">カテゴリーからプランを探す</p>
+          <p class="font-weight-bold side-title">カテゴリーからプランを探す</p>
             <p class="category_item"><img src="assets/icon_jyoshikai.png"><%= link_to "女子会", category_path(1) %></p>
             <p class="category_item"><img src="assets/icon_date.png"><%= link_to "デート", category_path(2) %></p>
             <p class="category_item"><img src="assets/icon_odekake.png"><%= link_to "お出かけ", category_path(3) %></p>
@@ -46,84 +47,67 @@
         </div>
         
         <div>
-          <p class="font-weight-bold mt-4">エリアからプランを探す</p>
+          <p class="font-weight-bold side-title mt-4">エリアからプランを探す</p>
           
           <div class="area_top">
             <p class="category_item"><%= link_to "北海道", prefecture_path(1) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "北海道", city_path(1) %></p>
+              <p class="small mt-1 topitem"><%= link_to "北海道", city_path(1) %></p>
             <p class="category_item web-mt-8"><%= link_to "東北", prefecture_path(2) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "青森", city_path(2), class: "mr-1" %><%= link_to "岩手", city_path(3), class: "mr-1" %><%= link_to "宮城", city_path(4), class: "mr-1" %><%= link_to "秋田", city_path(5), class: "mr-1" %><%= link_to "山形", city_path(6), class: "mr-1" %><%= link_to "福島", city_path(7) %></p>
+              <p class="small mt-1 topitem"><%= link_to "青森", city_path(2), class: "" %>┃<%= link_to "岩手", city_path(3), class: "" %>┃<%= link_to "宮城", city_path(4), class: "" %>┃<%= link_to "秋田", city_path(5), class: "" %>┃<%= link_to "山形", city_path(6), class: "" %>┃<%= link_to "福島", city_path(7) %></p>
             <p class="category_item web-mt-8"><%= link_to "関東", prefecture_path(3) %></p>
-             <p class="small mt-2 ml-3"><%= link_to "茨城", city_path(12), class: "mr-1" %><%= link_to "栃木", city_path(13), class: "mr-1" %><%= link_to "群馬", city_path(14), class: "mr-1" %><%= link_to "埼玉", city_path(11), class: "mr-1" %><%= link_to "千葉", city_path(10), class: "mr-1" %><%= link_to "東京", city_path(8), class: "mr-1" %><%= link_to "神奈川", city_path(9) %></p>
+             <p class="small mt-1 topitem"><%= link_to "茨城", city_path(12), class: "" %>┃<%= link_to "栃木", city_path(13), class: "" %>┃<%= link_to "群馬", city_path(14), class: "" %>┃<%= link_to "埼玉", city_path(11), class: "" %>┃<%= link_to "千葉", city_path(10), class: "" %>┃<%= link_to "東京", city_path(8), class: "" %>┃<%= link_to "神奈川", city_path(9) %></p>
             <p class="category_item web-mt-8"><%= link_to "甲信越", prefecture_path(4) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "山梨", city_path(15), class: "mr-1" %><%= link_to "長野", city_path(16), class: "mr-1" %><%= link_to "新潟", city_path(17) %></p>
+              <p class="small mt-1 topitem"><%= link_to "山梨", city_path(15), class: "" %>┃<%= link_to "長野", city_path(16), class: "" %>┃<%= link_to "新潟", city_path(17) %></p>
             <p class="category_item web-mt-8"><%= link_to "北陸", prefecture_path(5) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "富山", city_path(18), class: "mr-1" %><%= link_to "石川", city_path(19), class: "mr-1" %><%= link_to "福井", city_path(20) %></p>
+              <p class="small mt-1 topitem"><%= link_to "富山", city_path(18), class: "" %>┃<%= link_to "石川", city_path(19), class: "" %>┃<%= link_to "福井", city_path(20) %></p>
             <p class="category_item web-mt-8"><%= link_to "東海", prefecture_path(6) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "静岡", city_path(21), class: "mr-1" %><%= link_to "岐阜", city_path(22), class: "mr-1" %><%= link_to "愛知", city_path(23), class: "mr-1" %><%= link_to "三重", city_path(24) %></p>
+              <p class="small mt-1 topitem"><%= link_to "静岡", city_path(21), class: "" %>┃<%= link_to "岐阜", city_path(22), class: "" %>┃<%= link_to "愛知", city_path(23), class: "" %>┃<%= link_to "三重", city_path(24) %></p>
             <p class="category_item web-mt-8"><%= link_to "関西", prefecture_path(7) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "滋賀", city_path(29), class: "mr-1" %><%= link_to "京都", city_path(26), class: "mr-1" %><%= link_to "大阪", city_path(25), class: "mr-1" %><%= link_to "兵庫", city_path(27), class: "mr-1" %><%= link_to "奈良", city_path(28), class: "mr-1" %><%= link_to "和歌山", city_path(30) %></p>
+              <p class="small mt-1 topitem"><%= link_to "滋賀", city_path(29), class: "" %>┃<%= link_to "京都", city_path(26), class: "" %>┃<%= link_to "大阪", city_path(25), class: "" %>┃<%= link_to "兵庫", city_path(27), class: "" %>┃<%= link_to "奈良", city_path(28), class: "" %>┃<%= link_to "和歌山", city_path(30) %></p>
             <p class="category_item web-mt-8"><%= link_to "中国", prefecture_path(8) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "鳥取", city_path(31), class: "mr-1" %><%= link_to "島根", city_path(32), class: "mr-1" %><%= link_to "岡山", city_path(33), class: "mr-1" %><%= link_to "広島", city_path(34), class: "mr-1" %><%= link_to "山口", city_path(35) %></p>
+              <p class="small mt-1 topitem"><%= link_to "鳥取", city_path(31), class: "" %>┃<%= link_to "島根", city_path(32), class: "" %>┃<%= link_to "岡山", city_path(33), class: "" %>┃<%= link_to "広島", city_path(34), class: "" %>┃<%= link_to "山口", city_path(35) %></p>
             <p class="category_item web-mt-8"><%= link_to "四国", prefecture_path(9) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "徳島", city_path(36), class: "mr-1" %><%= link_to "香川", city_path(37), class: "mr-1" %><%= link_to "愛媛", city_path(38), class: "mr-1" %><%= link_to "高知", city_path(39) %></p>
+              <p class="small mt-1 topitem"><%= link_to "徳島", city_path(36), class: "" %>┃<%= link_to "香川", city_path(37), class: "" %>┃<%= link_to "愛媛", city_path(38), class: "" %>┃<%= link_to "高知", city_path(39) %></p>
             <p class="category_item web-mt-8"><%= link_to "九州", prefecture_path(10) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "福岡", city_path(40), class: "mr-1" %><%= link_to "佐賀", city_path(41), class: "mr-1" %><%= link_to "長崎", city_path(42), class: "mr-1" %><%= link_to "熊本", city_path(43), class: "mr-1" %><%= link_to "大分", city_path(44), class: "mr-1" %><%= link_to "宮崎", city_path(45), class: "mr-1" %><%= link_to "鹿児島", city_path(46) %></p>
+              <p class="small mt-1 topitem"><%= link_to "福岡", city_path(40), class: "" %>┃<%= link_to "佐賀", city_path(41), class: "" %>┃<%= link_to "長崎", city_path(42), class: "" %>┃<%= link_to "熊本", city_path(43), class: "" %>┃<%= link_to "大分", city_path(44), class: "" %>┃<%= link_to "宮崎", city_path(45), class: "" %>┃<%= link_to "鹿児島", city_path(46) %></p>
             <p class="category_item web-mt-8"><%= link_to "沖縄", prefecture_path(11) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "沖縄", city_path(47) %></p>
+              <p class="small mt-1 topitem"><%= link_to "沖縄", city_path(47) %></p>
             <p class="category_item web-mt-8"><%= link_to "海外", prefecture_path(12) %></p>
-              <p class="small mt-2 ml-3"><%= link_to "海外", prefecture_path(12) %></p>
+              <p class="small mt-1 topitem"><%= link_to "海外", prefecture_path(12) %></p>
           </div>
             
         </div>
         
-        <div>
-          <p class="font-weight-bold mt-4 mb-0">話題のキーワード</p>
+        <!--<div>-->
+        <!--  <p class="font-weight-bold mt-4 mb-0">話題のキーワード</p>-->
 
           
+        <!--  <% @tags.each do|tag| %>-->
+        <!--    <div class="btn btn-outline-info btn-sm xsmall mt-2 words">-->
+        <!--      <%= link_to "#{tag.name} (#{tag.taggings_count})", keyword_path(tag: tag.name) %>  -->
+        <!--    </div>-->
+        <!--  <% end %>-->
+        <!--</div>-->
+        
+        <div>
+          <p class="font-weight-bold mt-4 mb-0">話題のキーワード</p>
           <% @tags.each do|tag| %>
-            <div class="btn btn-outline-info btn-sm xsmall mt-2 words">
+            <span class="xsmall mt-2 keywords toptag">
               <%= link_to "#{tag.name} (#{tag.taggings_count})", keyword_path(tag: tag.name) %>  
-            </div>
+            </span>
           <% end %>
         </div>
         
-        <!--<div>-->
-        <!--  <p class="font-weight-bold mt-4">話題のキーワード</p>-->
-          
-        <!--  <div class="tag_top">-->
-        <!--    <p>-->
-        <!--    <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "おしゃれ", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "ランチ", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    </p>-->
-        <!--    <p class="web-mt-8">-->
-        <!--    <%= link_to "デート", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "インスタ映え", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    </p>-->
-        <!--    <p class="web-mt-8">-->
-        <!--    <%= link_to "デート", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "インスタ映え", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "タピオカ", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    <%= link_to "女子会", root_path, class: 'btn btn-outline-info btn-sm' %>-->
-        <!--    </p>-->
-
-        <!--  </div>-->
-        <!--</div>-->
-        
       </div>
       
-      <div class="top-main col-md-9">
+      <div class="col-sm-9">
 
         <p class="newplan_title"><img src="assets/icon_star.png">人気のプラン</p>
         
-        <div class="web-flex row">
+        <div class="row row-0">
           <% @most_viewed.each.with_index(1) do |rank| %>
-            <div class="top-planimage col-md-3">
-              <%= link_to image_tag(rank.image.to_s), plan_path(rank), data: {"turbolinks" => false} %>
+            <div class="top-planimage col-sm-3">
+              <%= link_to image_tag(rank.image.thumb.to_s), plan_path(rank), data: {"turbolinks" => false} %>
               <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(42), plan_path(rank), data: {"turbolinks" => false} %></p>
               <div class="tag xsmall bold mt-2">
                 <%= link_to rank.category.category, category_path(rank.category.id) %>
@@ -131,7 +115,7 @@
               <div class="tag xsmall bold mt-2">
                 <%= link_to rank.spot.name, spot_path(rank.spot.id) %>
               </div>
-              <div class="top-user mt-2 web-gray xsmall">
+              <div class="top-user mt-2 web-gray xsmall xsmall-tb">
                 <i class="far fa-clock"></i><%= rank.updated_at.strftime('%Y/%m/%d') %>
               </div>
             </div>
@@ -140,22 +124,22 @@
         <p style="text-align: right"><%= link_to "人気のプランをもっと見る　＞", popular_path %></p>
         
         <p class="newplan_title"><img src="assets/icon_new.png">新着のプラン</p>
-        <div class="web-flex row">
+        <div class="row row-0">
         <% @plans.each do |plan| %>
-          <div class="top-planimage col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+          <div class="top-planimage col-sm-3">
+            <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
             <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
             
             <% if plan.spot.present? %>
-            <div class="tag xsmall bold mt-2">
+            <div class="tag xsmall bold mt-2 mr-1 ">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
             <% end %>
             
-            <div class="top-user mt-2 web-gray xsmall">
+            <div class="top-user mt-2 web-gray xsmall xsmall-tb">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>
           </div>
@@ -165,10 +149,10 @@
         <p class="mt-3" style="text-align: right"><%= link_to "新着のプランをもっと見る　＞", new_arrival_path %></p>
         
         <p class="newplan_title"><img src="assets/icon_recommend.png">トレンドおすすめプラン</p>
-        <div class="web-flex row">
+        <div class="row row-0">
         <% @recomends.each do |plan| %>
-          <div class="top-planimage col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+          <div class="top-planimage col-sm-3">
+            <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
             <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
@@ -176,7 +160,7 @@
             <div class="tag xsmall bold mt-2">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
-            <div class="top-user mt-2 web-gray xsmall">
+            <div class="top-user mt-2 web-gray xsmall xsmall-tb">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>
           </div>
@@ -186,15 +170,15 @@
         
         <p class="newplan_title"><img src="assets/icon_popular.png">人気のプランナー</p>
         <!--プランナー一覧取得-->
-        <div class="web-flex row">
+        <div class="row row-0">
         <% @users.each do |user| %>
-          <div class="circle-image col-md-2">
-            <%= link_to image_tag(user.image.to_s), user_path(user) %>
-            <p class="top-username"><%= link_to user.name, user_path(user) %></p>
+          <div class="circle-image col-sm-2 pr-1 pl-1">
+            <%= link_to image_tag(user.image.plad.to_s), user_path(user) %>
+            <p class="top-username small mt-2"><%= link_to user.name, user_path(user) %></p>
           </div>
         <% end %>
         </div>
-            <p style="text-align: right"><%= link_to "人気のプランナーをもっと見る　＞", users_path %></p>
+            <p style="text-align: right"><%= link_to "人気のプランナーをもっと見る　＞", popular_users_path %></p>
         
       </div>
       
@@ -202,7 +186,7 @@
       
     </div>
   </div>
-
+</div>
 
 
 

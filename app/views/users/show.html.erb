@@ -3,10 +3,10 @@
     <%= render "layouts/breadcrumbs" %>
     <div class="row mt-4">
       
-      <div class="col-md-3 web-center">
+      <div class="col-lg-3 col-sm-4 web-center">
           <!--<p class="bold">投稿数 <%= @count_plans %> プラン</p>-->
-        <div class="circle-image">
-          <%= image_tag @user.image.thumb150.url %>
+        <div class="circle-image150">
+          <%= image_tag @user.image.plad.url %>
         </div>
         
         <% if logged_in? %>
@@ -19,9 +19,16 @@
         
         <p class="small mt-2">フォロー：<%= @count_followings %>人　フォロワー：<%= @count_followers %>人</p>
         
+        <% if logged_in? %>
+          <% if current_user.admin? && !(current_user == User) %>
+            <div><%= @user.email %></div>
+            <%= link_to "削除", user_path(@user), :method => :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger btn-sm mb-4" %>
+          <% end %>
+        <% end %>
+        
       </div>
 
-      <div class="col-md-6">
+      <div class="col-lg-6 col-sm-8">
         
         <p class="bold"><%= @user.name %></p>
         <p class="small web-mt-15"><%= @user.catchphrase %></p>
@@ -30,9 +37,9 @@
         
       </div>
       
-      <div class="col-md-3">
+      <div class="col-lg-3 d-none d-lg-block">
         <div class="mypage_right">
-        <image src="/assets/ad1.gif"></image>
+        <%= link_to image_tag("/assets/ad1.svg", alt: "酔つ馬-YOTUBA-浅草橋東口店"), "https://tabelog.com/tokyo/A1311/A131103/13214556/", target: "_blank" %>
         </div>
       </div>
       
@@ -41,16 +48,16 @@
     
     <div class="row">
     
-      <div class="col-md-9">
+      <div class="col-lg-9 col-sm-12">
         <Hr>
           
         <% if @count_plans >= 1 %>
           <div class="row border-b mb-3">
-            <div class="col-md-9 pt-2">
+            <div class="col-sm-8 pt-2">
               <span class="h3 bold">投稿したプラン一覧 　</span><span class="bold"><%= @count_plans %> プラン</span>
             </div>
           
-            <div class="col-md-3">
+            <div class="col-sm-4">
               <div class="form-group form-inline">
                 <%= form_with(url: user_path, method: :get, local: true) do |f| %>
                   <div class="input-group">
@@ -67,13 +74,13 @@
         
 
         <% @plans.each do |plan| %>
-          <div class="row planshow top-planimage mt-2">
+          <div class="row row-0 planshow top-planimage mt-2">
             
-          <div class="col-md-3">
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+          <div class="col-lg-3 col-sm-4">
+            <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
           </div>
           
-          <div class="col-md-9 pl-4 pt-2">
+          <div class="col-lg-9 col-sm-8 pl-2 pt-1">
             <%= link_to plan.plan_title.truncate(55), plan_path(plan), data: {"turbolinks" => false} %>
             <div class="small mt-1"><%= plan.content.truncate(114) %></div>
             
@@ -110,7 +117,7 @@
         
       </div>
     
-      <div class="col-md-3">
+      <div class="col-lg-3 d-md-none">
       </div>
     
 

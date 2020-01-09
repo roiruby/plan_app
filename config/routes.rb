@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   
   get 'reset', to: 'password_resets#reset'
   
-  get 'users/:id/edit_profile', to: 'edit_profile#edit',  as: :edit_profile
-  patch 'users/:id/edit_profile', to: 'edit_profile#update',  as: :update_profile
+  get 'users/:id/edit_profile', to: 'users#edit_profile',  as: :edit_profile
+  patch 'users/:id/edit_profile', to: 'users#update_profile'
 
   get 'signup', to: 'users#new'
   
@@ -31,7 +31,21 @@ Rails.application.routes.draw do
   get 'spots/:id', to: 'spots#show', as: :spot
   
   get 'keywords', to: 'keywords#index', as: :keyword
-
+  
+  get  'contact' =>'contacts#index'
+  post 'contact/confirm' => 'contacts#confirm'
+  post 'contact/done' => 'contacts#done'
+  
+  get 'tos', to: 'toppages#tos', as: :tos
+  get 'privacy', to: 'toppages#privacy', as: :privacy
+  get 'company', to: 'toppages#company', as: :company
+  get 'faq', to: 'toppages#faq', as: :faq
+  
+  get  'quit' =>'quits#new'
+  post  'quit' =>'quits#create'
+  get  'quits' =>'quits#index'
+  
+  get 'users/popular', to: 'users#popular', as: :popular_users
   
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do

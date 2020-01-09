@@ -23,6 +23,14 @@ crumb :news do |news|
   parent :information
 end
 
+crumb :contact do
+  link "お問い合わせ", contact_path
+end
+
+crumb :confirm do
+  link "下書き一覧", confirm_plans_path
+end
+
 crumb :likes do
   link "お気に入り", likes_user_path
 end
@@ -35,8 +43,12 @@ crumb :followers do
   link "フォロワー", followers_user_path
 end
 
+crumb :popular_users do
+  link "人気のプランナー", popular_users_path
+end
+
 crumb :users do
-  link "人気のプランナー", users_path
+  link "プランナー一覧", users_path
 end
 
 crumb :user do |user|

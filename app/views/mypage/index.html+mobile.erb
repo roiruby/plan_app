@@ -1,0 +1,139 @@
+  <div class="container">
+    <% breadcrumb :mypage %>
+    <%= render "layouts/breadcrumbs" %>
+    
+    
+    <div class="row">
+    
+      <div class="col-4 mt-3">
+        <div class="circle-image">
+          <%= link_to image_tag(@user.image.plad.url), edit_user_path(current_user) %>
+        </div>
+      </div>
+    
+    
+      <div class="col-8 mt-3">
+        <p class="bold"><%= @user.name %></p>
+        <div class="small web-mt-15"><%= @user.catchphrase %></div>
+        
+        <% if logged_in? %>
+          <div class="mt-2">
+            <%= render 'relationships/follow_button', user: @user %>
+          </div>
+        <% else %>
+            <%= link_to "フォローする", login_path, class: "follow-btn mt-2" %>
+        <% end %>
+        
+        <div class="xsmall mt-2">フォロー：<%= @count_followings %>人　フォロワー：<%= @count_followers %>人</div>
+      </div>
+      
+      <div class="mt-2 pl-3 pr-3">
+        <%= simple_format(@user.introduce, class:"xsmall") %>
+      </div>
+      
+    </div>
+
+    <% if logged_in? %>
+      <% if current_user.admin? && !(current_user == User) %>
+        <div class="mb-2">
+        <%= link_to "削除", user_path(@user), :method => :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger btn-sm" %>
+        <%= @user.email %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    
+    <div class="post text-center">
+      <%= link_to new_plan_path, data: {"turbolinks" => false}, :style=>"color:white;" do %>
+      <div class="medium ml-2">
+        <%= image_tag "/assets/icon_plan64.png" %>プラン作成
+      </div>
+      <% end %>
+    </div>
+    
+    
+  </div>
+    <div class="line mt-2"></div>
+    
+    
+    <div class="menu p-2">
+      <%= link_to mypage_path do %>
+        <div class="medium ml-2">
+          <i class="far fa-id-card mr-2"></i>マイページ<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to user_path(current_user) do %>
+        <div class="medium ml-2">
+          <i class="fas fa-user-circle mr-2"></i>マイプロフィール<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to edit_user_path(current_user) do %>
+        <div class="medium ml-2">
+          <i class="fas fa-user-edit mr-2"></i>プロフィール編集<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to confirm_plans_path do %>
+        <div class="medium ml-2">
+          <i class="fas fa-edit mr-2"></i>下書き編集<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to likes_user_path(@user) do %>
+        <div class="medium ml-2">
+          <i class="fab fa-gratipay mr-2"></i>お気に入り<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to information_index_path do %>
+        <div class="medium ml-2">
+          <i class="fas fa-info-circle mr-2"></i>お知らせ<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to followings_user_path(@user) do %>
+        <div class="medium ml-2">
+          <i class="fas fa-check mr-2"></i>フォロー/フォロワー<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="menu p-2">
+      <%= link_to edit_profile_path(current_user) do %>
+        <div class="medium ml-2">
+          <i class="fas fa-user-lock mr-2"></i>アカウント情報変更<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    
+    <% if current_user.admin? && !(current_user == User) %>
+    <div class="menu p-2">
+      <%= link_to new_information_path do %>
+        <div class="medium ml-2">
+          <i class="far fa-newspaper mr-2"></i>お知らせ投稿<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    <div class="menu p-2">
+      <%= link_to quits_path do %>
+        <div class="medium ml-2">
+          <i class="fas fa-sad-tear mr-2"></i>退会申請<span style="position: absolute; right: 0", class="mr-4"><i class="fas fa-angle-right web-gray"></i></span>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+    

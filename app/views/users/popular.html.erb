@@ -1,0 +1,32 @@
+  <div class="container-fluid">
+    <% breadcrumb :popular_users %>
+    <%= render "layouts/breadcrumbs" %>
+    
+    <div class="mt-4">
+      <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_popular.png">人気のプランナー</p>
+      
+    </div>
+
+    <div class="row row-0">
+      <% @users.each do |user| %>
+        <div class="circle-image col-md-2 mt-3 web-center">
+          <div class="pr-1 pl-1">
+            <%= link_to image_tag(user.image.plad.to_s), user_path(user) %>
+          </div>
+          <p class="top-username mt-2 small"><%= link_to user.name, user_path(user) %></p>
+          <p class="xxsmall web-mt-15"><%= user.catchphrase %></p>
+          
+          
+          
+        </div>
+      <% end %>
+      
+    </div>
+    
+      <div class="pagination justify-content-end pagination-sm">
+        <%= paginate @users %>
+      </div>
+      
+    
+    
+  </div>

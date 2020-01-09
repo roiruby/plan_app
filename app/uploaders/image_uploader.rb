@@ -5,7 +5,7 @@ class ImageUploader < CarrierWave::Uploader::Base
  
   # 5mbまでのファイルのみにする
   def size_range
-  1..10.megabytes
+  1..5.megabytes
   end
  
   # 保存形式をJPGにする
@@ -16,8 +16,12 @@ class ImageUploader < CarrierWave::Uploader::Base
     process :resize_to_limit => [1024, 576]
   end
   
-  version :thumb150 do
-    process :resize_to_limit => [150, 150]
+  # version :thumb150 do
+  #   process :resize_to_limit => [150, 150]
+  # end
+  
+  version :plad do
+    process :resize_to_fill => [300, 300]
   end
  
   # jpg,jpeg,gif,pngしか受け付けない

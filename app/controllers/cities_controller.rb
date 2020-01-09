@@ -1,4 +1,6 @@
 class CitiesController < ApplicationController
+  before_action :devise_variant
+  
   def index
     prefecture = Prefecture.find(params[:prefecture_id])
     cities = prefecture.cities.map do |city|
@@ -14,6 +16,20 @@ class CitiesController < ApplicationController
   def show
     @city = City.find(params[:id])
     @plans = @city.plans.published.order('time DESC').page(params[:page]).per(20)
+  end
+  
+  
+  private
+  
+  def devise_variant
+      case request.user_agent
+      when /iPad/
+        request.variant = :tablet
+      when /iPhone/
+        request.variant = :mobile
+      when /android/
+        request.variant = :android
+      end
   end
   
 end

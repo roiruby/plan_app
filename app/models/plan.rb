@@ -21,6 +21,7 @@ class Plan < ApplicationRecord
   has_many :users, through: :favorites
   
   validates :plan_title, presence: true, length: { maximum: 50 }
+  validates :image, presence: true
   validates :category, presence: true
   
   mount_uploader :image, ImageUploader
@@ -41,12 +42,8 @@ class Plan < ApplicationRecord
   scope :get_by_category, ->(category) {includes(:category).where(category: category).references(:category)}
   scope :get_by_budget, ->(budget) {includes(:budget).where(budget: budget).references(:budget)}
 
-  
 
-  
 
-  
-  
   private
   
   # def find_or_create_keyword

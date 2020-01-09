@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :devise_variant
+  
   def new
   end
 
@@ -30,5 +32,16 @@ class SessionsController < ApplicationController
   end
 
   private
+  
+  def devise_variant
+      case request.user_agent
+      when /iPad/
+        request.variant = :tablet
+      when /iPhone/
+        request.variant = :mobile
+      when /android/
+        request.variant = :android
+      end
+  end
 
 end

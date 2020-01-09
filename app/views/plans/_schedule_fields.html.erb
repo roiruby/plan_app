@@ -23,16 +23,26 @@
         <%= f.text_field :sub_title, placeholder: '50文字以内', class: 'form-control border-warning' %>
         
         
-        <div class="plan-image row mt-3">
+        <div class="plan-image row row-0 mt-3">
 
-          <div class="col-md-3 col-6">
+          <div class="col-md-3 col-6 prev pl-1 pr-1">
           <% if f.object.image1? %>
             <%= image_tag f.object.image1.url, id: :img1_prev %>
             <p><%= f.check_box :remove_image1 %>画像を削除する</p>
           <% else %>
             <%= image_tag "default_plan1.jpg", id: :img1_prev %>
           <% end %>
-            <p class="xsmall"><%= f.file_field :image1, id: :schedule1_img %></p>
+          
+          <div class="d-lg-none">
+            <label>
+              <div class="xsmall">
+              ファイルを選択
+              </div>
+              <div class="xsmall upload"><%= f.file_field :image1, class: :schedule1_img %></div>
+            </label>
+          </div>
+
+            <p class="xsmall d-none d-lg-block"><%= f.file_field :image1, class: :schedule1_img %></p>
           </div>
 
         
@@ -43,25 +53,36 @@
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-           $('#img1_prev').attr('src', e.target.result);
+           $(input).parents('.plan-image').find('#img1_prev').attr('src', e.target.result);
          }
          reader.readAsDataURL(input.files[0]);
          }
          }
-         $("#schedule1_img").change(function(){
+         $(document).on('change', '.schedule1_img', function(){
          readURL(this);
          });
         });
         </script>
+
         
-          <div class="col-md-3 col-6">
+          <div class="col-md-3 col-6 prev pl-1 pr-1">
             <% if f.object.image2? %>
-              <%= image_tag f.object.image2.url, id: :img2_prev %>
+              <%= image_tag f.object.image2.plad.url, id: :img2_prev %>
               <p><%= f.check_box :remove_image2 %>画像を削除する</p>
             <% else %>
               <%= image_tag "default_plan2.jpg", id: :img2_prev %>
             <% end %>
-              <p class="xsmall"><%= f.file_field :image2, id: :schedule2_img %></p>
+            
+              <div class="d-lg-none">
+            <label>
+              <div class="xsmall">
+              ファイルを選択
+              </div>
+              <div class="xsmall upload"><%= f.file_field :image2, class: :schedule2_img %></div>
+            </label>
+          </div>
+
+            <p class="xsmall d-none d-lg-block"><%= f.file_field :image2, class: :schedule2_img %></p>
           </div>
         
         <!--画像即時にプレビューjavascript-->
@@ -71,25 +92,35 @@
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-           $('#img2_prev').attr('src', e.target.result);
+           $(input).parents('.plan-image').find('#img2_prev').attr('src', e.target.result);
          }
          reader.readAsDataURL(input.files[0]);
          }
          }
-         $("#schedule2_img").change(function(){
+         $(document).on('change', '.schedule2_img', function(){
          readURL(this);
          });
         });
         </script>
         
-          <div class="col-md-3 col-6">
+          <div class="col-md-3 col-6 prev pl-1 pr-1">
             <% if f.object.image3? %>
-              <%= image_tag f.object.image3.url, id: :img3_prev %>
+              <%= image_tag f.object.image3.plad.url, id: :img3_prev %>
               <p><%= f.check_box :remove_image3 %>画像を削除する</p>
             <% else %>
               <%= image_tag "default_plan3.jpg", id: :img3_prev %>
             <% end %>
-              <p class="xsmall"><%= f.file_field :image3, id: :schedule3_img %></p>
+            
+              <div class="d-lg-none">
+            <label>
+              <div class="xsmall">
+              ファイルを選択
+              </div>
+              <div class="xsmall upload"><%= f.file_field :image3, class: :schedule3_img %></div>
+            </label>
+          </div>
+
+            <p class="xsmall d-none d-lg-block"><%= f.file_field :image3, class: :schedule3_img %></p>
           </div>
         
         <!--画像即時にプレビューjavascript-->
@@ -99,25 +130,38 @@
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-           $('#img3_prev').attr('src', e.target.result);
+           $(input).parents('.plan-image').find('#img3_prev').attr('src', e.target.result);
          }
          reader.readAsDataURL(input.files[0]);
          }
          }
-         $("#schedule3_img").change(function(){
+         $(document).on('change', '.schedule3_img', function(){
          readURL(this);
          });
         });
         </script>
         
-          <div class="col-md-3 col-6">
+          <div class="col-md-3 col-6 prev pl-1 pr-1">
             <% if f.object.image4? %>
-              <%= image_tag f.object.image4.url, id: :img4_prev %>
+              <%= image_tag f.object.image4.plad.url, id: :img4_prev %>
               <p><%= f.check_box :remove_image4 %>画像を削除する</p>
             <% else %>
               <%= image_tag "default_plan4.jpg", id: :img4_prev %>
             <% end %>
-              <p class="xsmall"><%= f.file_field :image4, id: :schedule4_img %></p>
+            
+          <div class="d-lg-none">
+            <label>
+              <div class="xsmall">
+              ファイルを選択
+              </div>
+              <div class="xsmall upload"><%= f.file_field :image4, class: :schedule4_img %></div>
+            </label>
+          </div>
+
+            <div class="d-none d-lg-block">
+            <p class="xsmall"><%= f.file_field :image4, class: :schedule4_img %></p>
+            </div>
+            
           </div>
         </div>
         
@@ -128,18 +172,18 @@
          if (input.files && input.files[0]) {
          var reader = new FileReader();
          reader.onload = function (e) {
-           $('#img4_prev').attr('src', e.target.result);
+           $(input).parents('.plan-image').find('#img4_prev').attr('src', e.target.result);
          }
          reader.readAsDataURL(input.files[0]);
          }
          }
-         $("#schedule4_img").change(function(){
+         $(document).on('change', '.schedule4_img', function(){
          readURL(this);
          });
         });
         </script>
 
-        <p class="xsmall">※image1から順番に、10MB以下の JPG・PNG・GIFファイルを選択してください</p>
+        <p class="xsmall">※image1から順番に、5MB以下の JPG・PNG・GIFファイルを選択してください</p>
         <p class="xsmall web-mt-8">※第三者の著作権、プライバシー権その他の権利を侵害しないよう留意してください</p>
         
     
@@ -159,7 +203,10 @@
         
         <div class="mt-3">
           <!--<%= f.label :access, 'アクセス' %>-->
-          <%= f.text_field :access, placeholder: '最寄り駅からの時間や道順などを入力', class: 'form-control border-warning'  %>
+          <%= f.text_field :access, placeholder: 'アクセス 1：最寄り駅からの時間や道順などを入力', class: 'form-control border-warning'  %>
+        </div>
+        <div class="mt-3">
+          <%= f.text_field :access2, placeholder: 'アクセス 2：最寄り駅からの時間や道順などを入力', class: 'form-control border-warning'  %>
         </div>
 
 

@@ -1,0 +1,71 @@
+      <div class="container">
+        <% breadcrumb :city, @city %>
+        <%= render "layouts/breadcrumbs" %>
+        
+        <div class="hidden_box mt-3">
+          <hr>
+          <div class="text-center web-gray">
+          <label for="label1">エリアを絞り込む<i class="fas fa-angle-down ml-2"></i></label>
+          </div>
+          <input type="checkbox" id="label1"/>
+          
+            <div class="hidden_show">
+              <% @city.spots.each do |spot| %>
+                <%= link_to spot_path(spot.id), class: "btn btn-outline-secondary btn-sm mt-2" do %>
+                <i class="fas fa-map-marker-alt"></i> <%= spot.name %>
+                <% end %>
+              <% end %>
+            </div>
+        </div>
+        <hr>
+        
+        
+          <p class="newplan_title mt-2 mb-1"><i class="fas fa-chess-queen mr-1 web-pb3"></i>【<%= @city.name %>】のプランの一覧　<span class="small"><%= @plans.count %>件</span></p>
+          
+          <% if @plans.count == 0 %>
+          <% if logged_in? %>
+            <div class="mt-5 text-center sp-medium">
+              まだ投稿されたプランがありません。<br>
+              あたなのプランを投稿してみませんか？<br>
+              <li class="nav-item btn btn-sm btn-plan mt-4"><%= link_to new_plan_path, data: {"turbolinks" => false}, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
+            </div>
+          <% else %>
+            <div class="mt-5 text-center sp-medium">
+              まだ投稿されたプランがありません。<br>
+              プランナーになってあたなのプランを投稿してみませんか？<br>
+              会員登録はたったの2ステップ、1分でOK!!<br>
+              <%= link_to "会員登録(無料)", signup_path, class: "btn btn-info mt-4" %>
+            </div>
+          <% end %>
+        <% end %>
+        
+        
+        <div class="row row-0">
+        <% @plans.each do |plan| %>
+          <div class="top-planimage col-6 mt-2">
+              <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+              <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+            <div class="tag xxsmall bold mt-2">
+              <%= link_to plan.category.category, category_path(plan.category.id) %>
+            </div>
+            
+            <% if plan.spot.present? %>
+            <div class="tag xxsmall bold mt-2 mr-1">
+              <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
+            </div>
+            <% end %>
+            
+            <div class="top-user mt-2 web-gray xsmall">
+              <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+  
+    <div class="pagination justify-content-center pagination-md mt-3">
+      <%= paginate @plans %>
+    </div>
+    
+  </div>
+        

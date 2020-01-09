@@ -1,12 +1,10 @@
 <header>
-  <nav class="navbar navbar-expand-sm navbar-light bg-white">
+  <nav class="navbar navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
+      
       <a class="navbar-brand" href="/"><%= image_tag "logo.svg" %></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    
-      <div class="navbar-nav form-group form-inline">
+      
+      <div class="navbar-nav mr-auto form-group form-inline">
         <%= form_with(url: search_path, method: :get, local: true) do |f| %>
           <div class="input-group">
             <%= f.text_field :search, value: params[:search], placeholder: "キーワードで検索", class: 'form-control' %>
@@ -16,40 +14,89 @@
           </div>
         <% end %>
       </div>
-    
-    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-      <ul class="navbar-nav">
-        
+      
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
         <% if logged_in? %>
-        
-          <!--<div class="nav-image">-->
-          <!--  <%= link_to image_tag(current_user.image.thumb150.url), mypage_path %>-->
-          <!--</div>-->
-          
-          
-          <li class="nav-image nav-item dropdown mr-3">
-              <a href="#" data-toggle="dropdown"><%= image_tag current_user.image.thumb150.url %></a>
-            <ul class="dropdown-menu dropdown-menu-right">
-              <li class="dropdown-item small"><i class="far fa-id-card mr-1"></i><%= link_to 'マイページ', mypage_path %></li>
-              <li class="dropdown-item small"><i class="fas fa-user-circle mr-1"></i><%= link_to 'マイプロフィール', user_path(current_user) %></li>
-              <!--<li class="dropdown-divider"></li>-->
-              <li class="dropdown-item small"><i class="fas fa-sign-out-alt mr-1"></i><%= link_to 'ログアウト', logout_path, method: :delete %></li>
-            </ul>
-          </li>
-          
-          <%= link_to information_index_path do %>
-          <i class="fas fa-info-circle news mr-3 mt-2"></i>
-          <% end %>
-            
-        
-          <li class="nav-item btn btn-sm btn-plan"><%= link_to new_plan_path, data: {"turbolinks" => false}, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
+        <span class="d-none d-lg-block">
+          <div class="nav-image">
+            <%= image_tag(current_user.image.plad.url) %>
+          </div>
+        </span>
         <% else %>
-          <i class="fas fa-user web-mt10"></i><li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>
-          <li class="nav-item mr-3"><%= link_to '会員登録(無料)', signup_path, class: 'nav-link' %></li>
-          <li class="nav-item btn btn-sm btn-plan"><%= link_to login_path, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
+          <span class="navbar-toggler-icon"></span>
         <% end %>
-      </ul>
-    </div>
+      </button>
+      
+
+      <div class="d-lg-none">
+        <ul class="list-unstyled">
+          <% if logged_in? %>
+            <li class="nav-icon nav-item dropdown">
+                <a href="#" data-toggle="dropdown"><%= image_tag current_user.image.plad.url %></a>
+                  <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-item small"><i class="fas fa-pen-square mr-1"></i><%= link_to 'プラン作成', new_plan_path %></li>
+                    <li class="dropdown-item small"><i class="far fa-id-card mr-1"></i><%= link_to 'マイページ', mypage_path %></li>
+                    <li class="dropdown-item small"><i class="fas fa-user-circle mr-1"></i><%= link_to 'マイプロフィール', user_path(current_user) %></li>
+                    <li class="dropdown-item small"><i class="fas fa-sign-out-alt mr-1"></i><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+                  </ul>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          
+          <% if logged_in? %>
+
+            <!--<div class="nav-image">-->
+            <!--  <%= link_to image_tag(current_user.image.plad.url), mypage_path %>-->
+            <!--</div>-->
+            
+            
+            <li class="nav-image nav-item dropdown mr-3 d-none d-lg-block">
+                <a href="#" data-toggle="dropdown"><%= image_tag current_user.image.plad.url %></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item small"><i class="far fa-id-card mr-1"></i><%= link_to 'マイページ', mypage_path %></li>
+                <li class="dropdown-item small"><i class="fas fa-user-circle mr-1"></i><%= link_to 'マイプロフィール', user_path(current_user) %></li>
+                <!--<li class="dropdown-divider"></li>-->
+                <li class="dropdown-item small"><i class="fas fa-sign-out-alt mr-1"></i><%= link_to 'ログアウト', logout_path, method: :delete %></li>
+              </ul>
+            </li>
+            
+            <%= link_to information_index_path do %>
+            <i class="fas fa-info-circle news mr-3 mt-2 d-none d-lg-block"></i>
+            <% end %>
+              
+          
+            <li class="nav-item btn btn-sm btn-plan d-none d-lg-block"><%= link_to new_plan_path, data: {"turbolinks" => false}, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
+          <% else %>
+            
+            
+            <%= link_to login_path do %>
+              <div class="navi">
+                <i class="fas fa-user"></i> ログイン
+              </div>
+            <% end %>
+    
+            <%= link_to signup_path do %>
+              <div class="navi">
+                <i class="far fa-smile-wink mr-1"></i>会員登録(無料)
+              </div>
+            <% end %>
+            
+            <!--<li class="nav-item"><%= link_to 'ログイン', login_path, class: 'nav-link' %></li>-->
+    
+    
+            <!--<li class="nav-item text-center mr-3"><%= link_to '会員登録(無料)', signup_path, class: 'nav-link' %></li>-->
+    
+            <li class="nav-item btn btn-sm btn-plan"><%= link_to login_path, class: 'nav-link',:style=>"color:white;" do %><%= image_tag "/assets/icon_plan.png" %>プラン作成<% end %></li>
+          <% end %>
+        </ul>
+      </div>
+    
     </div>
   </nav>
 </header>

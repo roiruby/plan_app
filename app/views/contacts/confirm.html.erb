@@ -1,0 +1,62 @@
+  <div class="container">
+    <% breadcrumb :contact %>
+    <%= render "layouts/breadcrumbs" %>
+    <div class="mt-4">
+      
+      <h2>プラデュースに関するお問い合わせ</h2>
+      
+      <h3 class="mt-4">お問い合わせ内容の確認</h3>
+      
+      <!--<div class="small mb-3">-->
+      <!--お問い合わせ内容に関しては可能な限り対応を行いますが、内容によっては対応できない場合がございます。ご了承ください。<br>-->
+      <!--ドメイン指定受信設定や迷惑メール設定をしている場合、当社からメールが届かない場合がございます。<br>-->
+      <!--「support@pladuce.com」からのメールを受信できるよう設定をお願いいたします。-->
+      <!--</div>-->
+      
+      
+      <%= form_with(url: contact_done_path, model: @contact, local: true) do |f| %>
+      
+        <div class="mt-4">
+          
+          <div class="form-group">
+            【<%= f.label 'お問い合わせの種類' %>】
+            <div>
+              <%= f.hidden_field :category %>
+              <%= @contact.category %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            【<%= f.label 'お名前' %>】
+            <div>
+              <%= f.hidden_field :name %>
+              <%= @contact.name %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            【<%= f.label 'メールアドレス' %>】
+            <div>
+              <%= f.hidden_field :email %>
+              <%= @contact.email %>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            【<%= f.label 'お問い合わせ内容' %>】
+            <div>
+              <%= f.hidden_field :content %>
+              <%= simple_format(@contact.content) %>
+              </div>
+          </div>
+          
+          <div class="text-center mt-4">
+            <%= f.submit '修正する', name: 'back', class: 'btn btn-warning bold' %>
+            <%= f.submit '送信する', class: 'btn btn-info bold' %>
+          </div>
+        </div>
+      <% end %>
+  
+  
+    </div>
+  </div>

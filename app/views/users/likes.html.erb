@@ -3,18 +3,18 @@
     <%= render "layouts/breadcrumbs" %>
     <div class="row web-mt40">
       
-      <div class="col-md-3">
+      <div class="col-lg-3 col-sm-4">
         <%= render 'mypage/mypage_left' %>
       </div>
       
-      <div class="col-md-6">
+      <div class="col-lg-6 col-sm-8">
         
           <div class="row border-b mb-3">
-            <div class="col-md-8 pt-2 pl-0">
-              <span class="h3 bold">お気に入りのプラン 　</span><span class="bold"><%= @count_favplans %> プラン</span>
+            <div class="col-lg-8 col-sm-7 pt-2 pl-0">
+              <span class="h3 bold h3-tb">お気に入りのプラン 　</span><span class="bold"><%= @count_favplans %> プラン</span>
             </div>
           
-            <div class="col-md-4">
+            <div class="col-lg-4 col-sm-5">
               <div class="form-group form-inline">
                 <%= form_with(url: likes_user_path, method: :get, local: true) do |f| %>
                   <div class="input-group">
@@ -31,11 +31,11 @@
         
         <div class="mypage-center top-planimage mt-3">
         <% @favplans.each do |plan| %>
-        <div class="web-flex mb-4">
-          <div>
-            <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+        <div class="row row-0">
+          <div class="top-planimage col-sm-4 mt-2">
+            <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
           </div>
-          <div class="ml-3">
+          <div class="col-sm-8 pl-2 mt-2">
             <%= link_to plan.plan_title.truncate(46), plan_path(plan), data: {"turbolinks" => false} %>
             <div class="small mt-1"><%= plan.content.truncate(62) %></div>
             
@@ -64,7 +64,7 @@
         </div>
       </div>
       
-      <div class="col-md-3">
+      <div class="col-lg-3 d-none d-lg-block">
         <div class="mypage_right">
         <image src="/assets/ad1.gif"></image>
         </div>

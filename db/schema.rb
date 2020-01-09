@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_090651) do
+ActiveRecord::Schema.define(version: 2019_12_21_063712) do
 
   create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -142,6 +142,14 @@ ActiveRecord::Schema.define(version: 2019_12_15_090651) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "quits", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_quits_on_user_id"
+  end
+
   create_table "relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "follow_id"
@@ -175,6 +183,7 @@ ActiveRecord::Schema.define(version: 2019_12_15_090651) do
     t.string "image2"
     t.string "image3"
     t.string "image4"
+    t.string "access2"
     t.index ["plan_id"], name: "index_schedules_on_plan_id"
   end
 
@@ -244,6 +253,7 @@ ActiveRecord::Schema.define(version: 2019_12_15_090651) do
   add_foreign_key "plans_categories", "plans"
   add_foreign_key "plans_keywords", "keywords"
   add_foreign_key "plans_keywords", "plans"
+  add_foreign_key "quits", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "schedules", "plans"

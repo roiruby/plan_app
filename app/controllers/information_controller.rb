@@ -1,6 +1,7 @@
 class InformationController < ApplicationController
   before_action :require_user_logged_in
   before_action :admin_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :devise_variant
   
   def index
     @news = Information.all.page(params[:page]).per(10).reverse_order
@@ -58,6 +59,17 @@ class InformationController < ApplicationController
   
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+  
+  def devise_variant
+      case request.user_agent
+      when /iPad/
+        request.variant = :tablet
+      when /iPhone/
+        request.variant = :mobile
+      when /android/
+        request.variant = :android
+      end
   end
   
 end

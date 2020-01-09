@@ -1,0 +1,120 @@
+  <%= form_with(model: @plan, local: true) do |f| %>
+    
+    <div class="plan-submit-row sticky-top">
+      <div class="plan-submit">
+        <div class="pt-1">
+          <h4>プラン編集</h4>
+        </div>
+
+          <div class="web-flex">
+            <div class="mr-2">
+              <%= f.select :status, Plan.statuses.keys.map { |k| [t("enums.plan.status.#{k}"),k]}, {}, {class: 'form-control-sm'} %>
+            </div>
+            <div>
+              <%= f.submit '更新する', class: 'btn btn-primary btn-sm' %>
+            </div>
+          </div>
+      </div>
+    </div>
+    
+  <div class="container">
+    
+    <div class="form-group mt-3">
+      <span class="required">*</span>
+      <%= f.label :plan_title, 'プランタイトル' %>
+      <%= f.text_field :plan_title, placeholder: 'プランのタイトルを入力 （50文字以内）', class: 'form-control border-warning' %>
+    </div>
+    
+    <div class="planimg">
+      <% if @plan.image? %>
+        <%= image_tag @plan.image.url, id: :img_prev %>
+        <p><%= f.check_box :remove_image %>画像を削除する</p>
+      <% else %>
+        <%= image_tag "default_plan.jpg", id: :img_prev %>
+      <% end %>
+        <div class="xsmall"><span class="required">*</span><%= f.file_field :image, id: :plan_img %></div>
+    </div>
+    
+    <div class="xxsmall mt-2">※プラン画像は必須です。<br>5MB以下の JPG・PNG・GIFファイルを選択してください。</div>
+    <div class="xxsmall">※第三者の著作権、プライバシー権その他の権利を侵害しないよう留意してください</div>
+    
+    <!--画像即時にプレビューjavascript-->
+    <script type="text/javascript">
+    $(function() {
+     function readURL(input) {
+     if (input.files && input.files[0]) {
+     var reader = new FileReader();
+     reader.onload = function (e) {
+       $('#img_prev').attr('src', e.target.result);
+     }
+     reader.readAsDataURL(input.files[0]);
+     }
+     }
+     $("#plan_img").change(function(){
+     readURL(this);
+     });
+    });
+    </script>
+    
+    
+    <div class="form-group mt-3">
+      <%= f.label :content, 'サブタイトル・説明' %>
+      <%= f.text_area :content, :maxlength => "255", :size => "80x4", placeholder: 'プランのサブタイトルや説明を入力 （255文字以内）', class: 'form-control border-warning'  %>
+    </div>
+    
+    <div class="form-group">
+      <span class="required">*</span>
+      <%= f.label 'カテゴリー' %>
+      <%= f.collection_select :category_id, Category.all, :id, :category, {include_blank: 'カテゴリーを選択', include_hidden: false}, class: 'form-control border-warning' %>
+    </div>
+    
+    
+    <div>
+      <%= f.label :prefecture_id,"エリア" %><br>
+    </div>
+
+    <div class="">
+      <% prefecture_options = Prefecture.order(:id).map { |c| [c.name, c.id, data: { children_path: prefecture_cities_path(c) }] } %>
+      <%= f.select :prefecture_id, prefecture_options, { include_blank: "都道府県を選択", include_hidden: false}, class: 'select-parent form-control border-warning' %>
+    </div>
+
+    <div class="mt-2">
+      <% cities = @plan.prefecture.try(:cities) || [] %>
+      <% city_options = cities.map { |c| [c.name, c.id, data: { path: prefecture_city_spots_path(c, city_id:c) }] } %>
+      <%= f.select :city_id, city_options, { include_blank: "市区町村を選択", include_hidden: false}, class: 'select-children form-control border-warning' %>
+    </div>
+  
+    <div class="mt-2">
+      <% spots = @plan.city.try(:spots) || [] %>
+      <% spot_options = spots.map { |c| [c.name, c.id] } %>
+      <%= f.select :spot_id, spot_options, { include_blank: "スポットを選択", include_hidden: false}, class: 'select-grandchildren form-control border-warning' %>
+    </div>
+    
+    
+    <div class="form-group mt-2">
+      <%= f.label '予算' %>
+      <%= f.collection_select :budget_id, Budget.all, :id, :name, {include_blank: 'プランの予算を選択', include_hidden: false}, class: 'form-control border-warning' %>
+    </div>
+    
+    
+    <div class="form-group">
+      <div class="pb-0">
+        <%= f.label "キーワード"  %></div>
+        <div class="xxsmall" %>※関連したワードやシーンを入力！Enterキーで決定、最大10個まで登録可</div>
+        <ul id="plan-tags"></ul>
+    </div>
+
+    <hr>
+    
+    
+    <%= f.fields_for :schedules do |s| %>
+      <%= render 'schedule_fields', f: s %>
+    <% end %>
+    
+    <div class="schedule_links btn  btn-sm btn-info">
+      <%= link_to_add_association '+ スケジュールを追加',f, :schedules %>
+    </div>
+    
+    <% end %>
+    
+  </div>

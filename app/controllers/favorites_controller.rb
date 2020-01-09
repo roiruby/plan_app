@@ -4,6 +4,7 @@ class FavoritesController < ApplicationController
   def create
     plan = Plan.find(params[:plan_id])
     current_user.like(plan)
+    FavoriteMailer.favorite_notification(current_user, plan).deliver_now
     redirect_back(fallback_location: root_path)
   end
 

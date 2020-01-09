@@ -3,6 +3,7 @@ class PlansController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_plan_tags_to_gon, only: [:edit]
   before_action :set_available_tags_to_gon, only: [:new, :edit, :create, :update]
+  before_action :devise_variant
   
   def index
     @plans = Plan.published.all.reverse_order.page(params[:page]).per(20)
@@ -17,8 +18,11 @@ class PlansController < ApplicationController
     impressionist(@plan, nil, :unique => [:session_hash])
     @relation_plans = Plan.published.includes([:category, :spot]).where(["category_id = ? and spot_id = ?","#{@plan.category_id}", "#{@plan.spot_id}"]).references([:category, :spot]).order("RAND()").limit(4).where.not(id: @plan.id)
     @most_viewed = Plan.published.order('impressions_count DESC').limit(5).where.not(id: @plan.id)
+    @most_viewed_sp = Plan.published.order('impressions_count DESC').limit(6).where.not(id: @plan.id)
     @plans = Plan.published.order(time: "DESC").limit(5).where.not(id: @plan.id)
-    @recomends = Plan.published.tagged_with("タピオカ").limit(5).where.not(id: @plan.id)
+    @plans_sp = Plan.published.order(time: "DESC").limit(6).where.not(id: @plan.id)
+    @recomends = Plan.published.tagged_with("タピオカ, 食べ歩き").limit(5).where.not(id: @plan.id)
+    @recomends_sp = Plan.published.tagged_with("タピオカ, 食べ歩き").limit(6).where.not(id: @plan.id)
     
     if @plan.draft?
       draftplan
@@ -28,6 +32,7 @@ class PlansController < ApplicationController
   def new
     @plan = current_user.plans.build
     @plan.schedules.build
+    
   end
 
   def create
@@ -35,7 +40,7 @@ class PlansController < ApplicationController
     if @plan.save
       redirect_to user_path(@plan.user_id)
     else
-      flash[:danger] = 'プランの投稿に失敗しました。'
+      flash[:danger] = 'プランの投稿に失敗しました。必須項目の入力漏れやアップロード画像が5MB以下になっているかご確認ください。'
       render :new 
     end
   end
@@ -56,6 +61,7 @@ class PlansController < ApplicationController
   end
 
   def destroy
+    @plan = Plan.find_by(id: params[:id])
     @plan.destroy
     flash[:success] = '投稿を削除しました。'
     redirect_to user_path(@plan.user_id)
@@ -135,7 +141,7 @@ class PlansController < ApplicationController
     params.require(:plan).permit(
     :plan_title, :content, :image, :remove_image, :user_id, :category_id, :budget_id, :prefecture_id, :city_id, :spot_id, :tag_list, :status,
     {schedules_attributes: [
-        :schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :remove_image2, :remove_image3, :remove_image4, :sub_title, :content, :spot_name, :address, :access, :business_hour, :regular_holiday, :tel, :parking, :budget, :link_url, :comment, :_destroy, :id]},
+        :schedule_title, :start_time, :end_time, :image1, :image2, :image3, :image4, :remove_image1, :remove_image2, :remove_image3, :remove_image4, :sub_title, :content, :spot_name, :address, :access, :access2, :business_hour, :regular_holiday, :tel, :parking, :budget, :link_url, :comment, :_destroy, :id]},
     {keywords_attributes: [
         :name, :_destroy, :id]})
   end
@@ -143,15 +149,33 @@ class PlansController < ApplicationController
   def correct_user
     @plan = current_user.plans.find_by(id: params[:id])
     unless @plan
+    unless current_user.admin? #
       redirect_to root_url
+    end
     end
   end
   
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
+  
   def set_plan_tags_to_gon
+    @plan = Plan.find_by(id: params[:id]) #
     gon.plan_tags = @plan.tag_list
   end
   def set_available_tags_to_gon
     gon.available_tags = Plan.tags_on(:tags).pluck(:name)
+  end
+  
+  def devise_variant
+      case request.user_agent
+      when /iPad/
+        request.variant = :tablet
+      when /iPhone/
+        request.variant = :mobile
+      when /android/
+        request.variant = :android
+      end
   end
 
 
