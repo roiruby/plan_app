@@ -12,14 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2019_12_21_063712) do
 
-  create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "ancestry"
-    t.index ["ancestry"], name: "index_areas_on_ancestry"
-  end
-
   create_table "budgets", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -86,13 +78,6 @@ ActiveRecord::Schema.define(version: 2019_12_21_063712) do
     t.index ["user_id"], name: "index_information_on_user_id"
   end
 
-  create_table "keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_keywords_on_name", unique: true
-  end
-
   create_table "plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "plan_title"
     t.string "content"
@@ -101,7 +86,6 @@ ActiveRecord::Schema.define(version: 2019_12_21_063712) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id"
-    t.bigint "area_id"
     t.integer "impressions_count", default: 0
     t.bigint "prefecture_id"
     t.bigint "city_id"
@@ -109,31 +93,12 @@ ActiveRecord::Schema.define(version: 2019_12_21_063712) do
     t.bigint "budget_id"
     t.integer "status", default: 0, null: false
     t.datetime "time"
-    t.index ["area_id"], name: "index_plans_on_area_id"
     t.index ["budget_id"], name: "index_plans_on_budget_id"
     t.index ["category_id"], name: "index_plans_on_category_id"
     t.index ["city_id"], name: "index_plans_on_city_id"
     t.index ["prefecture_id"], name: "index_plans_on_prefecture_id"
     t.index ["spot_id"], name: "index_plans_on_spot_id"
     t.index ["user_id"], name: "index_plans_on_user_id"
-  end
-
-  create_table "plans_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.bigint "category_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_plans_categories_on_category_id"
-    t.index ["plan_id"], name: "index_plans_categories_on_plan_id"
-  end
-
-  create_table "plans_keywords", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "plan_id"
-    t.bigint "keyword_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["keyword_id"], name: "index_plans_keywords_on_keyword_id"
-    t.index ["plan_id"], name: "index_plans_keywords_on_plan_id"
   end
 
   create_table "prefectures", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -242,17 +207,12 @@ ActiveRecord::Schema.define(version: 2019_12_21_063712) do
   add_foreign_key "favorites", "plans"
   add_foreign_key "favorites", "users"
   add_foreign_key "information", "users"
-  add_foreign_key "plans", "areas"
   add_foreign_key "plans", "budgets"
   add_foreign_key "plans", "categories"
   add_foreign_key "plans", "cities"
   add_foreign_key "plans", "prefectures"
   add_foreign_key "plans", "spots"
   add_foreign_key "plans", "users"
-  add_foreign_key "plans_categories", "categories"
-  add_foreign_key "plans_categories", "plans"
-  add_foreign_key "plans_keywords", "keywords"
-  add_foreign_key "plans_keywords", "plans"
   add_foreign_key "quits", "users"
   add_foreign_key "relationships", "users"
   add_foreign_key "relationships", "users", column: "follow_id"

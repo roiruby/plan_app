@@ -3,28 +3,29 @@
 
   <div class="slide-image mypattern mt-2">
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide1.jpg"></a>
-      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <!--<a href="plans/1"><img src="assets/slide1.jpg"></a>-->
+      <%= link_to image_tag("/assets/slide1.jpg"), plan_path(1), data: {"turbolinks" => false} %>
+      <p class="text-center">【渋谷デート】学生～大人まで楽しめる！女性ウケ◎のおすすめプラン♡</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide2.jpg"></a>
-      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選</p>
+      <%= link_to image_tag("/assets/slide2.jpg"), plan_path(2), data: {"turbolinks" => false} %>
+      <p class="text-center">天気の良い休日は鎌倉～江の島を1日満喫！海や神社巡りも！おすすめドライブコース♡</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide3.jpg"></a>
-      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <%= link_to image_tag("/assets/slide3.jpg"), plan_path(3), data: {"turbolinks" => false} %>
+      <p class="text-center">【鎌倉】インスタ映えするおすすめ女子旅プラン♡デートにも◎</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide4.jpg"></a>
-      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
+      <%= link_to image_tag("/assets/slide4.jpg"), plan_path(4), data: {"turbolinks" => false} %>
+      <p class="text-center">東京の下町を歩く！デート・女子会♡【蔵前・両国・浅草橋】観光・雑貨屋巡りプラン♡</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide5.jpg"></a>
-      <p class="text-center">沖縄うるま市で感動のアクティビティデート！パワー溢れる1泊2日コース♡</p>
+      <%= link_to image_tag("/assets/slide5.jpg"), plan_path(5), data: {"turbolinks" => false} %>
+      <p class="text-center">三重県 お伊勢参り 初めての【伊勢神宮】を参拝！</p>
     </div>
     <div class="slide-title mr-1">
-      <a href="/"><img src="assets/slide6.jpg"></a>
-      <p class="text-center">大阪は遊び場の宝庫！大人も楽しめるおすすめ観光スポット13選♡</p>
+      <%= link_to image_tag("/assets/slide6.jpg"), plan_path(6), data: {"turbolinks" => false} %>
+      <p class="text-center">ファミリーにも！タピオカ&お買い物【新小岩】～【幕張】お出かけプラン☆</p>
     </div>
   </div>
 
@@ -37,13 +38,14 @@
             <p class="category_item"><img src="assets/icon_jyoshikai.png"><%= link_to "女子会", category_path(1) %></p>
             <p class="category_item"><img src="assets/icon_date.png"><%= link_to "デート", category_path(2) %></p>
             <p class="category_item"><img src="assets/icon_odekake.png"><%= link_to "お出かけ", category_path(3) %></p>
-            <p class="category_item"><img src="assets/icon_drive.png"><%= link_to "ドライブ", category_path(4) %></p>
-            <p class="category_item"><img src="assets/icon_travel.png"><%= link_to "旅行・観光", category_path(5) %></p>
-            <p class="category_item"><img src="assets/icon_suprise.png"><%= link_to "サプライズ", category_path(6) %></p>
-            <p class="category_item"><img src="assets/icon_diet.png"><%= link_to "ダイエット", category_path(7) %></p>
-            <p class="category_item"><img src="assets/icon_training.png"><%= link_to "トレーニング", category_path(8) %></p>
-            <p class="category_item"><img src="assets/icon_study.png"><%= link_to "スタディ", category_path(9) %></p>
-            <p class="category_item"><img src="assets/icon_etc.png"><%= link_to "その他", category_path(10) %></p>
+            <p class="category_item"><img src="assets/icon_gourmet.png"><%= link_to "グルメ・カフェ", category_path(4) %></p>
+            <p class="category_item"><img src="assets/icon_drive.png"><%= link_to "ドライブ", category_path(5) %></p>
+            <p class="category_item"><img src="assets/icon_travel.png"><%= link_to "旅行・観光", category_path(6) %></p>
+            <p class="category_item"><img src="assets/icon_suprise.png"><%= link_to "サプライズ", category_path(7) %></p>
+            <p class="category_item"><img src="assets/icon_diet.png"><%= link_to "ダイエット", category_path(8) %></p>
+            <p class="category_item"><img src="assets/icon_training.png"><%= link_to "トレーニング", category_path(9) %></p>
+            <p class="category_item"><img src="assets/icon_study.png"><%= link_to "スタディ", category_path(10) %></p>
+            <p class="category_item"><img src="assets/icon_etc.png"><%= link_to "その他", category_path(11) %></p>
         </div>
         
         <div>
@@ -108,13 +110,17 @@
           <% @most_viewed.each.with_index(1) do |rank| %>
             <div class="top-planimage col-sm-3">
               <%= link_to image_tag(rank.image.thumb.to_s), plan_path(rank), data: {"turbolinks" => false} %>
-              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(42), plan_path(rank), data: {"turbolinks" => false} %></p>
+              <p class="top-plantitle mb-0 pr-1 pl-1"><%= link_to rank.plan_title.truncate(39), plan_path(rank), data: {"turbolinks" => false} %></p>
               <div class="tag xsmall bold mt-2">
                 <%= link_to rank.category.category, category_path(rank.category.id) %>
               </div>
-              <div class="tag xsmall bold mt-2">
+              
+              <% if rank.spot.present? %>
+              <div class="tag xsmall bold mt-2 mr-1">
                 <%= link_to rank.spot.name, spot_path(rank.spot.id) %>
               </div>
+              <% end %>
+              
               <div class="top-user mt-2 web-gray xsmall xsmall-tb">
                 <i class="far fa-clock"></i><%= rank.updated_at.strftime('%Y/%m/%d') %>
               </div>
@@ -128,7 +134,7 @@
         <% @plans.each do |plan| %>
           <div class="top-planimage col-sm-3">
             <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
-            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
+            <p class="top-plantitle mb-0 pr-1 pl-1"><%= link_to plan.plan_title.truncate(39), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
@@ -153,13 +159,17 @@
         <% @recomends.each do |plan| %>
           <div class="top-planimage col-sm-3">
             <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
-            <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
+            <p class="top-plantitle mb-0 pr-1 pl-1"><%= link_to plan.plan_title.truncate(39), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
-            <div class="tag xsmall bold mt-2">
+            
+            <% if plan.spot.present? %>
+            <div class="tag xsmall bold mt-2 mr-1">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
+            <% end %>
+            
             <div class="top-user mt-2 web-gray xsmall xsmall-tb">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>

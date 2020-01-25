@@ -3,77 +3,68 @@
     <%= render "layouts/breadcrumbs" %>
     <div class="row mt-4">
       
-      <div class="col-lg-3 col-sm-4 web-center">
-          <!--<p class="bold">投稿数 <%= @count_plans %> プラン</p>-->
-        <div class="circle-image150">
-          <%= image_tag @user.image.plad.url %>
-        </div>
-        
-        <% if logged_in? %>
-          <div class="mt-4">
-            <%= render 'relationships/follow_button', user: @user %>
-          </div>
-        <% else %>
-            <%= link_to "フォローする", login_path, class: "follow-btn mt-4" %>
-        <% end %>
-        
-        <p class="small mt-2">フォロー：<%= @count_followings %>人　フォロワー：<%= @count_followers %>人</p>
-        
-        <% if logged_in? %>
-          <% if current_user.admin? && !(current_user == User) %>
-            <div><%= @user.email %></div>
-            <%= link_to "削除", user_path(@user), :method => :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger btn-sm mb-4" %>
-          <% end %>
-        <% end %>
-        
-      </div>
-
-      <div class="col-lg-6 col-sm-8">
-        
-        <p class="bold"><%= @user.name %></p>
-        <p class="small web-mt-15"><%= @user.catchphrase %></p>
-        <%= simple_format(@user.introduce) %>
-        
-        
-      </div>
+      <div class="col-lg-9">
       
-      <div class="col-lg-3 d-none d-lg-block">
-        <div class="mypage_right">
-        <%= link_to image_tag("/assets/ad1.svg", alt: "酔つ馬-YOTUBA-浅草橋東口店"), "https://tabelog.com/tokyo/A1311/A131103/13214556/", target: "_blank" %>
-        </div>
-      </div>
-      
-    </div>
-    
-    
-    <div class="row">
-    
-      <div class="col-lg-9 col-sm-12">
-        <Hr>
+        <div class="row">
           
-        <% if @count_plans >= 1 %>
-          <div class="row border-b mb-3">
-            <div class="col-sm-8 pt-2">
-              <span class="h3 bold">投稿したプラン一覧 　</span><span class="bold"><%= @count_plans %> プラン</span>
+          <div class="col-4 text-center">
+            <div class="circle-image150">
+              <%= image_tag @user.image.plad.url %>
             </div>
+            
+            <% if logged_in? %>
+              <div class="mt-4">
+                <%= render 'relationships/follow_button', user: @user %>
+              </div>
+            <% else %>
+                <%= link_to "フォローする", login_path, class: "follow-btn mt-4" %>
+            <% end %>
+            
+            <p class="small mt-2">フォロー：<%= @count_followings %>人　フォロワー：<%= @count_followers %>人</p>
+            
+            <% if logged_in? %>
+              <% if current_user.admin? && !(current_user == User) %>
+                <div><%= @user.email %></div>
+                <%= link_to "削除", user_path(@user), :method => :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger btn-sm mb-4" %>
+              <% end %>
+            <% end %>
+          </div>
+  
+          <div class="col-8 col-sm-8">
+            <p class="bold"><%= @user.name %></p>
+            <p class="small web-mt-15"><%= @user.catchphrase %></p>
+            <div class="medium">
+            <%= simple_format(@user.introduce) %>
+            </div>
+          </div>
           
-            <div class="col-sm-4">
-              <div class="form-group form-inline">
-                <%= form_with(url: user_path, method: :get, local: true) do |f| %>
-                  <div class="input-group">
-                    <%= f.text_field :search, value: params[:search], placeholder: "プラン絞り込み", class: 'form-control' %>
-                    <span class="input-group-btn">
-                      <%= button_tag '<i class="fas fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-search", :style => "color:white;" %>
-                    </span>
-                  </div>
-                <% end %>
+        </div>
+      
+      <hr>
+      
+      <% if @count_plans >= 1 %>
+      <div class="row border-b mb-3">
+        <div class="col-sm-8 pt-2">
+          <span class="h3 bold">投稿したプラン一覧 　</span><span class="bold"><%= @count_plans %> プラン</span>
+        </div>
+      
+        <div class="col-sm-4">
+          <div class="form-group form-inline">
+            <%= form_with(url: user_path, method: :get, local: true) do |f| %>
+              <div class="input-group">
+                <%= f.text_field :search, value: params[:search], placeholder: "プラン絞り込み", class: 'form-control' %>
+                <span class="input-group-btn">
+                  <%= button_tag '<i class="fas fa-search"></i>'.html_safe, :type => "submit", :class =>"btn btn-search", :style => "color:white;" %>
+                </span>
               </div>
             <% end %>
           </div>
         </div>
-        
-
-        <% @plans.each do |plan| %>
+      </div>
+      <% end %>
+      
+      
+      <% @plans.each do |plan| %>
           <div class="row row-0 planshow top-planimage mt-2">
             
           <div class="col-lg-3 col-sm-4">
@@ -114,13 +105,20 @@
         <div class="pagination justify-content-end pagination-sm">
           <%= paginate @plans %>
         </div>
-        
-      </div>
-    
-      <div class="col-lg-3 d-md-none">
-      </div>
-    
 
     </div>
     
+    
+      
+      <div class="col-lg-3 d-none d-lg-block">
+        <div class="mypage_right">
+          <%= link_to image_tag("/assets/ad1.jpg", alt: "酔つ馬-YOTUBA-浅草橋東口店"), "https://tabelog.com/tokyo/A1311/A131103/13214556/", target: "_blank" %>
+        </div>
+        <div class="mypage_right mt-3">
+          <%= link_to image_tag("/assets/model_wanted.jpg", alt: "モデル募集"), model_wanted_path %>
+        </div>
+      </div>
+
+
+    </div>
   </div>

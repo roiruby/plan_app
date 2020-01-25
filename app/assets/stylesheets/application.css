@@ -436,6 +436,7 @@ a:hover .span2box {
 .plan-image img {
   height: 150px;
   width: 200px;
+  object-fit: cover;
 }
 
 /*----------------------------------------------------------プラン投稿-----*/
@@ -450,6 +451,9 @@ a:hover .span2box {
   padding: 7px 15px 7px 15px;
   display: flex;
   justify-content: space-between;
+}
+.prev img{
+  object-fit: cover;
 }
 
 /*-----------------------------------------------------------プラン詳細-----*/
@@ -1019,8 +1023,8 @@ h3 {
    width: 50%;
 }
 .slide-title p {
-  font-size: 65%;
-  padding: 15px;
+  font-size: 56%;
+  padding: 11px;
   top: 130px;
 }
 /*-------------------------------------------------------top-----*/

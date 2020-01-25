@@ -1,49 +1,54 @@
 Category.seed do |s|
 s.id = 1
-s.name = '女子会'
+s.category = '女子会'
 end
 
 Category.seed do |s|
 s.id = 2
-s.name = 'デート'
+s.category = 'デート'
 end
 
 Category.seed do |s|
 s.id = 3
-s.name = 'お出かけ'
+s.category = 'お出かけ'
 end
 
 Category.seed do |s|
 s.id = 4
-s.name = 'ドライブ'
+s.category = 'グルメ・カフェ'
 end
 
 Category.seed do |s|
 s.id = 5
-s.name = '旅行・観光'
+s.category = 'ドライブ'
 end
 
 Category.seed do |s|
 s.id = 6
-s.name = 'サプライズ'
+s.category = '旅行・観光'
 end
 
 Category.seed do |s|
 s.id = 7
-s.name = 'ダイエット'
+s.category = 'サプライズ'
 end
 
 Category.seed do |s|
 s.id = 8
-s.name = 'トレーニング'
+s.category = 'ダイエット'
 end
 
 Category.seed do |s|
 s.id = 9
-s.name = 'スタディ'
+s.category = 'トレーニング'
 end
 
 Category.seed do |s|
 s.id = 10
-s.name = 'その他'
+s.category = 'スタディ'
+end
+
+Category.seed do |s|
+s.id = 11
+s.category = 'その他'
 end

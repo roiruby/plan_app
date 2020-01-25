@@ -47,6 +47,8 @@ Rails.application.routes.draw do
   
   get 'users/popular', to: 'users#popular', as: :popular_users
   
+  get 'model_wanted', to: 'plans#model_wanted', as: :model_wanted
+  
 
   resources :users, only: [:index, :show, :new, :create, :edit, :update, :destroy] do
     

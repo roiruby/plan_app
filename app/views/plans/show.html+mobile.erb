@@ -77,10 +77,16 @@
             <%= schedule.end_time %>　
           <% end %>
         </div>
-          
+        
+        <% if schedule.start_time.present? && schedule.end_time.present? %>
           <div class="bold ml-2 sp-medium">
             <%= link_to schedule.schedule_title, "#schedule_title#{schedule.id}", :style=>"color:black;" %>
           </div>
+        <% else %>
+          <div class="bold sp-medium">
+            <%= link_to schedule.schedule_title, "#schedule_title#{schedule.id}", :style=>"color:black;" %>
+          </div>
+        <% end %>
         
       <% end %>
     </div>
@@ -182,49 +188,113 @@
           <% end %>
           
           
-
+          
           <% if schedule.spot_name.present? %>
           <div class="spot-details_container">
   
             <h4><%= schedule.spot_name %></h4>
           <% end %>
           
+          
           <% if schedule.address.present? %>
-            <div class="small mt-1">住所：　　　<%= schedule.address %></div>
+          <div class="row row-0">
+            <div class="col-auto small">
+              住所：　　　
+            </div>
+            <div class="col-9 small">
+              <%= schedule.address %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.access.present? %>
-            <div class="small mt-1">アクセス：　<%= schedule.access %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              アクセス：　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= schedule.access %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.access2.present? %>
-            <div class="small mt-1">　　　　　　<%= schedule.access2 %></div>
+          <div class="row row-0">
+            <div class="col-auto small">
+              　　　　　　
+            </div>
+            <div class="col-9 small">
+              <%= schedule.access2 %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.business_hour.present? %>
-            <div class="small mt-1">営業時間：　<%= schedule.business_hour %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              営業時間：　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= schedule.business_hour %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.regular_holiday.present? %>
-            <div class="small mt-1">定休日：　　<%= schedule.regular_holiday %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              定休日：　　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= schedule.regular_holiday %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.tel.present? %>
-            <div class="small mt-1">電話番号：　<%= schedule.tel %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              電話番号：　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= link_to schedule.tel, "tel:" + schedule.tel %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.parking.present? %>
-            <div class="small mt-1">駐車場：　　<%= schedule.parking %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              駐車場：　　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= schedule.parking %>
+            </div>
+          </div>
           <% end %>
-          
+
           <% if schedule.budget.present? %>
-            <div class="small mt-1">価格・予算：<%= schedule.budget %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              価格・予算：
+            </div>
+            <div class="col-9 small mt-1">
+              <%= schedule.budget %>
+            </div>
+          </div>
           <% end %>
           
           <% if schedule.link_url.present? %>
-            <div class="small mt-1">リンク：　　<%= text_url_to_link(h(schedule.link_url)).html_safe %></div>
+          <div class="row row-0">
+            <div class="col-auto small mt-1">
+              リンク：　　
+            </div>
+            <div class="col-9 small mt-1">
+              <%= text_url_to_link(h(schedule.link_url)).html_safe %>
+            </div>
+          </div>
           <% end %>
-          
+
           <% if schedule.comment.present? %>
             <div class="small mt-1"><%= schedule.comment %></div>
           <% end %>
@@ -232,6 +302,7 @@
           <% if schedule.spot_name.present? %>
           </div>
           <% end %>
+          
           
         <% end %>
         
@@ -292,7 +363,7 @@
               <%= link_to image_tag(@plan.user.image.plad.url), user_path(@plan.user) %>
             </div>
             
-            <div class="introduce-name">
+            <div class="introduce-name mt-2 ml-3">
               
               <% if current_user == @plan.user %>
                 <div class="mt-3">
@@ -313,9 +384,9 @@
           </div>
           
           <% if current_user == @plan.user %>
-            <p class="xsmall mt-3"><%= @plan.user.introduce %></p>
+            <p class="xsmall mt-2"><%= @plan.user.introduce %></p>
           <% else %>
-            <p class="xsmall"><%= @plan.user.introduce %></p>
+            <p class="xsmall mt-2"><%= @plan.user.introduce %></p>
           <% end %>
         </div>
         
@@ -399,9 +470,13 @@
               <div class="tag xxsmall bold mt-2">
                 <%= link_to plan.category.category, category_path(plan.category.id) %>
               </div>
+              
+              <% if plan.spot.present? %>
               <div class="tag xxsmall bold mt-2">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
               </div>
+              <% end %>
+              
               <div class="top-user mt-2 web-gray xsmall">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
               </div>

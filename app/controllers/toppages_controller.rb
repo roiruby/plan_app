@@ -16,7 +16,7 @@ class ToppagesController < ApplicationController
     
     @tags = Plan.published.all_tags.order("taggings_count DESC").limit(12)
     
-    @recomends = Plan.published.order(time: "DESC").tagged_with("タピオカ, 食べ歩き").limit(4)
+    @recomends = Plan.published.order(time: "DESC").tagged_with("タピオカ").limit(4)
     
   end
   
@@ -35,7 +35,6 @@ class ToppagesController < ApplicationController
       case request.user_agent
       # when /iPad/
       #   request.variant = :tablet
-      #   request.variant = :ipad
       when /iPhone/
         request.variant = :mobile
       when /android/

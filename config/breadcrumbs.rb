@@ -96,6 +96,9 @@ crumb :keywords do |tag|
   link "#{params[:tag]}", recommend_path
 end
 
+crumb :model_wanted do
+  link "モデル募集", model_wanted_path
+end
 
 # crumb :projects do
 #   link "Projects", projects_path

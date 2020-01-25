@@ -52,3 +52,11 @@ production:
   database: pladuce1_0_production
   username: pladuce1_0
   password: <%= ENV['PLADUCE1_0_DATABASE_PASSWORD'] %>
+  
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  database: pladuce_db
+  username: root
+  password: Pladmysql1!
+  socket: /var/lib/mysql/mysql.sock

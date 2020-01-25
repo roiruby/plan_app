@@ -21,8 +21,8 @@ class PlansController < ApplicationController
     @most_viewed_sp = Plan.published.order('impressions_count DESC').limit(6).where.not(id: @plan.id)
     @plans = Plan.published.order(time: "DESC").limit(5).where.not(id: @plan.id)
     @plans_sp = Plan.published.order(time: "DESC").limit(6).where.not(id: @plan.id)
-    @recomends = Plan.published.tagged_with("タピオカ, 食べ歩き").limit(5).where.not(id: @plan.id)
-    @recomends_sp = Plan.published.tagged_with("タピオカ, 食べ歩き").limit(6).where.not(id: @plan.id)
+    @recomends = Plan.published.tagged_with("タピオカ").limit(5).where.not(id: @plan.id)
+    @recomends_sp = Plan.published.tagged_with("タピオカ").limit(6).where.not(id: @plan.id)
     
     if @plan.draft?
       draftplan
@@ -74,7 +74,7 @@ class PlansController < ApplicationController
     @plans = Plan.published.order('impressions_count DESC').limit(300).page(params[:page]).per(20)
   end
   def recommend
-    @plans = Plan.published.order(time: "DESC").tagged_with("タピオカ, 食べ歩き").page(params[:page]).per(20)
+    @plans = Plan.published.order(time: "DESC").tagged_with("タピオカ").page(params[:page]).per(20)
   end
   
   # def keywordAutocomplete
@@ -130,6 +130,15 @@ class PlansController < ApplicationController
   
   def draftplan
     redirect_to root_path unless current_user == @user
+  end
+  
+  def model_wanted
+    @most_viewed = Plan.published.order('impressions_count DESC').limit(5)
+    @most_viewed_sp = Plan.published.order('impressions_count DESC').limit(6)
+    @plans = Plan.published.order(time: "DESC").limit(5)
+    @plans_sp = Plan.published.order(time: "DESC").limit(6)
+    @recomends = Plan.published.tagged_with("タピオカ").limit(5)
+    @recomends_sp = Plan.published.tagged_with("タピオカ").limit(6)
   end
   
   

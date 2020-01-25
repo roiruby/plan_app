@@ -63,8 +63,6 @@ class InformationController < ApplicationController
   
   def devise_variant
       case request.user_agent
-      when /iPad/
-        request.variant = :tablet
       when /iPhone/
         request.variant = :mobile
       when /android/
