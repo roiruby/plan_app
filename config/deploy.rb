@@ -18,6 +18,13 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
+namespace :deploy do
+  desc "Load the seed data from db/seeds.rb"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed_fu RAILS_ENV=#{rails_env}"
+  end
+end
+after :deploy, "deploy:seed"
 
 namespace :deploy do
 
