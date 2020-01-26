@@ -18,6 +18,7 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
+
 namespace :deploy do
 
 desc 'Restart application'
@@ -30,7 +31,7 @@ task :db_create do
   on roles(:db) do |host|
     with rails_env: fetch(:rails_env) do
       within current_path do
-        sql = "CREATE DATABASE IF NOT EXISTS test01_app_production;"
+        sql = "CREATE DATABASE IF NOT EXISTS pladuce_db;"
         execute "mysql --user=root --password=Pladmysql1! -e '#{sql}'"
         
       end
