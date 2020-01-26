@@ -2,27 +2,27 @@
 
   <div class="slide-image mypattern mt-2">
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide1.jpg"), plan_path(1), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide1.jpg"), plan_path(1), data: {"turbolinks" => false} %>
       <p class="text-center">【渋谷デート】学生～大人まで楽しめる！女性ウケ◎のおすすめプラン♡</p>
     </div>
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide2.jpg"), plan_path(2), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide2.jpg"), plan_path(2), data: {"turbolinks" => false} %>
       <p class="text-center">天気の良い休日は鎌倉～江の島を1日満喫！海や神社巡りも！おすすめドライブコース♡</p>
     </div>
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide3.jpg"), plan_path(3), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide3.jpg"), plan_path(3), data: {"turbolinks" => false} %>
       <p class="text-center">【鎌倉】インスタ映えするおすすめ女子旅プラン♡デートにも◎</p>
     </div>
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide4.jpg"), plan_path(4), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide4.jpg"), plan_path(4), data: {"turbolinks" => false} %>
       <p class="text-center">東京の下町を歩く！デート・女子会♡【蔵前・両国・浅草橋】観光・雑貨屋巡りプラン♡</p>
     </div>
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide5.jpg"), plan_path(5), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide5.jpg"), plan_path(5), data: {"turbolinks" => false} %>
       <p class="text-center">三重県 お伊勢参り 初めての【伊勢神宮】を参拝！</p>
     </div>
     <div class="slide-title mr-1">
-      <%= link_to image_tag("/assets/slide6.jpg"), plan_path(6), data: {"turbolinks" => false} %>
+      <%= link_to image_tag("slide6.jpg"), plan_path(6), data: {"turbolinks" => false} %>
       <p class="text-center">ファミリーにも！タピオカ&お買い物【新小岩】～【幕張】お出かけプラン☆</p>
     </div>
   </div>
@@ -31,7 +31,7 @@
 
   <div class="container">
     
-      <p class="newplan_title mt-3 mb-0"><img src="assets/icon_star.png">人気のプラン</p>
+      <p class="newplan_title mt-3 mb-0"><%= image_tag "assets/icon_star.png" %>人気のプラン</p>
         
       <div class="row row-0">
         <% @most_viewed.each.with_index(1) do |rank| %>
@@ -62,7 +62,7 @@
         
   <div class="container">
         
-        <p class="newplan_title mt-4 mb-0"><img src="assets/icon_new.png">新着のプラン</p>
+        <p class="newplan_title mt-4 mb-0"><%= image_tag"icon_new.png" %>新着のプラン</p>
       <div class="row row-0">
         <% @plans.each do |plan| %>
           <div class="top-planimage col-6 mt-2">
@@ -93,7 +93,7 @@
         
   <div class="container">
   
-          <p class="newplan_title mt-4 mb-0"><img src="assets/icon_recommend.png">トレンドおすすめプラン</p>
+          <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_recommend.png" %>トレンドおすすめプラン</p>
         <div class="row row-0">
           <% @recomends.each do |plan| %>
             <div class="top-planimage col-6 mt-2">
@@ -124,7 +124,7 @@
         
         
   <div class="container">  
-          <p class="newplan_title mt-4 mb-0"><img src="assets/icon_popular.png">人気のプランナー</p>
+          <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_popular.png" %>人気のプランナー</p>
 
         <div class="mt-2 img-_scroll">
         <% @users_sp.each do |user| %>
@@ -157,47 +157,47 @@
         
           <p class="bold mt-4">カテゴリーからプランを探す</p>
             <div class="top-item">
-              <p class="category_item mb-1"><img src="assets/icon_jyoshikai.png"><%= link_to "女子会", category_path(1) %>
+              <p class="category_item mb-1"><%= image_tag "icon_jyoshikai.png" %><%= link_to "女子会", category_path(1) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_date.png"><%= link_to "デート", category_path(2) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_date.png" %><%= link_to "デート", category_path(2) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_odekake.png"><%= link_to "お出かけ", category_path(3) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_odekake.png" %><%= link_to "お出かけ", category_path(3) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_gourmet.png"><%= link_to "グルメ・カフェ", category_path(4) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_gourmet.png" %><%= link_to "グルメ・カフェ", category_path(4) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_drive.png"><%= link_to "ドライブ", category_path(5) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_drive.png" %><%= link_to "ドライブ", category_path(5) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_travel.png"><%= link_to "旅行・観光", category_path(6) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_travel.png" %><%= link_to "旅行・観光", category_path(6) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_suprise.png"><%= link_to "サプライズ", category_path(7) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_suprise.png" %><%= link_to "サプライズ", category_path(7) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_diet.png"><%= link_to "ダイエット", category_path(8) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_diet.png" %><%= link_to "ダイエット", category_path(8) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_training.png"><%= link_to "トレーニング", category_path(9) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_training.png" %><%= link_to "トレーニング", category_path(9) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_study.png"><%= link_to "スタディ", category_path(10) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_study.png" %><%= link_to "スタディ", category_path(10) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
             <div class="top-item">
-              <p class="category_item mt-2 mb-1"><img src="assets/icon_etc.png"><%= link_to "その他", category_path(11) %>
+              <p class="category_item mt-2 mb-1"><%= image_tag "icon_etc.png" %><%= link_to "その他", category_path(11) %>
               <span style="position: absolute; right: 0", class="mr-3"><i class="fas fa-angle-right web-gray"></i></span></span></p>
             </div>
 
