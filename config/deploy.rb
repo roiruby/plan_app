@@ -18,13 +18,6 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
-namespace :deploy do
-  desc "Load the seed data from db/seeds.rb"
-  task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed_fu RAILS_ENV=#{rails_env}"
-  end
-end
-after :deploy, "deploy:seed"
 
 namespace :deploy do
 
@@ -41,6 +34,17 @@ task :db_create do
         sql = "CREATE DATABASE IF NOT EXISTS pladuce_db;"
         execute "mysql --user=root --password=Pladmysql1! -e '#{sql}'"
         
+      end
+    end
+  end
+end
+
+desc 'Run seed'
+task :seed_fu do
+  on roles(:app) do
+    with rails_env: fetch(:rails_env) do
+      within current_path do
+        execute :bundle, :exec, :rake, 'db:seed_fu'
       end
     end
   end
