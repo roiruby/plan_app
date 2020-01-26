@@ -7,6 +7,8 @@ require "capistrano/rails/migrations"
 require "capistrano/scm/git"
 require 'capistrano/rails/console'
 
+require 'seed-fu/capistrano'
+
 install_plugin Capistrano::SCM::Git
 
 Dir.glob("lib/capistrano/tasks/*.rb").each { |r| import r }

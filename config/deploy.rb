@@ -18,10 +18,6 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
-require 'seed-fu/capistrano'
-
-# Trigger the task after update_code
-after 'deploy:update_code', 'db:seed_fu'
 
 namespace :deploy do
 
@@ -43,7 +39,7 @@ task :db_create do
   end
 end
 
-
+after 'deploy:update_code', 'db:seed_fu'
 
 after :publishing, :restart
 
