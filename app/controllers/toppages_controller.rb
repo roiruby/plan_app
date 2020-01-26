@@ -1,13 +1,6 @@
 class ToppagesController < ApplicationController
   before_action :devise_variant
   
-  before_action do
-    case params[:device]
-      when 'tablet'
-        request.variant = :tablet
-    end
-  end
-  
   def index
     @most_viewed = Plan.published.order('impressions_count DESC').limit(4)
     @plans = Plan.published.order(time: "DESC").limit(4)
