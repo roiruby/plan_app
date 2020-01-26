@@ -39,7 +39,6 @@ task :db_create do
   end
 end
 
-after 'deploy:update_code', 'db:seed_fu'
 
 after :publishing, :restart
 
