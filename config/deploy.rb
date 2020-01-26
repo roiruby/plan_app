@@ -39,16 +39,6 @@ task :db_create do
   end
 end
 
-desc 'Run seed_fu'
-task :seed_fu do
-  on roles(:app) do
-    with rails_env: fetch(:rails_env) do
-      within current_path do
-        execute :bundle, :exec, :rails, 'db:seed_fu'
-      end
-    end
-  end
-end
 
 
 after :publishing, :restart
@@ -58,3 +48,8 @@ after :publishing, :restart
     end
   end
 end
+
+require 'seed-fu/capistrano'
+
+# Trigger the task after update_code
+after 'deploy:update_code', 'db:seed_fu'

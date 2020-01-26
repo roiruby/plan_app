@@ -10,7 +10,7 @@
         
         <h3><i class="fas fa-ice-cream mr-1"></i>モデル募集</h3>
         
-        <%= image_tag "/assets/wanted.jpg", :width => '100%' %>
+        <%= image_tag "wanted.jpg", :width => '100%' %>
         
           <div class="p-3">
           【モデルのお仕事の内容】
@@ -65,7 +65,7 @@
       <div class="container_right col-sm-3 mt-4">
         
         
-          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_star.png">人気のプラン</p>
+          <p class="newplan_title mt-3 mb-0"><%= image_tag "icon_star.png" %>人気のプラン</p>
           
           <div class="row row-0">
           <% @most_viewed.each.with_index(1) do |rank| %>
@@ -100,7 +100,7 @@
 
 
           
-          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_new.png">新着のプラン</p>
+          <p class="newplan_title mt-3 mb-0"><%= image_tag "icon_new.png" %>新着のプラン</p>
           
           <div class="row row-0">
           <% @plans.each do |plan| %>
@@ -135,7 +135,7 @@
           
           
           
-          <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_recommend.png">トレンドおすすめプラン</p>
+          <p class="newplan_title mt-3 mb-0"><%= image_tag "icon_recommend.png" %>トレンドおすすめプラン</p>
           
           <div class="row row-0">
           <% @recomends.each do |plan| %>
