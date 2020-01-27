@@ -2,7 +2,7 @@
     <% breadcrumb :recommend %>
     <%= render "layouts/breadcrumbs" %>
 
-    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_star.png", class="mr-2">【タピオカ】のプラン</p>
+    <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_star.png" %>【タピオカ】のプラン</p>
     
     <div class="row row-0 mt-2">
       <% @plans.each do |plan| %>

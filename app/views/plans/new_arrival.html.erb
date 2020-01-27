@@ -2,7 +2,7 @@
     <% breadcrumb :new_arrival %>
     <%= render "layouts/breadcrumbs" %>
 
-    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_new.png", class="mr-2">新着のプラン</p>
+    <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_new.png" %>新着のプラン</p>
     
     <div class="row row-0 mt-2">
       <% @plans.each do |plan| %>

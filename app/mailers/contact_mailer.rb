@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default to: 'roiruby0@gmail.com'
+  default to: 'info@pladuce.jp'
 
   def received_email(contact)
     @contact = contact

@@ -91,4 +91,14 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  config.action_mailer.smtp_settings = {
+    :address => smtp.pladuce.conoha.io,
+    :port => 587,
+    :user_name => Rails.application.credentials.mail[info@pladuce.jp],
+    :password => Rails.application.credentials.mail[Pladmail1!],
+    :authentication => :plain,
+    :enable_starttls_auto => false
+  }
+  
 end
