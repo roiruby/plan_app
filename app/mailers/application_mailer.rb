@@ -1,4 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'info@pladuce.jp'
+  default from: "Pladuce【プラデュース】 <info@pladuce.jp>",
+  reply_to: "info@pladuce.jp"
   layout 'mailer'
 end

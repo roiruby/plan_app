@@ -62,6 +62,23 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "pladuce1_0_#{Rails.env}"
+  
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'pladuce.jp'
+  config.action_mailer.default_url_options = { host: host }
+  # config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  
+  
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => false,
+      :address => 'smtp.pladuce.conoha.io',
+      :port => 587,
+      :domain => 'pladuce.jp',
+      :authentication => :plain,
+      :user_name => Rails.application.credentials.mail[:address],
+      :password => Rails.application.credentials.mail[:password]
+  }
 
   config.action_mailer.perform_caching = false
 
@@ -92,13 +109,5 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  config.action_mailer.smtp_settings = {
-    :address => smtp.pladuce.conoha.io,
-    :port => 587,
-    :user_name => Rails.application.credentials.mail[info@pladuce.jp],
-    :password => Rails.application.credentials.mail[Pladmail1!],
-    :authentication => :plain,
-    :enable_starttls_auto => false
-  }
   
 end

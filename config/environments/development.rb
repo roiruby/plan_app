@@ -34,8 +34,20 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   # config.action_mailer.delivery_method = :test
   config.action_mailer.delivery_method = :letter_opener_web
+  # config.action_mailer.delivery_method = :smtp
   host = 'https://b8ef28e493e148d8812405fe6015e8e8.vfs.cloud9.us-east-1.amazonaws.com/'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  
+  
+  # config.action_mailer.smtp_settings = {
+  #     :enable_starttls_auto => false,
+  #     :address => 'smtp.pladuce.conoha.io',
+  #     :port => 587,
+  #     :domain => 'pladuce.jp',
+  #     :authentication => :plain,
+  #     :user_name => Rails.application.credentials.mail[:address],
+  #     :password => Rails.application.credentials.mail[:password]
+  # }
 
   config.action_mailer.perform_caching = false
 
@@ -62,5 +74,6 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
   
 end
