@@ -76,8 +76,8 @@ Rails.application.configure do
       :port => 587,
       :domain => 'pladuce.jp',
       :authentication => :plain,
-      :user_name => 'info@xxxx.jp',
-      :password => '12345678'
+      :user_name => Rails.application.credentials.mail[:address],
+      :password => Rails.application.credentials.mail[:password]
   }
 
   config.action_mailer.perform_caching = false
