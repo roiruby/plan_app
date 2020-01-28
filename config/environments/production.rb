@@ -63,6 +63,22 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "pladuce1_0_#{Rails.env}"
   
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  host = 'pladuce.jp'
+  config.action_mailer.default_url_options = { host: host }
+  # config.action_mailer.default_url_options = { host: host, protocol: 'https' }
+  
+  
+  config.action_mailer.smtp_settings = {
+      :enable_starttls_auto => false,
+      :address => 'smtp.pladuce.conoha.io',
+      :port => 587,
+      :domain => 'pladuce.jp',
+      :authentication => :plain,
+      :user_name => Rails.application.credentials.mail[:address],
+      :password => Rails.application.credentials.mail[:password]
+  }
 
   config.action_mailer.perform_caching = false
 
