@@ -26,5 +26,5 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/config/environments/production
-/config/environments/development
+/config/environments/production.rb
+/config/environments/development.rb
