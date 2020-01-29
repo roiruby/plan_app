@@ -77,7 +77,8 @@ Rails.application.configure do
       :domain => 'pladuce.jp',
       :authentication => :plain,
       :user_name => Rails.application.credentials.mail[:address],
-      :password => Rails.application.credentials.mail[:password]
+      :password => Rails.application.credentials.mail[:password],
+      :tls => true
   }
 
   config.action_mailer.perform_caching = false
