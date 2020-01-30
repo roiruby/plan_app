@@ -20,7 +20,6 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/storage"
 
 
 namespace :deploy do
