@@ -20,6 +20,8 @@ set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
 
+set :linked_dirs, %w(public/uploads)
+
 
 
 namespace :deploy do
