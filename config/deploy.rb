@@ -10,7 +10,7 @@ set :deploy_to, '/var/www/pladuce'
 
 set :linked_files, fetch(:linked_files, []).push('config/secrets.yml')
 
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 set :linked_files, fetch(:linked_files, []).push("config/master.key")
 
@@ -19,7 +19,6 @@ set :keep_releases, 5
 set :rbenv_ruby, '2.5.3'
 
 set :log_level, :debug
-
 
 
 
