@@ -296,7 +296,8 @@
           <% end %>
 
           <% if schedule.comment.present? %>
-            <div class="small mt-1"><%= schedule.comment %></div>
+            <!--<div class="small mt-1"><%= schedule.comment %></div>-->
+            <div class="small mt-1"><%= text_url_to_link(h(schedule.comment)).html_safe %></div>
           <% end %>
           
           <% if schedule.spot_name.present? %>
@@ -320,7 +321,7 @@
     
         
         <% if @relation_plans.present? %>
-          <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_relation.png">関連したプラン</p>
+          <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_relation.png" %>関連したプラン</p>
         <% end %>
         
           <div class="row row-0">
@@ -396,7 +397,7 @@
           
   <div class="container">
 
-      <p class="newplan_title mt-3 mb-0"><img src="../assets/icon_star.png">人気のプラン</p>
+      <p class="newplan_title mt-3 mb-0"><%= image_tag "icon_star.png" %>人気のプラン</p>
         
       <div class="row row-0">
         <% @most_viewed_sp.each.with_index(1) do |rank| %>
@@ -427,7 +428,7 @@
           
   <div class="container">
     
-    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_new.png">新着のプラン</p>
+    <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_new.png" %>新着のプラン</p>
       <div class="row row-0">
         <% @plans_sp.each do |plan| %>
           <div class="top-planimage col-6 mt-2">
@@ -461,7 +462,7 @@
           
   <div class="container">
     
-    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_recommend.png">トレンドおすすめプラン</p>
+    <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_recommend.png" %>トレンドおすすめプラン</p>
         <div class="row row-0">
           <% @recomends_sp.each do |plan| %>
             <div class="top-planimage col-6 mt-2">

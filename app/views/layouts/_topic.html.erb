@@ -1,5 +1,11 @@
 <div class="span2box">
-<a href="#">
-<span class="span2box">新規プランナー大募集中!!</span>
-</a>
+  <% if logged_in? %>
+    <a href="/">
+    <span class="span2box">新規プランナー大募集中!!</span>
+    </a>
+  <% else %>
+    <a href="signup">
+    <span class="span2box">新規プランナー大募集中!!</span>
+    </a>
+  <% end %>
 </div>
