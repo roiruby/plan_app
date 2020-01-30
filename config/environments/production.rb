@@ -67,18 +67,16 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = 'pladuce.jp'
   config.action_mailer.default_url_options = { host: host }
-  # config.action_mailer.default_url_options = { host: host, protocol: 'https' }
   
   
   config.action_mailer.smtp_settings = {
-      :enable_starttls_auto => false,
+      :enable_starttls_auto => true,
       :address => 'smtp.pladuce.conoha.io',
       :port => 587,
       :domain => 'pladuce.jp',
       :authentication => :plain,
       :user_name => Rails.application.credentials.mail[:address],
       :password => Rails.application.credentials.mail[:password],
-      :tls => true
   }
 
   config.action_mailer.perform_caching = false
