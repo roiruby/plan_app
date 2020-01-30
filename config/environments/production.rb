@@ -70,13 +70,14 @@ Rails.application.configure do
   
   
   config.action_mailer.smtp_settings = {
-      :enable_starttls_auto => true,
+      :enable_starttls_auto => false,
       :address => 'smtp.pladuce.conoha.io',
       :port => 587,
       :domain => 'pladuce.jp',
       :authentication => :plain,
       :user_name => Rails.application.credentials.mail[:address],
       :password => Rails.application.credentials.mail[:password],
+      :openssl_verify_mode  => 'none'
   }
 
   config.action_mailer.perform_caching = false
