@@ -40,7 +40,7 @@ class PlansController < ApplicationController
     if @plan.save
       redirect_to user_path(@plan.user_id)
     else
-      flash[:danger] = 'プランの投稿に失敗しました。必須項目の入力漏れやアップロード画像が5MB以下になっているかご確認ください。'
+      flash[:danger] = 'プランの投稿に失敗しました。必須項目の入力漏れや文字数制限、アップロード画像が5MB以下になっているかご確認ください。'
       render :new 
     end
   end
@@ -55,7 +55,7 @@ class PlansController < ApplicationController
     if @plan.update(plan_params)
       redirect_to plan_path
     else
-      flash.now[:danger] = '更新されませんでした'
+      flash.now[:danger] = 'プランの更新に失敗しました。必須項目の入力漏れや文字数制限、アップロード画像が5MB以下になっているかご確認ください。'
       render :edit
     end
   end
