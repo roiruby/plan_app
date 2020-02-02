@@ -19,3 +19,12 @@
 //= require turbolinks
 //= require cocoon
 //= require_tree .
+
+document.addEventListener('turbolinks:load', function(event){
+  if(typeof(gtag) == 'function'){
+    gtag('config', 'UA-157537683-1', {
+      'page_title' : event.target.title,
+      'page_path': event.data.url.replace(window.location.protocol + "//" + window.location.hostname, "")
+    });
+  }
+})
