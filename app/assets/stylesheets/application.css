@@ -62,6 +62,9 @@ color: pink;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+div {
+  word-break: break-word;
+}
 
 .btn-coral,
 .btn-coral.disabled, .btn-coral:disabled {
