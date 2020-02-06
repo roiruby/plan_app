@@ -1,3 +1,4 @@
+<% content_for(:title, @plan.plan_title) %>
   <div class="container">
     <% breadcrumb :plan, @plan %>
     <%= render "layouts/breadcrumbs" %>
@@ -34,7 +35,7 @@
           <%= render partial: 'tags', locals: { tags: @plan.tags } %>
 
         <div class="mt-3">
-          <h2><%= @plan.plan_title %></h2>
+          <h1><%= @plan.plan_title %></h1>
         </div>
 
         <div class="planshow-image mt-2">
@@ -87,7 +88,7 @@
         
           <% if schedule.schedule_title.present? %>
             <div class="mt-3 mb-2" id="schedule_title<%= schedule.id %>">
-              <h3><%= schedule.schedule_title %></h3>
+              <h2><%= schedule.schedule_title %></h2>
             </div>
           <% end %>
             

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Pladuce【プラデュース】┃毎日をもっと楽しく♪みんなのプランでプロデュース(遊び・お出かけ情報プラン共有サイト)</title>
+    <title><%= content_for?(:title) ? yield(:title) + ' | Pladuce【プラデュース】' : 'Pladuce【プラデュース】┃毎日をもっと楽しく♪みんなのプランでプロデュース(遊び・お出かけ情報プラン共有サイト)' %></title>
     <meta name="description" content="女子会・デート・お出かけ・旅行など様々なプランを投稿・共有！旅行のしおりにもなる、ソーシャルメディアPladuce【プラデュース】" />
     <meta name="keywords" content="旅行,デート,お出かけ,女子会,ドライブ,グルメ,カフェ,観光,サプライズ,ダイエット,トレーニング,勉強法,カップル,ファミリー,学生">
     <%= csrf_meta_tags %>
