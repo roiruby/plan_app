@@ -91,7 +91,7 @@ gem 'enum_help'
 
 gem 'rack-attack'
 
-gem 'meta-tags'
+gem 'meta-tags', :require => 'meta_tags'
 
 group :production, :staging do
  gem 'unicorn'
