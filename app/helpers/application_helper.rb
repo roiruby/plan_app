@@ -26,7 +26,6 @@ module ApplicationHelper
       noindex: ! Rails.env.production?,
       icon: [
         { href: image_url('favicon.ico') },
-        { href: image_url('logo.svg'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
       ],
       og: {
         site_name: 'Pladuce【プラデュース】',
