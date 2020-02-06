@@ -53,6 +53,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'letter_opener_web'
+  gem 'brakeman'
   
   gem 'capistrano'
   gem 'capistrano-bundler'
@@ -89,6 +90,8 @@ gem 'impressionist'
 gem 'enum_help'
 
 gem 'rack-attack'
+
+gem 'meta-tags'
 
 group :production, :staging do
  gem 'unicorn'

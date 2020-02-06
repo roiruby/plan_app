@@ -1,4 +1,5 @@
-<% content_for(:title, @plan.plan_title) %>
+<% set_meta_tags title: @plan.plan_title, description: @plan.content %>
+
   <div class="container">
     <% breadcrumb :plan, @plan %>
     <%= render "layouts/breadcrumbs" %>
