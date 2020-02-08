@@ -2,7 +2,7 @@
     <% breadcrumb :popular %>
     <%= render "layouts/breadcrumbs" %>
 
-    <p class="newplan_title mt-4 mb-0"><img src="../assets/icon_star.png", class="mr-2">人気のプラン</p>
+    <p class="newplan_title mt-4 mb-0"><%= image_tag "icon_star.png" %>人気のプラン</p>
     
     <div class="row row-0">
         <% @plans.each do |plan| %>
