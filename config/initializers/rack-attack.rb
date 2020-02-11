@@ -1,5 +1,5 @@
 class Rack::Attack
-  BANTIME = 1.minutes.freeze
+  BANTIME = 10.minutes.freeze
 
   Rack::Attack.cache.store = ActiveSupport::Cache::MemoryStore.new
   Rack::Attack.blocklist('fail2ban pentesters') do |req|
