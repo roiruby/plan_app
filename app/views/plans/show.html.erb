@@ -357,14 +357,14 @@
           <p class="xsmall mt-3">※掲載されている情報は、<%= @plan.updated_at.strftime('%Y/%m/%d') %>時点の情報です。情報が変更されている可能性がありますので、必ず事前にお調べください。</p>
 
         <% if @relation_plans.present? %>
-          <div class="newplan_title mt-4"><img src="../assets/icon_relation.png">関連したプラン</div>
+          <div class="newplan_title mt-4"><%= image_tag "icon_relation.png" %>関連したプラン</div>
         <% end %>
           <div class="row row-0">
             <% @relation_plans.each do |plan| %>
               
               <div class="relation-planimage col-sm-3">
                   <div class="mt-2">
-                    <%= link_to image_tag(plan.image.thumb150.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+                    <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
                   </div>
                   <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(42), plan_path(plan), data: {"turbolinks" => false} %></p>
 

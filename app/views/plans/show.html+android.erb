@@ -329,7 +329,7 @@
             <% @relation_plans.each do |plan| %>
               
               <div class="top-planimage col-6 mt-2">
-                <%= link_to image_tag(plan.image.to_s), plan_path(plan), data: {"turbolinks" => false} %>
+                <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
                 <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
                 
                 <span class="tag xxsmall bold mt-2">
