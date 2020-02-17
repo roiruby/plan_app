@@ -28,16 +28,16 @@ module ApplicationHelper
         { href: image_url('favicon.ico') },
       ],
       og: {
-        site_name: 'Pladuce【プラデュース】',
-        title: 'Pladuce【プラデュース】┃毎日をもっと楽しく♪みんなのプランでプロデュース(遊び・お出かけ情報プラン共有サイト)',
-        description: '女子会・デート・お出かけ・旅行など様々なプランを投稿・共有！旅行のしおりにもなる、ソーシャルメディアPladuce【プラデュース】',
+        site_name: :site,
+        title: :title,
+        description: :description,
         type: 'website',
         url: request.original_url,
         image: image_url('ogp.png'),
         locale: 'ja_JP',
       },
       twitter: {
-        card: 'summary',
+        card: 'summary_large_image',
         site: '@Pladuce_jp',
       }
     }
