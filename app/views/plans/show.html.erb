@@ -1,4 +1,4 @@
-<% set_meta_tags title: @plan.plan_title, description: @plan.content, og: { title: @plan.plan_title, type: 'article', image: @plan.image } %>
+<% set_meta_tags title: @plan.plan_title, description: @plan.content, og: { title: @plan.plan_title, type: 'article', image: @plan.image.thumb.url } %>
 
   <div class="container">
     <% breadcrumb :plan, @plan %>
