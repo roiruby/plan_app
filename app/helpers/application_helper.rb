@@ -33,7 +33,7 @@ module ApplicationHelper
         description: :description,
         type: 'website',
         url: request.original_url,
-        image: image_url('ogp1.png'),
+        image: image_url('ogp.png'),
         locale: 'ja_JP',
       },
       twitter: {
