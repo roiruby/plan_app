@@ -93,6 +93,9 @@ gem 'rack-attack'
 
 gem 'meta-tags', :require => 'meta_tags'
 
+gem 'sitemap_generator'
+gem 'whenever', require: false
+
 group :production, :staging do
  gem 'unicorn'
 end

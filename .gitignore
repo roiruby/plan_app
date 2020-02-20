@@ -27,3 +27,6 @@
 /config/master.key
 
 public/uploads/
+
+# Ignore sitemap file
+public/sitemap.xml.gz

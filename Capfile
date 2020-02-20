@@ -7,6 +7,7 @@ require "capistrano/rails/migrations"
 require "capistrano/scm/git"
 require 'capistrano/rails/console'
 
+require 'whenever/capistrano'
 
 install_plugin Capistrano::SCM::Git
 
