@@ -12,7 +12,7 @@ class Schedule < ApplicationRecord
   validates :tel, length: { maximum: 200 }
   validates :parking, length: { maximum: 255 }
   validates :budget, length: { maximum: 255 }
-  validates :comment, length: { maximum: 700 }
+  validates :comment, length: { maximum: 255 }
   
   mount_uploader :image1, ImageUploader
   mount_uploader :image2, ImageUploader
