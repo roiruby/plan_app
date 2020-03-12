@@ -297,8 +297,7 @@
           <% end %>
 
           <% if schedule.comment.present? %>
-            <!--<div class="small mt-1"><%= schedule.comment %></div>-->
-            <div class="small mt-1"><%= text_url_to_link(h(schedule.comment)).html_safe %></div>
+            <div class="small mt-1"><%= simple_format text_url_to_link(h(schedule.comment)).html_safe %></div>
           <% end %>
           
           <% if schedule.spot_name.present? %>
