@@ -9,7 +9,7 @@ class Plan < ApplicationRecord
   belongs_to :area, optional: true
   
   # has_many :plans_keywords, dependent: :destroy
-  # has_many :keywords, through: :plans_keywords
+  # has_many :keywords, through: :plans_keywords, dependent: :destroy
   # accepts_nested_attributes_for :keywords, :reject_if => proc { |att| att[:name].blank?}
   # before_save :find_or_create_keyword
   
