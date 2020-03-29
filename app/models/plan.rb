@@ -18,7 +18,7 @@ class Plan < ApplicationRecord
   belongs_to :spot, optional: true
   
   has_many :favorites, foreign_key: 'plan_id', dependent: :destroy
-  has_many :users, through: :favorites
+  has_many :users, through: :favorites, dependent: :destroy
   
   validates :plan_title, presence: true, length: { maximum: 50 }
   validates :image, presence: true

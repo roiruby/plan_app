@@ -27,6 +27,8 @@ class User < ApplicationRecord
   
   has_many :information, dependent: :destroy
   
+  has_many :quits, dependent: :destroy
+  
 
   
   def like(plan)
