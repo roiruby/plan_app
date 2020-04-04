@@ -9,7 +9,7 @@ class ToppagesController < ApplicationController
     
     @tags = Plan.published.all_tags.order("taggings_count DESC").limit(12)
     
-    @recomends = Plan.published.order(time: "DESC").tagged_with("タピオカ").limit(4)
+    @recomends = Plan.published.order("RAND()").tagged_with("タピオカ").limit(4)
     
   end
   
