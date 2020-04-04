@@ -37,7 +37,7 @@
         <% @most_viewed.each.with_index(1) do |rank| %>
           <div class="top-planimage col-6 mt-2">
               <%= link_to image_tag(rank.image.thumb.to_s), plan_path(rank), data: {"turbolinks" => false} %>
-              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(26), plan_path(rank), data: {"turbolinks" => false} %></p>
+              <p class="top-plantitle mb-0"><%= link_to rank.plan_title.truncate(39), plan_path(rank), data: {"turbolinks" => false} %></p>
             <div class="tag xxsmall bold mt-2">
               <%= link_to rank.category.category, category_path(rank.category.id) %>
             </div>
@@ -67,7 +67,7 @@
         <% @plans.each do |plan| %>
           <div class="top-planimage col-6 mt-2">
               <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
-              <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+              <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(39), plan_path(plan), data: {"turbolinks" => false} %></p>
             <div class="tag xxsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
@@ -98,7 +98,7 @@
           <% @recomends.each do |plan| %>
             <div class="top-planimage col-6 mt-2">
                 <%= link_to image_tag(plan.image.thumb.to_s), plan_path(plan), data: {"turbolinks" => false} %>
-                <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(26), plan_path(plan), data: {"turbolinks" => false} %></p>
+                <p class="top-plantitle mb-0"><%= link_to plan.plan_title.truncate(39), plan_path(plan), data: {"turbolinks" => false} %></p>
               <div class="tag xxsmall bold mt-2">
                 <%= link_to plan.category.category, category_path(plan.category.id) %>
               </div>
