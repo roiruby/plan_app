@@ -37,9 +37,13 @@
             <div class="tag xsmall bold mt-2">
               <%= link_to plan.category.category, category_path(plan.category.id) %>
             </div>
+            
+            <% if plan.spot.present? %>
             <div class="tag xsmall bold mt-2 mr-1">
                 <%= link_to plan.spot.name, spot_path(plan.spot.id) %>
             </div>
+            <% end %>
+            
             <div class="top-user mt-2 web-gray xsmall">
                 <i class="far fa-clock"></i><%= plan.updated_at.strftime('%Y/%m/%d') %>
             </div>
