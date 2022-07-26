@@ -71,7 +71,7 @@ Rails.application.configure do
   
   config.action_mailer.smtp_settings = {
       :enable_starttls_auto => false,
-      :address => 'smtp.pladuce.conoha.io',
+      :address => 'mail73.conoha.ne.jp',
       :port => 587,
       :domain => 'pladuce.jp',
       :authentication => :plain,

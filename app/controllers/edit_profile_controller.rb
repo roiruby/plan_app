@@ -11,6 +11,7 @@ class EditProfileController < ApplicationController
 
     if @user.update(user_params)
       flash[:success] = '正常に更新されました'
+      UserMailer.edit_profile(@user).deliver_now
       redirect_to mypage_path
     else
       flash.now[:danger] = '更新されませんでした'
