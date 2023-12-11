@@ -8,15 +8,26 @@
     <%= csp_meta_tag %>
     
     <% if Rails.env.production? %>
-     <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157537683-1"></script>
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCMCJ2N8H8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
     
-      gtag('config', 'UA-157537683-1');
+      gtag('config', 'G-QCMCJ2N8H8');
     </script>
+    
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!--  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157537683-1"></script>-->
+    <!--<script>-->
+    <!--  window.dataLayer = window.dataLayer || [];-->
+    <!--  function gtag(){dataLayer.push(arguments);}-->
+    <!--  gtag('js', new Date());-->
+    
+    <!--  gtag('config', 'UA-157537683-1');-->
+    <!--</script>-->
     <% end %>
     
     <%= include_gon %>
